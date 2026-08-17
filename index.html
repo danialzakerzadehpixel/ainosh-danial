@@ -3,12 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b0908">
+<meta name="theme-color" content="#050505">
 
-<title>آینوش و دانیال | دعوتنامه عروسی</title>
+<title>Ainoosh & Danial | Wedding Invitation</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Vazirmatn:wght@300;400;500;600&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Montserrat:ital,wght@0,700;1,700&family=Vazirmatn:wght@300;400;500;600&display=swap');
 
 :root{
   --bg:#090807;
@@ -20,23 +21,36 @@
   box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
   margin:0;
+  padding:0;
+
   background:#050505;
+
   color:var(--cream);
+
   font-family:Vazirmatn,sans-serif;
+
+  overflow-x:hidden;
 }
 
 body{
   min-height:100vh;
-  overflow-x:hidden;
 }
 
 .app{
   min-height:100vh;
+
   position:relative;
+
   background:
-    radial-gradient(circle at 50% 20%,#26201a 0,#0a0908 38%,#030303 100%);
+    radial-gradient(
+      circle at 50% 20%,
+      #26201a 0,
+      #0a0908 38%,
+      #030303 100%
+    );
 }
 
 /* =========================
@@ -46,8 +60,11 @@ body{
 .noise{
   position:fixed;
   inset:0;
+
   pointer-events:none;
-  opacity:.08;
+
+  opacity:.06;
+
   z-index:50;
 
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
@@ -60,6 +77,7 @@ body{
 .envelope-screen{
   position:fixed;
   inset:0;
+
   z-index:40;
 
   background:url("splash.webp.png") center/cover no-repeat;
@@ -73,26 +91,37 @@ body{
 
 .envelope-screen.hidden{
   opacity:0;
+
   transform:scale(1.04);
+
   pointer-events:none;
 }
 
+/*
+   نور اصلاح شده
+   بدون blend سنگین
+   برای Android شفاف‌تر
+*/
+
 .envelope-screen::after{
   content:"";
+
   position:absolute;
-  inset:-20%;
+
+  inset:-15%;
 
   background:
     radial-gradient(
       circle at 50% 55%,
-      rgba(255,220,150,.85) 0%,
-      rgba(255,205,120,.28) 12%,
-      rgba(255,190,100,.10) 28%,
-      transparent 55%
+      rgba(255,245,220,.72) 0%,
+      rgba(255,235,195,.34) 10%,
+      rgba(255,225,175,.14) 25%,
+      rgba(255,220,170,0) 55%
     );
 
   opacity:0;
-  transform:scale(.45);
+
+  transform:scale(.55);
 
   transition:
     opacity .9s ease,
@@ -103,7 +132,8 @@ body{
 
 .envelope-screen.opening::after{
   opacity:1;
-  transform:scale(2.2);
+
+  transform:scale(2.1);
 }
 
 /* =========================
@@ -113,18 +143,24 @@ body{
 .music-permission{
   position:fixed;
   inset:0;
+
   z-index:60;
 
   display:flex;
+
   align-items:center;
   justify-content:center;
 
   padding:25px;
 
   background:rgba(0,0,0,.72);
+
   backdrop-filter:blur(10px);
 
+  -webkit-backdrop-filter:blur(10px);
+
   opacity:0;
+
   pointer-events:none;
 
   transition:opacity .6s ease;
@@ -132,11 +168,13 @@ body{
 
 .music-permission.show{
   opacity:1;
+
   pointer-events:auto;
 }
 
 .music-box{
   width:min(390px,100%);
+
   padding:38px 25px;
 
   text-align:center;
@@ -149,6 +187,7 @@ body{
     );
 
   border:1px solid rgba(199,168,109,.45);
+
   border-radius:18px;
 
   box-shadow:
@@ -157,45 +196,61 @@ body{
 
 .music-symbol{
   font-family:Amiri,serif;
+
   font-size:42px;
+
   color:var(--gold);
+
   margin-bottom:10px;
 }
 
 .music-title{
   font-family:Amiri,serif;
+
   font-size:27px;
+
   color:#ead8b5;
 }
 
 .music-text{
   margin-top:10px;
+
   color:#b9aa91;
+
   font-size:13px;
+
   line-height:2;
 }
 
 .music-buttons{
   display:flex;
+
   justify-content:center;
+
   gap:10px;
+
   margin-top:25px;
 }
 
 .music-btn{
   border:1px solid rgba(199,168,109,.5);
+
   background:#17120e;
+
   color:#ead8b5;
 
   padding:11px 22px;
+
   border-radius:999px;
 
   font-family:Vazirmatn,sans-serif;
+
   cursor:pointer;
 }
 
 .music-btn.primary{
   background:#b08d55;
+
   color:#17110b;
 }
 
@@ -205,6 +260,7 @@ body{
 
 .main{
   opacity:0;
+
   transform:translateY(25px);
 
   transition:
@@ -216,16 +272,19 @@ body{
 
 .main.visible{
   opacity:1;
+
   transform:none;
+
   pointer-events:auto;
 }
 
 /* =========================
-   CINEMATIC SNOW
+   SNOW
 ========================= */
 
 .snow{
   position:fixed;
+
   inset:0;
 
   z-index:25;
@@ -362,12 +421,15 @@ body{
   min-height:100svh;
 
   display:flex;
+
   align-items:flex-end;
+
   justify-content:center;
 
   padding:28px 18px 55px;
 
   position:relative;
+
   overflow:hidden;
 }
 
@@ -375,6 +437,7 @@ body{
   content:"";
 
   position:absolute;
+
   inset:0;
 
   background:
@@ -397,6 +460,7 @@ body{
   content:"";
 
   position:absolute;
+
   inset:0;
 
   background:
@@ -410,6 +474,7 @@ body{
 
 .hero-content{
   position:relative;
+
   z-index:2;
 
   width:min(720px,100%);
@@ -419,6 +484,7 @@ body{
 
 .kicker{
   font-family:Amiri,serif;
+
   font-size:16px;
 
   color:#d2bd98;
@@ -426,20 +492,40 @@ body{
   letter-spacing:4px;
 }
 
-.names{
-  font-family:Amiri,serif;
+/* =========================
+   ENGLISH NAMES
+========================= */
 
-  font-size:clamp(50px,13vw,88px);
+.names{
+  font-family:
+    "Montserrat",
+    Arial,
+    sans-serif;
+
+  font-size:
+    clamp(38px,10vw,72px);
+
+  font-weight:700;
+
+  font-style:italic;
 
   line-height:1.05;
 
-  margin:12px 0 15px;
+  direction:ltr;
 
-  text-shadow:0 5px 30px #000;
+  margin:14px 0 18px;
+
+  color:#eadcc0;
+
+  text-shadow:
+    0 5px 30px rgba(0,0,0,.9);
+
+  letter-spacing:-1px;
 }
 
 .orn{
   color:#c1a06a;
+
   font-size:26px;
 }
 
@@ -460,11 +546,20 @@ body{
 }
 
 /* =========================
-   PHOTO STRIP
+   PHOTO CONNECTION
 ========================= */
 
+/*
+   این بخش باعث می‌شود
+   انتهای couple به ابتدای hall
+   نرم و بدون خط جداکننده دیده شود.
+*/
+
 .photo-strip{
+  position:relative;
+
   margin:0;
+
   padding:0;
 
   background:#050505;
@@ -476,35 +571,71 @@ body{
   overflow:hidden;
 }
 
-.photo-strip img{
-  display:block;
+.photo-strip::before{
+  content:"";
 
-  width:100%;
-  height:auto;
+  position:absolute;
 
-  margin:0;
-  padding:0;
+  top:0;
+  left:0;
+  right:0;
 
-  border:0;
+  height:90px;
 
-  vertical-align:top;
+  z-index:3;
+
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #050505 0%,
+      rgba(5,5,5,.82) 18%,
+      rgba(5,5,5,.42) 48%,
+      rgba(5,5,5,0) 100%
+    );
 }
 
 /*
-  hall و closeup کاملاً چسبیده
+   عکس‌ها کاملاً به هم چسبیده‌اند
 */
 
 .gallery-photo{
-  margin:0 !important;
-  padding:0 !important;
-
   display:block;
 
   width:100%;
+
+  height:auto;
+
+  margin:0 !important;
+
+  padding:0 !important;
 
   border:0;
 
   border-radius:0;
+
+  vertical-align:top;
+}
+
+.photo-strip img + img{
+  margin-top:0 !important;
+}
+
+/* =========================
+   HALL
+========================= */
+
+.hall-photo{
+  display:block;
+
+  width:100%;
+
+  margin:0;
+
+  padding:0;
+
+  border:0;
 }
 
 /* =========================
@@ -667,6 +798,12 @@ body{
     width:2px;
     height:2px;
   }
+
+  .names{
+    font-size:clamp(34px,10vw,55px);
+
+    letter-spacing:-.5px;
+  }
 }
 
 @media(max-width:380px){
@@ -681,6 +818,10 @@ body{
 
   .unit{
     padding:10px 2px;
+  }
+
+  .names{
+    font-size:32px;
   }
 }
 
@@ -754,9 +895,7 @@ body{
   id="main">
 
 
-<!-- =========================
-     SNOW
-========================= -->
+<!-- SNOW -->
 
 <div
   class="snow"
@@ -766,7 +905,6 @@ body{
 
 <!-- =========================
      HERO
-     couple.jpeg + text روی عکس
 ========================= -->
 
 <section class="hero">
@@ -778,7 +916,7 @@ body{
     </div>
 
     <div class="names">
-      آینوش &amp; دانیال
+      Ainoosh &amp; Danial
     </div>
 
     <div class="orn">
@@ -799,9 +937,7 @@ body{
 
 
 <!-- =========================
-     HALL + CLOSEUP
-     بدون قصه ما
-     بدون فاصله
+     PHOTOS
 ========================= -->
 
 <section class="photo-strip">
@@ -809,12 +945,12 @@ body{
   <img
     class="gallery-photo"
     src="hall.jpg"
-    alt="آینوش و دانیال">
+    alt="Ainoosh and Danial">
 
   <img
     class="gallery-photo"
     src="closeup.jpg"
-    alt="آینوش و دانیال">
+    alt="Ainoosh and Danial">
 
 </section>
 
@@ -902,7 +1038,7 @@ body{
 
 
   <div class="footer">
-    آینوش و دانیال • ۱۴۰۵
+    Ainoosh &amp; Danial • ۱۴۰۵
   </div>
 
 </section>
@@ -1061,7 +1197,7 @@ musicNo.addEventListener("click",function(){
 
 
 /* =========================
-   CINEMATIC SNOW
+   SNOW
 ========================= */
 
 const snow =
