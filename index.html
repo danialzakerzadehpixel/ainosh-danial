@@ -9,7 +9,7 @@
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Montserrat:ital,wght@0,700;1,700&family=Vazirmatn:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@1,600;1,700&family=Vazirmatn:wght@300;400;500;600&display=swap');
 
 :root{
   --bg:#090807;
@@ -25,13 +25,9 @@ html,
 body{
   margin:0;
   padding:0;
-
   background:#050505;
-
   color:var(--cream);
-
   font-family:Vazirmatn,sans-serif;
-
   overflow-x:hidden;
 }
 
@@ -41,7 +37,6 @@ body{
 
 .app{
   min-height:100vh;
-
   position:relative;
 
   background:
@@ -91,23 +86,16 @@ body{
 
 .envelope-screen.hidden{
   opacity:0;
-
   transform:scale(1.04);
-
   pointer-events:none;
 }
 
-/*
-   نور اصلاح شده
-   بدون blend سنگین
-   برای Android شفاف‌تر
-*/
+/* نور شفاف و مناسب Android */
 
 .envelope-screen::after{
   content:"";
 
   position:absolute;
-
   inset:-15%;
 
   background:
@@ -132,7 +120,6 @@ body{
 
 .envelope-screen.opening::after{
   opacity:1;
-
   transform:scale(2.1);
 }
 
@@ -147,7 +134,6 @@ body{
   z-index:60;
 
   display:flex;
-
   align-items:center;
   justify-content:center;
 
@@ -156,11 +142,9 @@ body{
   background:rgba(0,0,0,.72);
 
   backdrop-filter:blur(10px);
-
   -webkit-backdrop-filter:blur(10px);
 
   opacity:0;
-
   pointer-events:none;
 
   transition:opacity .6s ease;
@@ -168,7 +152,6 @@ body{
 
 .music-permission.show{
   opacity:1;
-
   pointer-events:auto;
 }
 
@@ -196,39 +179,28 @@ body{
 
 .music-symbol{
   font-family:Amiri,serif;
-
   font-size:42px;
-
   color:var(--gold);
-
   margin-bottom:10px;
 }
 
 .music-title{
   font-family:Amiri,serif;
-
   font-size:27px;
-
   color:#ead8b5;
 }
 
 .music-text{
   margin-top:10px;
-
   color:#b9aa91;
-
   font-size:13px;
-
   line-height:2;
 }
 
 .music-buttons{
   display:flex;
-
   justify-content:center;
-
   gap:10px;
-
   margin-top:25px;
 }
 
@@ -250,7 +222,6 @@ body{
 
 .music-btn.primary{
   background:#b08d55;
-
   color:#17110b;
 }
 
@@ -272,9 +243,7 @@ body{
 
 .main.visible{
   opacity:1;
-
   transform:none;
-
   pointer-events:auto;
 }
 
@@ -284,7 +253,6 @@ body{
 
 .snow{
   position:fixed;
-
   inset:0;
 
   z-index:25;
@@ -437,7 +405,6 @@ body{
   content:"";
 
   position:absolute;
-
   inset:0;
 
   background:
@@ -460,7 +427,6 @@ body{
   content:"";
 
   position:absolute;
-
   inset:0;
 
   background:
@@ -493,73 +459,78 @@ body{
 }
 
 /* =========================
-   ENGLISH NAMES
+   AINOOSH & DANIAL
+   Calligraphy style
 ========================= */
 
 .names{
   font-family:
-    "Montserrat",
-    Arial,
-    sans-serif;
+    "Cormorant Garamond",
+    "Times New Roman",
+    serif;
 
   font-size:
-    clamp(38px,10vw,72px);
+    clamp(34px,8.5vw,62px);
 
   font-weight:700;
 
   font-style:italic;
 
-  line-height:1.05;
+  line-height:1;
 
   direction:ltr;
 
-  margin:14px 0 18px;
+  margin:13px 0 17px;
 
   color:#eadcc0;
 
+  letter-spacing:-1px;
+
   text-shadow:
     0 5px 30px rgba(0,0,0,.9);
-
-  letter-spacing:-1px;
 }
 
-.orn{
-  color:#c1a06a;
-
-  font-size:26px;
-}
+/* =========================
+   DATE
+========================= */
 
 .date{
   font-family:Amiri,serif;
 
-  font-size:23px;
+  font-size:25px;
+
+  font-weight:700;
 
   color:#eadcc0;
 }
 
+/* =========================
+   TIME
+========================= */
+
 .sub{
-  font-size:13px;
+  font-size:15px;
+
+  font-weight:700;
 
   color:#c8b99d;
 
   margin-top:8px;
 }
 
-/* =========================
-   PHOTO CONNECTION
-========================= */
+.orn{
+  color:#c1a06a;
+  font-size:26px;
+}
 
-/*
-   این بخش باعث می‌شود
-   انتهای couple به ابتدای hall
-   نرم و بدون خط جداکننده دیده شود.
-*/
+/* =========================
+   PHOTO STRIP
+========================= */
 
 .photo-strip{
   position:relative;
 
   margin:0;
-
   padding:0;
 
   background:#050505;
@@ -570,6 +541,11 @@ body{
 
   overflow:hidden;
 }
+
+/*
+  محو شدن نرم انتهای couple
+  به ابتدای hall
+*/
 
 .photo-strip::before{
   content:"";
@@ -596,23 +572,16 @@ body{
     );
 }
 
-/*
-   عکس‌ها کاملاً به هم چسبیده‌اند
-*/
-
 .gallery-photo{
   display:block;
 
   width:100%;
-
   height:auto;
 
   margin:0 !important;
-
   padding:0 !important;
 
   border:0;
-
   border-radius:0;
 
   vertical-align:top;
@@ -620,22 +589,6 @@ body{
 
 .photo-strip img + img{
   margin-top:0 !important;
-}
-
-/* =========================
-   HALL
-========================= */
-
-.hall-photo{
-  display:block;
-
-  width:100%;
-
-  margin:0;
-
-  padding:0;
-
-  border:0;
 }
 
 /* =========================
@@ -800,9 +753,15 @@ body{
   }
 
   .names{
-    font-size:clamp(34px,10vw,55px);
+    font-size:clamp(31px,8.5vw,52px);
+  }
 
-    letter-spacing:-.5px;
+  .date{
+    font-size:24px;
+  }
+
+  .sub{
+    font-size:14px;
   }
 }
 
@@ -821,7 +780,7 @@ body{
   }
 
   .names{
-    font-size:32px;
+    font-size:30px;
   }
 }
 
