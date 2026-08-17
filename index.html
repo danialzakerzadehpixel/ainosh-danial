@@ -77,8 +77,6 @@ body{
   pointer-events:none;
 }
 
-/* نور سینمایی */
-
 .envelope-screen::after{
   content:"";
   position:absolute;
@@ -109,7 +107,7 @@ body{
 }
 
 /* =========================
-   MUSIC PERMISSION
+   MUSIC
 ========================= */
 
 .music-permission{
@@ -236,13 +234,21 @@ body{
 
   overflow:hidden;
 
-  opacity:0;
+  opacity:1;
 
-  transition:opacity 2s ease;
+  visibility:hidden;
+
+  transition:
+    opacity 1.5s ease,
+    visibility 0s linear 1.5s;
 }
 
 .main.visible .snow{
-  opacity:1;
+  visibility:visible;
+
+  transition:
+    opacity 1.5s ease,
+    visibility 0s;
 }
 
 .snowflake{
@@ -255,7 +261,7 @@ body{
 
   border-radius:50%;
 
-  background:rgba(255,247,225,.92);
+  background:rgba(255,247,225,.95);
 
   box-shadow:
     0 0 5px rgba(255,240,205,.95),
@@ -265,6 +271,8 @@ body{
   animation:
     snowFall linear infinite,
     snowSway ease-in-out infinite alternate;
+
+  will-change:transform;
 }
 
 .snowflake::after{
@@ -275,8 +283,10 @@ body{
   width:1px;
   height:1px;
 
-  left:1px;
-  top:1px;
+  left:50%;
+  top:50%;
+
+  transform:translate(-50%,-50%);
 
   border-radius:50%;
 
@@ -312,8 +322,6 @@ body{
     margin-left:15px;
   }
 }
-
-/* ذرات درخشان */
 
 .spark{
   width:2px;
@@ -477,19 +485,28 @@ body{
   margin-bottom:35px;
 }
 
+/*
+   عکس‌ها بدون فاصله
+   و با محو شدن نرم
+*/
+
 .gallery-item{
   max-width:760px;
 
-  margin:0 auto 30px;
+  margin:0 auto;
 
   position:relative;
 
   overflow:hidden;
 
-  border-radius:8px;
+  border-radius:0;
 
   box-shadow:
     0 20px 60px rgba(0,0,0,.55);
+}
+
+.gallery-item + .gallery-item{
+  margin-top:0;
 }
 
 .gallery-item img{
@@ -500,13 +517,62 @@ body{
 
   object-fit:cover;
 
+  margin:0;
+
   transition:
-    transform 1.2s ease,
-    filter 1.2s ease;
+    opacity 1.4s ease,
+    transform 1.4s ease,
+    filter 1.4s ease;
+}
+
+.gallery-item:first-of-type img{
+  animation:
+    imageFadeOne 8s ease-in-out infinite;
+}
+
+.gallery-item:last-of-type img{
+  animation:
+    imageFadeTwo 8s ease-in-out infinite;
+}
+
+@keyframes imageFadeOne{
+
+  0%,35%{
+    opacity:1;
+    filter:grayscale(0);
+  }
+
+  50%,85%{
+    opacity:.35;
+    filter:grayscale(.35);
+  }
+
+  100%{
+    opacity:1;
+    filter:grayscale(0);
+  }
+}
+
+@keyframes imageFadeTwo{
+
+  0%,35%{
+    opacity:.35;
+    filter:grayscale(.35);
+  }
+
+  50%,85%{
+    opacity:1;
+    filter:grayscale(0);
+  }
+
+  100%{
+    opacity:.35;
+    filter:grayscale(.35);
+  }
 }
 
 .gallery-item:hover img{
-  transform:scale(1.025);
+  transform:scale(1.015);
 }
 
 .hall-photo{
@@ -705,7 +771,6 @@ body{
 
 <div class="noise"></div>
 
-
 <!-- =========================
      پاکت ورود
 ========================= -->
@@ -765,8 +830,7 @@ body{
   class="main"
   id="main">
 
-
-<!-- افکت برف و نور -->
+<!-- افکت برف -->
 
 <div
   class="snow"
@@ -817,22 +881,20 @@ body{
     قصه‌ی ما
   </h2>
 
-
   <div class="gallery-item">
 
     <img
       class="hall-photo"
-      src="hall.PNG"
+      src="hall.jpg"
       alt="آینوش و دانیال">
 
   </div>
-
 
   <div class="gallery-item">
 
     <img
       class="closeup-photo"
-      src="closeup.PNG"
+      src="closeup.jpg"
       alt="آینوش و دانیال">
 
   </div>
@@ -849,7 +911,6 @@ body{
   <h2 class="section-title">
     تا آغاز یک خاطره‌ی ماندگار
   </h2>
-
 
   <div class="countdown">
 
@@ -890,7 +951,6 @@ body{
       Red Carpet
     </div>
 
-
     <div class="map-buttons">
 
       <a
@@ -920,7 +980,6 @@ body{
     </div>
 
   </div>
-
 
   <div class="footer">
     آینوش و دانیال • ۱۴۰۵
@@ -980,7 +1039,6 @@ function tick(){
   const seconds =
     Math.floor(d / 1000);
 
-
   document.getElementById("days").textContent =
     days;
 
@@ -1030,13 +1088,7 @@ screen.addEventListener("click",function(){
 
   opened = true;
 
-
-  /* نور طلایی */
-
   screen.classList.add("opening");
-
-
-  /* ورود به صفحه اصلی */
 
   setTimeout(function(){
 
@@ -1046,8 +1098,6 @@ screen.addEventListener("click",function(){
 
   },900);
 
-
-  /* درخواست موسیقی */
 
   setTimeout(function(){
 
@@ -1097,53 +1147,41 @@ const snow =
 
 
 /*
-  60 ذره ایجاد می‌کنیم.
-  بیشترشان برف بسیار ریز هستند
-  و تعدادی ذرات نورانی‌اند.
+  برف واقعی:
+  85 ذره برای موبایل و دسکتاپ
 */
 
-for(let i=0;i<60;i++){
+for(let i=0;i<85;i++){
 
   const particle =
     document.createElement("span");
 
-
   particle.className =
-    Math.random() > .78
+    Math.random() > .82
       ? "snowflake spark"
       : "snowflake";
 
-
-  /* محل شروع */
 
   particle.style.left =
     Math.random()*100 + "%";
 
 
-  /* سرعت */
-
   particle.style.animationDuration =
-    (8 + Math.random()*12) + "s";
+    (7 + Math.random()*13) + "s";
 
-
-  /* شروع تصادفی */
 
   particle.style.animationDelay =
-    (-Math.random()*15) + "s";
+    (-Math.random()*18) + "s";
 
-
-  /* حرکت جانبی */
 
   particle.style.setProperty(
     "--drift",
-    (-80 + Math.random()*160) + "px"
+    (-100 + Math.random()*200) + "px"
   );
 
 
-  /* اندازه تصادفی */
-
   const size =
-    .55 + Math.random()*1.5;
+    .8 + Math.random()*2.2;
 
   particle.style.width =
     size + "px";
@@ -1160,7 +1198,7 @@ for(let i=0;i<60;i++){
    EXTRA GOLDEN LIGHT
 ========================= */
 
-for(let i=0;i<12;i++){
+for(let i=0;i<15;i++){
 
   const light =
     document.createElement("span");
@@ -1187,7 +1225,7 @@ for(let i=0;i<12;i++){
 
   light.style.setProperty(
     "--drift",
-    (-50 + Math.random()*100) + "px"
+    (-60 + Math.random()*120) + "px"
   );
 
 
