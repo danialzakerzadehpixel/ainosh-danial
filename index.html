@@ -460,129 +460,51 @@ body{
 }
 
 /* =========================
-   GALLERY
+   PHOTO STRIP
 ========================= */
 
-.gallery{
-  padding:70px 18px 30px;
+.photo-strip{
+  margin:0;
+  padding:0;
 
-  background:
-    linear-gradient(
-      #050505,
-      #0b0907
-    );
-}
+  background:#050505;
 
-.gallery-title{
-  text-align:center;
+  line-height:0;
 
-  font-family:Amiri,serif;
-
-  font-size:29px;
-
-  color:#d9c49e;
-
-  margin-bottom:35px;
-}
-
-/*
-   عکس‌ها بدون فاصله
-   و با محو شدن نرم
-*/
-
-.gallery-item{
-  max-width:760px;
-
-  margin:0 auto;
-
-  position:relative;
+  font-size:0;
 
   overflow:hidden;
-
-  border-radius:0;
-
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.55);
 }
 
-.gallery-item + .gallery-item{
-  margin-top:0;
-}
-
-.gallery-item img{
+.photo-strip img{
   display:block;
 
   width:100%;
   height:auto;
 
-  object-fit:cover;
-
   margin:0;
+  padding:0;
 
-  transition:
-    opacity 1.4s ease,
-    transform 1.4s ease,
-    filter 1.4s ease;
+  border:0;
+
+  vertical-align:top;
 }
 
-.gallery-item:first-of-type img{
-  animation:
-    imageFadeOne 8s ease-in-out infinite;
-}
+/*
+  hall و closeup کاملاً چسبیده
+*/
 
-.gallery-item:last-of-type img{
-  animation:
-    imageFadeTwo 8s ease-in-out infinite;
-}
+.gallery-photo{
+  margin:0 !important;
+  padding:0 !important;
 
-@keyframes imageFadeOne{
+  display:block;
 
-  0%,35%{
-    opacity:1;
-    filter:grayscale(0);
-  }
+  width:100%;
 
-  50%,85%{
-    opacity:.35;
-    filter:grayscale(.35);
-  }
+  border:0;
 
-  100%{
-    opacity:1;
-    filter:grayscale(0);
-  }
-}
-
-@keyframes imageFadeTwo{
-
-  0%,35%{
-    opacity:.35;
-    filter:grayscale(.35);
-  }
-
-  50%,85%{
-    opacity:1;
-    filter:grayscale(0);
-  }
-
-  100%{
-    opacity:.35;
-    filter:grayscale(.35);
-  }
-}
-
-.gallery-item:hover img{
-  transform:scale(1.015);
-}
-
-.hall-photo{
-  max-height:90svh;
-
-  object-fit:cover !important;
-}
-
-.closeup-photo{
-  filter:grayscale(1);
+  border-radius:0;
 }
 
 /* =========================
@@ -771,8 +693,9 @@ body{
 
 <div class="noise"></div>
 
+
 <!-- =========================
-     پاکت ورود
+     ENVELOPE
 ========================= -->
 
 <section
@@ -782,7 +705,7 @@ body{
 
 
 <!-- =========================
-     اجازه موسیقی
+     MUSIC
 ========================= -->
 
 <div
@@ -830,7 +753,10 @@ body{
   class="main"
   id="main">
 
-<!-- افکت برف -->
+
+<!-- =========================
+     SNOW
+========================= -->
 
 <div
   class="snow"
@@ -840,6 +766,7 @@ body{
 
 <!-- =========================
      HERO
+     couple.jpeg + text روی عکس
 ========================= -->
 
 <section class="hero">
@@ -872,32 +799,22 @@ body{
 
 
 <!-- =========================
-     GALLERY
+     HALL + CLOSEUP
+     بدون قصه ما
+     بدون فاصله
 ========================= -->
 
-<section class="gallery">
+<section class="photo-strip">
 
-  <h2 class="gallery-title">
-    قصه‌ی ما
-  </h2>
+  <img
+    class="gallery-photo"
+    src="hall.jpg"
+    alt="آینوش و دانیال">
 
-  <div class="gallery-item">
-
-    <img
-      class="hall-photo"
-      src="hall.jpg"
-      alt="آینوش و دانیال">
-
-  </div>
-
-  <div class="gallery-item">
-
-    <img
-      class="closeup-photo"
-      src="closeup.jpg"
-      alt="آینوش و دانیال">
-
-  </div>
+  <img
+    class="gallery-photo"
+    src="closeup.jpg"
+    alt="آینوش و دانیال">
 
 </section>
 
@@ -911,6 +828,7 @@ body{
   <h2 class="section-title">
     تا آغاز یک خاطره‌ی ماندگار
   </h2>
+
 
   <div class="countdown">
 
@@ -951,6 +869,7 @@ body{
       Red Carpet
     </div>
 
+
     <div class="map-buttons">
 
       <a
@@ -980,6 +899,7 @@ body{
     </div>
 
   </div>
+
 
   <div class="footer">
     آینوش و دانیال • ۱۴۰۵
@@ -1039,6 +959,7 @@ function tick(){
   const seconds =
     Math.floor(d / 1000);
 
+
   document.getElementById("days").textContent =
     days;
 
@@ -1089,6 +1010,7 @@ screen.addEventListener("click",function(){
   opened = true;
 
   screen.classList.add("opening");
+
 
   setTimeout(function(){
 
@@ -1145,11 +1067,6 @@ musicNo.addEventListener("click",function(){
 const snow =
   document.getElementById("snow");
 
-
-/*
-  برف واقعی:
-  85 ذره برای موبایل و دسکتاپ
-*/
 
 for(let i=0;i<85;i++){
 
