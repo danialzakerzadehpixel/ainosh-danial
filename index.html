@@ -1,834 +1,1165 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
+
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#090807">
+<meta name="theme-color" content="#080706">
+
 <title>آینوش و دانیال | دعوتنامه عروسی</title>
 
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:wght@400;500;600&family=Vazirmatn:wght@300;400;500;600&display=swap');
 
+
 :root{
-  --gold:#c7a66a;
-  --gold-light:#f3dfad;
-  --cream:#f1e7d1;
-  --dark:#070605;
+    --bg:#090807;
+    --paper:#e8dcc3;
+    --gold:#c7a66a;
+    --gold-light:#f3dfad;
+    --red:#741d18;
+    --cream:#f1e7d1;
 }
 
-*{box-sizing:border-box}
 
-html,body{
-  margin:0;
-  background:#050505;
-  color:var(--cream);
-  font-family:Vazirmatn,sans-serif;
+/* =========================
+   BASE
+========================= */
+
+*{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    background:#050505;
+    color:var(--cream);
+    font-family:Vazirmatn,sans-serif;
 }
 
 body{
-  min-height:100vh;
-  overflow-x:hidden;
+    min-height:100vh;
+    overflow-x:hidden;
 }
 
 .app{
-  min-height:100vh;
-  position:relative;
-  background:
-    radial-gradient(circle at 50% 20%,#29221b 0,#0a0908 40%,#030303 100%);
+    min-height:100vh;
+    position:relative;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            #282019 0,
+            #0a0908 40%,
+            #030303 100%
+        );
 }
 
+
 /* =========================
-   NOISE
+   CINEMATIC NOISE
 ========================= */
 
 .noise{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  pointer-events:none;
-  opacity:.075;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+
+    opacity:.075;
+
+    z-index:100;
+
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
 }
 
-/* =========================
+
+/* =========================================================
    ENVELOPE INTRO
-========================= */
+========================================================= */
 
 .envelope-screen{
-  position:fixed;
-  inset:0;
-  z-index:40;
-  overflow:hidden;
-  cursor:pointer;
 
-  background:
-    url("splash.webp.png")
-    center/cover no-repeat;
+    position:fixed;
+    inset:0;
 
-  transition:
-    opacity 1s ease,
-    visibility 1s ease;
+    z-index:40;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    background:
+        url("splash.webp.png")
+        center/cover no-repeat;
+
+    transition:
+        opacity 1.15s cubic-bezier(.2,.8,.2,1),
+        visibility 1.15s;
 }
 
-/* کمی تیرگی سینمایی */
 
-.envelope-screen:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
+/* تاریکی سینمایی روی پاکت */
 
-  background:
-    radial-gradient(
-      circle at 50% 45%,
-      transparent 20%,
-      rgba(0,0,0,.12) 58%,
-      rgba(0,0,0,.48) 100%
-    );
+.envelope-screen::after{
+
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            transparent 15%,
+            rgba(0,0,0,.08) 48%,
+            rgba(0,0,0,.5) 100%
+        );
 }
 
-/* =========================
+
+/* =========================================================
    LIGHT FROM SEAL
-========================= */
+========================================================= */
 
 .seal-light{
-  position:absolute;
-  z-index:5;
 
-  /*
-    محل تقریبی مهر در تصویر پاکت
-  */
-  left:50%;
-  top:54%;
+    position:absolute;
 
-  width:35px;
-  height:35px;
+    z-index:4;
 
-  transform:translate(-50%,-50%) scale(.2);
+    left:50%;
+    top:54%;
 
-  border-radius:50%;
+    width:35px;
+    height:35px;
 
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,245,210,1) 0%,
-      rgba(255,213,124,.95) 16%,
-      rgba(218,164,67,.55) 34%,
-      rgba(180,120,35,.18) 52%,
-      transparent 72%
-    );
+    transform:
+        translate(-50%,-50%)
+        scale(.2);
 
-  filter:blur(1px);
+    border-radius:50%;
 
-  opacity:0;
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,250,225,1) 0%,
+            rgba(255,226,155,.95) 13%,
+            rgba(225,177,85,.65) 30%,
+            rgba(205,145,45,.25) 48%,
+            transparent 72%
+        );
 
-  pointer-events:none;
+    filter:blur(1px);
+
+    opacity:0;
+
+    pointer-events:none;
 }
+
 
 .envelope-screen.opening .seal-light{
-  animation:sealGlow 1.45s cubic-bezier(.2,.8,.2,1) forwards;
+
+    animation:
+        sealGlow
+        1.35s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
 }
+
 
 @keyframes sealGlow{
 
-  0%{
-    opacity:0;
-    transform:translate(-50%,-50%) scale(.2);
-  }
+    0%{
+        opacity:0;
 
-  18%{
-    opacity:1;
-    transform:translate(-50%,-50%) scale(1);
-  }
+        transform:
+            translate(-50%,-50%)
+            scale(.2);
+    }
 
-  45%{
-    opacity:1;
-    transform:translate(-50%,-50%) scale(4);
-  }
+    15%{
+        opacity:1;
+    }
 
-  70%{
-    opacity:.85;
-    transform:translate(-50%,-50%) scale(10);
-  }
+    40%{
+        opacity:1;
 
-  100%{
-    opacity:0;
-    transform:translate(-50%,-50%) scale(22);
-  }
+        transform:
+            translate(-50%,-50%)
+            scale(4);
+    }
+
+    68%{
+        opacity:.85;
+
+        transform:
+            translate(-50%,-50%)
+            scale(11);
+    }
+
+    100%{
+        opacity:0;
+
+        transform:
+            translate(-50%,-50%)
+            scale(25);
+    }
 }
 
-/* حلقه نور */
+
+/* =========================================================
+   LIGHT RING
+========================================================= */
 
 .light-ring{
-  position:absolute;
-  z-index:4;
 
-  left:50%;
-  top:54%;
+    position:absolute;
 
-  width:30px;
-  height:30px;
+    z-index:5;
 
-  transform:translate(-50%,-50%) scale(.3);
+    left:50%;
+    top:54%;
 
-  border-radius:50%;
+    width:28px;
+    height:28px;
 
-  border:1px solid rgba(255,225,158,.9);
+    transform:
+        translate(-50%,-50%)
+        scale(.3);
 
-  opacity:0;
+    border-radius:50%;
 
-  pointer-events:none;
+    border:
+        1px solid
+        rgba(255,225,158,.9);
+
+    opacity:0;
+
+    pointer-events:none;
 }
+
 
 .envelope-screen.opening .light-ring{
-  animation:ringExpand 1.25s ease-out forwards;
+
+    animation:
+        ringExpand
+        1.2s
+        ease-out
+        forwards;
 }
+
 
 @keyframes ringExpand{
 
-  0%{
-    opacity:0;
-    transform:translate(-50%,-50%) scale(.3);
-  }
+    0%{
+        opacity:0;
 
-  20%{
-    opacity:.9;
-  }
+        transform:
+            translate(-50%,-50%)
+            scale(.3);
+    }
 
-  100%{
-    opacity:0;
-    transform:translate(-50%,-50%) scale(15);
-  }
+    20%{
+        opacity:.9;
+    }
+
+    100%{
+        opacity:0;
+
+        transform:
+            translate(-50%,-50%)
+            scale(18);
+    }
 }
 
-/* =========================
+
+/* =========================================================
    LIGHT PARTICLES
-========================= */
+========================================================= */
 
 .light-particles{
-  position:absolute;
-  z-index:6;
-  inset:0;
-  pointer-events:none;
+
+    position:absolute;
+    inset:0;
+
+    z-index:6;
+
+    pointer-events:none;
 }
+
 
 .light-particle{
-  position:absolute;
 
-  left:50%;
-  top:54%;
+    position:absolute;
 
-  width:4px;
-  height:4px;
+    left:50%;
+    top:54%;
 
-  border-radius:50%;
+    width:3px;
+    height:3px;
 
-  background:#f6dfa7;
+    border-radius:50%;
 
-  box-shadow:
-    0 0 5px #fff1c8,
-    0 0 12px rgba(238,190,95,.8);
+    background:#f5dfaa;
 
-  opacity:0;
+    box-shadow:
+        0 0 5px #fff2c9,
+        0 0 12px rgba(238,190,95,.8);
+
+    opacity:0;
 }
+
 
 .envelope-screen.opening .light-particle{
-  animation:particleBurst 1.25s ease-out forwards;
+
+    animation:
+        particleBurst
+        1.3s
+        ease-out
+        forwards;
 }
+
 
 @keyframes particleBurst{
 
-  0%{
-    opacity:0;
-    transform:translate(-50%,-50%) scale(.3);
-  }
+    0%{
 
-  20%{
-    opacity:1;
-  }
+        opacity:0;
 
-  100%{
-    opacity:0;
-    transform:
-      translate(
-        calc(-50% + var(--x)),
-        calc(-50% + var(--y))
-      )
-      scale(.1);
-  }
+        transform:
+            translate(-50%,-50%)
+            scale(.2);
+    }
+
+    18%{
+        opacity:.95;
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+            translate(
+                calc(-50% + var(--x)),
+                calc(-50% + var(--y))
+            )
+            scale(.1);
+    }
 }
 
-/* =========================
-   LETTER
-========================= */
 
-.letter{
-  position:absolute;
-  z-index:8;
-
-  left:50%;
-  top:57%;
-
-  width:min(76vw,390px);
-  height:min(92vw,480px);
-
-  transform:
-    translate(-50%,15%)
-    scale(.35);
-
-  opacity:0;
-
-  pointer-events:none;
-
-  background:
-    linear-gradient(
-      145deg,
-      #f0e4cc,
-      #d7c19a
-    );
-
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.75);
-
-  border-radius:3px;
-
-  overflow:hidden;
-
-  transition:
-    transform 1.7s cubic-bezier(.16,.8,.2,1),
-    top 1.7s cubic-bezier(.16,.8,.2,1),
-    width 1.4s ease,
-    height 1.4s ease,
-    opacity .35s ease;
-}
-
-/* بافت کاغذ */
-
-.letter:before{
-  content:"";
-  position:absolute;
-  inset:0;
-
-  opacity:.25;
-
-  background:
-    repeating-linear-gradient(
-      0deg,
-      transparent 0,
-      transparent 4px,
-      rgba(70,45,20,.035) 5px
-    );
-}
-
-.letter-content{
-  position:absolute;
-  inset:0;
-
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-
-  text-align:center;
-
-  color:#4b3b27;
-
-  opacity:0;
-  transform:translateY(20px);
-
-  transition:
-    opacity .8s 1s ease,
-    transform .8s 1s ease;
-}
-
-.letter-orn{
-  font-family:Amiri,serif;
-  font-size:25px;
-  color:#977447;
-}
-
-.letter-title{
-  font-family:Amiri,serif;
-  font-size:36px;
-  margin-top:12px;
-}
-
-.letter-names{
-  font-family:Amiri,serif;
-  font-size:25px;
-  margin-top:8px;
-}
-
-.letter-date{
-  font-family:Amiri,serif;
-  font-size:17px;
-  margin-top:8px;
-}
-
-/* بیرون آمدن نامه */
-
-.envelope-screen.opening .letter{
-  opacity:1;
-
-  top:40%;
-
-  transform:
-    translate(-50%,-50%)
-    scale(.82);
-}
-
-.envelope-screen.opening .letter-content{
-  opacity:1;
-  transform:none;
-}
-
-/* نامه تبدیل به صفحه می‌شود */
-
-.envelope-screen.opening.final .letter{
-  top:50%;
-
-  width:110vw;
-  height:110vh;
-
-  transform:
-    translate(-50%,-50%)
-    scale(1.02);
-
-  border-radius:0;
-}
-
-/* =========================
-   MUSIC PERMISSION
-========================= */
-
-.music-permission{
-  position:fixed;
-  z-index:60;
-
-  left:50%;
-  bottom:28px;
-
-  width:min(410px,88%);
-
-  transform:translate(-50%,30px);
-
-  padding:22px;
-
-  text-align:center;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(29,22,16,.97),
-      rgba(7,6,5,.98)
-    );
-
-  border:
-    1px solid rgba(199,166,106,.55);
-
-  border-radius:18px;
-
-  box-shadow:
-    0 20px 70px rgba(0,0,0,.7);
-
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-
-  opacity:0;
-  visibility:hidden;
-
-  transition:
-    opacity .7s ease,
-    transform .7s ease,
-    visibility .7s;
-}
-
-.music-permission.show{
-  opacity:1;
-  visibility:visible;
-  transform:translate(-50%,0);
-}
-
-.music-title{
-  font-family:Amiri,serif;
-  font-size:24px;
-  color:#ead8b4;
-}
-
-.music-text{
-  font-size:12px;
-  color:#bcae97;
-  line-height:2;
-  margin:6px 0 18px;
-}
-
-.music-actions{
-  display:flex;
-  gap:9px;
-}
-
-.music-action{
-  flex:1;
-
-  border-radius:999px;
-
-  padding:11px;
-
-  font-family:Vazirmatn,sans-serif;
-  font-size:12px;
-
-  cursor:pointer;
-}
-
-.music-yes{
-  border:1px solid #c7a66a;
-  color:#f3dfad;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(199,166,106,.28),
-      rgba(116,29,24,.3)
-    );
-}
-
-.music-no{
-  border:1px solid rgba(199,166,106,.3);
-
-  color:#bcae97;
-
-  background:rgba(255,255,255,.04);
-}
-
-/* =========================
-   MAIN
-========================= */
+/* =========================================================
+   MAIN PAGE
+========================================================= */
 
 .main{
-  opacity:0;
-  transform:translateY(25px);
 
-  transition:
-    opacity 1.4s ease,
-    transform 1.4s ease;
+    opacity:0;
 
-  pointer-events:none;
+    transform:
+        scale(1.035)
+        translateY(20px);
+
+    transition:
+        opacity 1.45s cubic-bezier(.2,.8,.2,1),
+        transform 1.65s cubic-bezier(.2,.8,.2,1);
+
+    pointer-events:none;
 }
+
 
 .main.visible{
-  opacity:1;
-  transform:none;
-  pointer-events:auto;
+
+    opacity:1;
+
+    transform:
+        scale(1)
+        translateY(0);
+
+    pointer-events:auto;
 }
 
-/* =========================
+
+/* =========================================================
+   CINEMATIC SNOW
+========================================================= */
+
+.snow{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:15;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    opacity:0;
+
+    transition:
+        opacity 1.5s ease;
+}
+
+
+.main.visible .snow{
+    opacity:1;
+}
+
+
+.snowflake{
+
+    position:absolute;
+
+    top:-20px;
+
+    width:3px;
+    height:3px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,248,226,.9);
+
+    box-shadow:
+        0 0 5px
+        rgba(255,244,210,.9),
+
+        0 0 12px
+        rgba(255,220,160,.45);
+
+    animation:
+        snowFall
+        linear
+        infinite;
+
+    opacity:.65;
+}
+
+
+@keyframes snowFall{
+
+    0%{
+
+        transform:
+            translate3d(
+                0,
+                -20px,
+                0
+            )
+            rotate(0deg);
+
+        opacity:0;
+    }
+
+    10%{
+        opacity:.75;
+    }
+
+    50%{
+
+        transform:
+            translate3d(
+                var(--drift),
+                50vh,
+                0
+            )
+            rotate(180deg);
+    }
+
+    100%{
+
+        transform:
+            translate3d(
+                calc(var(--drift) * -1),
+                110vh,
+                0
+            )
+            rotate(360deg);
+
+        opacity:0;
+    }
+}
+
+
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .hero{
-  min-height:100svh;
 
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
+    min-height:100svh;
 
-  padding:28px 18px 38px;
+    display:flex;
 
-  position:relative;
+    align-items:flex-end;
 
-  overflow:hidden;
+    justify-content:center;
+
+    padding:
+        28px
+        18px
+        38px;
+
+    position:relative;
+
+    overflow:hidden;
 }
 
-.hero:before{
-  content:"";
 
-  position:absolute;
-  inset:0;
+/* عکس اصلی */
 
-  background:
-    linear-gradient(
-      180deg,
-      #0000 35%,
-      #050505 92%
-    ),
-    url("couple.jpeg")
-    center 20%/cover no-repeat;
+.hero::before{
 
-  filter:grayscale(1);
+    content:"";
 
-  transform:scale(1.02);
+    position:absolute;
 
-  opacity:.86;
+    inset:0;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            transparent 35%,
+            rgba(5,5,5,.25) 60%,
+            #050505 92%
+        ),
+
+        url("couple.jpeg")
+        center 20%/cover
+        no-repeat;
+
+    filter:
+        grayscale(1);
+
+    transform:
+        scale(1.02);
+
+    opacity:.88;
+
+    transition:
+        transform 5s ease;
 }
 
-.hero:after{
-  content:"";
 
-  position:absolute;
-  inset:0;
+.main.visible .hero::before{
 
-  background:
-    radial-gradient(
-      circle at 50% 38%,
-      transparent 0,
-      #0005 58%,
-      #000 100%
-    );
+    transform:
+        scale(1.035);
 }
+
+
+/* vignette */
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 38%,
+            transparent 0,
+            rgba(0,0,0,.3) 55%,
+            #000 100%
+        );
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
 
 .topbar,
 .hero-content{
-  position:relative;
-  z-index:2;
+
+    position:relative;
+
+    z-index:20;
 }
+
 
 .topbar{
-  position:absolute;
 
-  top:18px;
-  left:18px;
-  right:18px;
+    position:absolute;
 
-  display:flex;
-  justify-content:space-between;
+    top:18px;
 
-  direction:ltr;
+    left:18px;
+    right:18px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    direction:ltr;
 }
+
 
 .icon{
-  width:42px;
-  height:42px;
 
-  border:1px solid #b99a6766;
-  border-radius:50%;
+    width:42px;
+    height:42px;
 
-  background:#09080799;
+    border:
+        1px solid
+        rgba(185,154,103,.4);
 
-  color:#d9c49e;
+    border-radius:50%;
 
-  display:grid;
-  place-items:center;
+    background:
+        rgba(9,8,7,.6);
 
-  backdrop-filter:blur(8px);
+    color:#d9c49e;
 
-  cursor:pointer;
+    display:grid;
+
+    place-items:center;
+
+    backdrop-filter:blur(8px);
+
+    -webkit-backdrop-filter:blur(8px);
+
+    cursor:pointer;
+
+    transition:
+        transform .3s ease,
+        background .3s ease;
 }
+
+
+.icon:active{
+
+    transform:
+        scale(.9);
+}
+
+
+/* =========================================================
+   HERO TEXT
+========================================================= */
 
 .hero-content{
-  width:min(720px,100%);
 
-  text-align:center;
+    width:min(720px,100%);
+
+    text-align:center;
 }
+
 
 .kicker{
-  font-family:"Playfair Display",serif;
 
-  font-size:15px;
+    font-family:
+        "Playfair Display",
+        serif;
 
-  color:#d2bd98;
+    font-size:15px;
 
-  letter-spacing:3px;
+    color:#d2bd98;
+
+    letter-spacing:3px;
+
+    text-shadow:
+        0 2px 15px #000;
 }
+
 
 .names{
-  font-family:Amiri,serif;
 
-  font-size:clamp(50px,13vw,90px);
+    font-family:
+        Amiri,
+        serif;
 
-  line-height:1.05;
+    font-size:
+        clamp(48px,13vw,88px);
 
-  margin:10px 0 15px;
+    line-height:1.05;
 
-  text-shadow:0 4px 25px #000;
+    margin:
+        10px 0 15px;
+
+    text-shadow:
+        0 4px 25px #000;
 }
+
 
 .orn{
-  color:#c1a06a;
 
-  font-size:25px;
+    color:#c1a06a;
+
+    font-size:25px;
+
+    text-shadow:
+        0 0 15px
+        rgba(199,166,106,.3);
 }
+
 
 .date{
-  font-family:Amiri,serif;
 
-  font-size:23px;
+    font-family:
+        Amiri,
+        serif;
 
-  color:#eadcc0;
+    font-size:22px;
+
+    color:#eadcc0;
 }
+
 
 .sub{
-  font-size:13px;
 
-  color:#c8b99d;
+    font-size:13px;
 
-  margin-top:8px;
+    color:#c8b99d;
+
+    margin-top:8px;
 }
 
-/* =========================
+
+/* =========================================================
    CARD
-========================= */
+========================================================= */
 
 .card{
-  max-width:760px;
 
-  margin:-1px auto 0;
+    max-width:760px;
 
-  padding:42px 18px 80px;
+    margin:-1px auto 0;
 
-  background:
-    linear-gradient(#050505,#0b0907);
+    padding:
+        48px
+        18px
+        80px;
 
-  text-align:center;
+    background:
+        linear-gradient(
+            #050505,
+            #0b0907
+        );
+
+    text-align:center;
+
+    position:relative;
+
+    z-index:2;
 }
+
 
 .section-title{
-  font-family:Amiri,serif;
 
-  font-size:26px;
+    font-family:
+        Amiri,
+        serif;
 
-  color:#d9c49e;
+    font-size:26px;
 
-  margin:0 0 20px;
+    color:#d9c49e;
+
+    margin:
+        0 0 20px;
 }
+
 
 .countdown{
-  display:grid;
 
-  grid-template-columns:repeat(4,1fr);
+    display:grid;
 
-  gap:8px;
+    grid-template-columns:
+        repeat(4,1fr);
 
-  direction:ltr;
+    gap:8px;
+
+    direction:ltr;
 }
+
 
 .unit{
-  border:1px solid #b99a675c;
 
-  padding:13px 4px;
+    border:
+        1px solid
+        rgba(185,154,103,.36);
 
-  background:#0f0c09;
+    padding:
+        13px 4px;
 
-  border-radius:4px;
+    background:
+        rgba(15,12,9,.85);
+
+    border-radius:6px;
+
+    box-shadow:
+        inset 0 0 20px
+        rgba(199,166,106,.025);
 }
+
 
 .num{
-  font-family:Amiri,serif;
 
-  font-size:31px;
+    font-family:
+        Amiri,
+        serif;
 
-  color:#ead7b4;
+    font-size:31px;
+
+    color:#ead7b4;
 }
+
 
 .label{
-  font-size:10px;
 
-  color:#a9997f;
+    font-size:10px;
 
-  letter-spacing:1px;
+    color:#a9997f;
 
-  margin-top:3px;
+    letter-spacing:1px;
+
+    margin-top:3px;
 }
+
+
+/* =========================================================
+   VENUE
+========================================================= */
 
 .venue{
-  margin:55px 0 0;
+
+    margin:
+        55px 0 0;
 }
+
 
 .venue-name{
-  font-family:Amiri,serif;
-  font-size:28px;
+
+    font-family:
+        Amiri,
+        serif;
+
+    font-size:28px;
+
+    color:#eadbc0;
 }
+
 
 .venue-en{
-  font-family:"Playfair Display",serif;
-  font-size:14px;
-  color:#a99576;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:14px;
+
+    color:#a99576;
+
+    margin-top:2px;
 }
+
 
 .map-buttons{
-  display:flex;
-  flex-wrap:wrap;
-  gap:9px;
-  justify-content:center;
-  margin-top:18px;
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:9px;
+
+    justify-content:center;
+
+    margin-top:20px;
 }
+
 
 .map-btn{
-  color:#dfceb0;
 
-  border:1px solid #b99a675c;
+    color:#dfceb0;
 
-  padding:11px 16px;
+    border:
+        1px solid
+        rgba(185,154,103,.4);
 
-  border-radius:999px;
+    padding:
+        11px 18px;
 
-  text-decoration:none;
+    border-radius:999px;
 
-  font-size:12px;
+    text-decoration:none;
 
-  background:#100d0a;
+    font-size:12px;
+
+    background:
+        rgba(16,13,10,.9);
+
+    transition:
+        all .3s ease;
 }
+
+
+.map-btn:active{
+
+    transform:
+        scale(.95);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
 
 .footer{
-  padding-top:55px;
 
-  color:#776b59;
+    padding-top:55px;
 
-  font-size:11px;
+    color:#776b59;
+
+    font-size:11px;
 }
 
-/* =========================
+
+/* =========================================================
    MUSIC BUTTON
-========================= */
+========================================================= */
 
 .music-note{
-  position:fixed;
 
-  bottom:20px;
-  left:20px;
+    position:fixed;
 
-  z-index:10;
+    bottom:20px;
+
+    left:20px;
+
+    z-index:30;
 }
+
 
 .music-note.playing{
-  animation:spin 3s linear infinite;
+
+    animation:
+        spin
+        3s
+        linear
+        infinite;
 }
 
+
 @keyframes spin{
-  to{transform:rotate(360deg)}
+
+    to{
+        transform:rotate(360deg);
+    }
 }
+
+
+/* =========================================================
+   MUSIC PERMISSION
+========================================================= */
+
+.music-permission{
+
+    position:fixed;
+
+    z-index:60;
+
+    left:50%;
+
+    bottom:28px;
+
+    width:min(410px,88%);
+
+    transform:
+        translate(-50%,35px);
+
+    padding:22px;
+
+    text-align:center;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(29,22,16,.97),
+            rgba(7,6,5,.98)
+        );
+
+    border:
+        1px solid
+        rgba(199,166,106,.55);
+
+    border-radius:18px;
+
+    box-shadow:
+        0 20px 70px
+        rgba(0,0,0,.75);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:
+
+        opacity .7s ease,
+
+        transform .7s ease,
+
+        visibility .7s;
+}
+
+
+.music-permission.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:
+        translate(-50%,0);
+}
+
+
+.music-title{
+
+    font-family:
+        Amiri,
+        serif;
+
+    font-size:24px;
+
+    color:#ead8b4;
+}
+
+
+.music-text{
+
+    font-size:12px;
+
+    color:#bcae97;
+
+    line-height:2;
+
+    margin:
+        6px 0 18px;
+}
+
+
+.music-actions{
+
+    display:flex;
+
+    gap:9px;
+}
+
+
+.music-action{
+
+    flex:1;
+
+    border-radius:999px;
+
+    padding:11px;
+
+    font-family:
+        Vazirmatn,
+        sans-serif;
+
+    font-size:12px;
+
+    cursor:pointer;
+}
+
+
+.music-yes{
+
+    border:
+        1px solid
+        #c7a66a;
+
+    color:#f3dfad;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(199,166,106,.28),
+            rgba(116,29,24,.3)
+        );
+}
+
+
+.music-no{
+
+    border:
+        1px solid
+        rgba(199,166,106,.3);
+
+    color:#bcae97;
+
+    background:
+        rgba(255,255,255,.04);
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
 
 @media(min-width:700px){
 
-  .hero{
-    min-height:900px;
-  }
+    .hero{
+        min-height:900px;
+    }
 
-  .hero:before{
-    background-position:center 26%;
-  }
+    .hero::before{
+        background-position:
+            center 26%;
+    }
 
-  .card{
-    padding-left:30px;
-    padding-right:30px;
-  }
+    .card{
+        padding-left:30px;
+        padding-right:30px;
+    }
 }
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
 
 @media(max-width:380px){
 
-  .countdown{
-    gap:4px;
-  }
+    .countdown{
+        gap:4px;
+    }
 
-  .num{
-    font-size:26px;
-  }
+    .num{
+        font-size:26px;
+    }
 
-  .unit{
-    padding:10px 2px;
-  }
+    .unit{
+        padding:
+            10px 2px;
+    }
 }
+
 </style>
 </head>
+
 
 <body>
 
@@ -836,530 +1167,872 @@ body{
 
 <div class="noise"></div>
 
-<!-- =========================
-     پاکت ورود
-========================= -->
+
+<!-- ======================================================
+     ENVELOPE
+====================================================== -->
 
 <section
-  class="envelope-screen"
-  id="envelopeScreen">
+    class="envelope-screen"
+    id="envelopeScreen">
 
-  <!-- نور از محل مهر -->
+    <div class="seal-light"></div>
 
-  <div class="seal-light"></div>
+    <div class="light-ring"></div>
 
-  <div class="light-ring"></div>
-
-  <!-- ذرات نور هنگام باز شدن -->
-
-  <div
-    class="light-particles"
-    id="lightParticles">
-  </div>
-
-  <!-- نامه -->
-
-  <div class="letter">
-
-    <div class="letter-content">
-
-      <div class="letter-orn">
-        ⌁ ❦ ⌁
-      </div>
-
-      <div class="letter-title">
-        دعوت به آغاز
-      </div>
-
-      <div class="letter-names">
-        آینوش &amp; دانیال
-      </div>
-
-      <div class="letter-date">
-        ۱۰ مهر ۱۴۰۵
-      </div>
-
+    <div
+        class="light-particles"
+        id="lightParticles">
     </div>
-
-  </div>
 
 </section>
 
 
-<!-- =========================
-     اجازه موسیقی
-========================= -->
+
+<!-- ======================================================
+     MUSIC PERMISSION
+====================================================== -->
 
 <div
-  class="music-permission"
-  id="musicPermission">
+    class="music-permission"
+    id="musicPermission">
 
-  <div class="music-title">
-    این شب را با موسیقی ما کامل‌تر تجربه کنید
-  </div>
+    <div class="music-title">
+        این شب را با موسیقی ما کامل‌تر تجربه کنید
+    </div>
 
-  <div class="music-text">
-    آیا مایلید موسیقی این شب هنگام تماشای دعوتنامه پخش شود؟
-  </div>
+    <div class="music-text">
+        آیا مایلید موسیقی این شب هنگام تماشای دعوتنامه پخش شود؟
+    </div>
 
-  <div class="music-actions">
+    <div class="music-actions">
 
-    <button
-      class="music-action music-yes"
-      id="musicYes">
-      ♪ بله، پخش کن
-    </button>
+        <button
+            class="music-action music-yes"
+            id="musicYes">
+            ♪ بله، پخش کن
+        </button>
 
-    <button
-      class="music-action music-no"
-      id="musicNo">
-      بدون موسیقی
-    </button>
+        <button
+            class="music-action music-no"
+            id="musicNo">
+            بدون موسیقی
+        </button>
 
-  </div>
+    </div>
 
 </div>
 
 
-<!-- =========================
-     سایت اصلی
-========================= -->
+
+<!-- ======================================================
+     MAIN
+====================================================== -->
 
 <main
-  class="main"
-  id="main">
+    class="main"
+    id="main">
 
-<section class="hero">
 
-  <div class="topbar">
+    <!-- برف سینمایی -->
 
-    <button
-      class="icon music-note"
-      id="musicBtn"
-      aria-label="موسیقی">
-      ♫
-    </button>
-
-    <button
-      class="icon"
-      id="menuBtn"
-      aria-label="اطلاعات">
-      ☰
-    </button>
-
-  </div>
-
-  <div class="hero-content">
-
-    <div class="kicker">
-      THE BEGINNING OF FOREVER
+    <div
+        class="snow"
+        id="snow">
     </div>
 
-    <div class="names">
-      آینوش &amp; دانیال
-    </div>
 
-    <div class="orn">
-      ⌁ ❦ ⌁
-    </div>
+    <!-- HERO -->
 
-    <div class="date">
-      ۱۰ مهر ۱۴۰۵
-    </div>
-
-    <div class="sub">
-      ساعت ۱۹:۰۰
-    </div>
-
-  </div>
-
-</section>
+    <section class="hero">
 
 
-<section class="card">
+        <div class="topbar">
 
-  <h2 class="section-title">
-    تا آغاز یک خاطره‌ی ماندگار
-  </h2>
+            <button
+                class="icon music-note"
+                id="musicBtn"
+                aria-label="موسیقی">
 
-  <div class="countdown">
+                ♫
 
-    <div class="unit">
-      <div class="num" id="days">--</div>
-      <div class="label">DAYS</div>
-    </div>
-
-    <div class="unit">
-      <div class="num" id="hours">--</div>
-      <div class="label">HOURS</div>
-    </div>
-
-    <div class="unit">
-      <div class="num" id="minutes">--</div>
-      <div class="label">MINUTES</div>
-    </div>
-
-    <div class="unit">
-      <div class="num" id="seconds">--</div>
-      <div class="label">SECONDS</div>
-    </div>
-
-  </div>
+            </button>
 
 
-  <div class="venue">
+            <button
+                class="icon"
+                id="menuBtn"
+                aria-label="اطلاعات">
 
-    <div class="section-title">
-      مراسم ما
-    </div>
+                ☰
 
-    <div class="venue-name">
-      تالار فرش قرمز
-    </div>
+            </button>
 
-    <div class="venue-en">
-      Red Carpet
-    </div>
+        </div>
 
-    <div class="map-buttons">
 
-      <a
-        class="map-btn"
-        href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x3fbc4b61e82d70f9:0x4f22546a30003f?entry=s&sa=X&ved=2ahUKEwj6mLyvuqOWAxVyTqQEHTYfBlYQ4kB6BAgVEAA&hl=fa&g_ep=Eg1tbF9yMDI2MDgxMV8wIOC7DCoASAJQAg%3D%3D"
-        target="_blank"
-        rel="noopener">
-        Google Maps
-      </a>
 
-      <a
-        class="map-btn"
-        href="https://www.waze.com/ul?q=%D8%AA%D8%A7%D9%84%D8%A7%D8%B1%20%D9%81%D8%B1%D8%B4%20%D9%82%D8%B1%D9%85%D8%B2"
-        target="_blank"
-        rel="noopener">
-        Waze
-      </a>
+        <div class="hero-content">
 
-      <a
-        class="map-btn"
-        href="https://maps.apple.com/?q=%D8%AA%D8%A7%D9%84%D8%A7%D8%B1%20%D9%81%D8%B1%D8%B4%20%D9%82%D8%B1%D9%85%D8%B2"
-        target="_blank"
-        rel="noopener">
-        Apple Maps
-      </a>
 
-    </div>
+            <div class="kicker">
+                THE BEGINNING OF FOREVER
+            </div>
 
-  </div>
 
-  <div class="footer">
-    آینوش و دانیال • ۱۴۰۵
-  </div>
+            <div class="names">
+                آینوش &amp; دانیال
+            </div>
 
-</section>
+
+            <div class="orn">
+                ⌁ ❦ ⌁
+            </div>
+
+
+            <div class="date">
+                ۱۰ مهر ۱۴۰۵
+            </div>
+
+
+            <div class="sub">
+                ساعت ۱۹:۰۰
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         CARD
+    ================================================== -->
+
+    <section class="card">
+
+
+        <h2 class="section-title">
+            تا آغاز یک خاطره‌ی ماندگار
+        </h2>
+
+
+        <div class="countdown">
+
+
+            <div class="unit">
+
+                <div
+                    class="num"
+                    id="days">
+                    --
+                </div>
+
+                <div class="label">
+                    DAYS
+                </div>
+
+            </div>
+
+
+
+            <div class="unit">
+
+                <div
+                    class="num"
+                    id="hours">
+                    --
+                </div>
+
+                <div class="label">
+                    HOURS
+                </div>
+
+            </div>
+
+
+
+            <div class="unit">
+
+                <div
+                    class="num"
+                    id="minutes">
+                    --
+                </div>
+
+                <div class="label">
+                    MINUTES
+                </div>
+
+            </div>
+
+
+
+            <div class="unit">
+
+                <div
+                    class="num"
+                    id="seconds">
+                    --
+                </div>
+
+                <div class="label">
+                    SECONDS
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ==================================================
+             VENUE
+        ================================================== -->
+
+        <div class="venue">
+
+
+            <div class="section-title">
+                مراسم ما
+            </div>
+
+
+            <div class="venue-name">
+                تالار فرش قرمز
+            </div>
+
+
+            <div class="venue-en">
+                Red Carpet
+            </div>
+
+
+            <div class="map-buttons">
+
+
+                <a
+                    class="map-btn"
+                    href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x3fbc4b61e82d70f9:0x4f22546a30003f?entry=s&sa=X&ved=2ahUKEwj6mLyvuqOWAxVyTqQEHTYfBlYQ4kB6BAgVEAA&hl=fa&g_ep=Eg1tbF9yMDI2MDgxMV8wIOC7DCoASAJQAg%3D%3D"
+                    target="_blank"
+                    rel="noopener">
+
+                    Google Maps
+
+                </a>
+
+
+                <a
+                    class="map-btn"
+                    href="https://www.waze.com/ul?q=%D8%AA%D8%A7%D9%84%D8%A7%D8%B1%20%D9%81%D8%B1%D8%B4%20%D9%82%D8%B1%D9%85%D8%B2"
+                    target="_blank"
+                    rel="noopener">
+
+                    Waze
+
+                </a>
+
+
+                <a
+                    class="map-btn"
+                    href="https://maps.apple.com/?q=%D8%AA%D8%A7%D9%84%D8%A7%D8%B1%20%D9%81%D8%B1%D8%B4%20%D9%82%D8%B1%D9%85%D8%B2"
+                    target="_blank"
+                    rel="noopener">
+
+                    Apple Maps
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer">
+            آینوش و دانیال • ۱۴۰۵
+        </div>
+
+
+    </section>
+
 
 </main>
 
 
+
+<!-- ======================================================
+     AUDIO
+====================================================== -->
+
 <audio
-  id="audio"
-  src="wedding-song.mp3"
-  preload="auto"
-  loop>
+    id="audio"
+    src="wedding-song.mp3"
+    preload="auto"
+    loop>
 </audio>
+
 
 </div>
 
 
+
 <script>
 
-/* =========================
+
+/* ======================================================
    COUNTDOWN
-========================= */
+====================================================== */
 
 const target =
-  new Date("2026-10-02T19:00:00+03:30").getTime();
+    new Date(
+        "2026-10-02T19:00:00+03:30"
+    ).getTime();
+
 
 function pad(n){
-  return String(n).padStart(2,"0");
+
+    return String(n)
+        .padStart(2,"0");
+
 }
+
 
 function tick(){
 
-  let d =
-    Math.max(0,target-Date.now());
+    let d =
+        Math.max(
+            0,
+            target-Date.now()
+        );
 
-  const days =
-    Math.floor(d/86400000);
 
-  d%=86400000;
+    const days =
+        Math.floor(
+            d/86400000
+        );
 
-  const hours =
-    Math.floor(d/3600000);
 
-  d%=3600000;
+    d %= 86400000;
 
-  const minutes =
-    Math.floor(d/60000);
 
-  d%=60000;
+    const hours =
+        Math.floor(
+            d/3600000
+        );
 
-  const seconds =
-    Math.floor(d/1000);
 
-  document.getElementById("days").textContent =
-    days;
+    d %= 3600000;
 
-  document.getElementById("hours").textContent =
-    pad(hours);
 
-  document.getElementById("minutes").textContent =
-    pad(minutes);
+    const minutes =
+        Math.floor(
+            d/60000
+        );
 
-  document.getElementById("seconds").textContent =
-    pad(seconds);
+
+    d %= 60000;
+
+
+    const seconds =
+        Math.floor(
+            d/1000
+        );
+
+
+    document
+        .getElementById("days")
+        .textContent =
+        days;
+
+
+    document
+        .getElementById("hours")
+        .textContent =
+        pad(hours);
+
+
+    document
+        .getElementById("minutes")
+        .textContent =
+        pad(minutes);
+
+
+    document
+        .getElementById("seconds")
+        .textContent =
+        pad(seconds);
+
 }
+
 
 tick();
-setInterval(tick,1000);
+
+setInterval(
+    tick,
+    1000
+);
 
 
-/* =========================
-   عناصر
-========================= */
+
+/* ======================================================
+   ELEMENTS
+====================================================== */
 
 const screen =
-  document.getElementById("envelopeScreen");
+    document.getElementById(
+        "envelopeScreen"
+    );
+
 
 const main =
-  document.getElementById("main");
+    document.getElementById(
+        "main"
+    );
+
 
 const audio =
-  document.getElementById("audio");
+    document.getElementById(
+        "audio"
+    );
+
 
 const musicBtn =
-  document.getElementById("musicBtn");
+    document.getElementById(
+        "musicBtn"
+    );
+
 
 const musicPermission =
-  document.getElementById("musicPermission");
+    document.getElementById(
+        "musicPermission"
+    );
+
 
 const musicYes =
-  document.getElementById("musicYes");
+    document.getElementById(
+        "musicYes"
+    );
+
 
 const musicNo =
-  document.getElementById("musicNo");
+    document.getElementById(
+        "musicNo"
+    );
+
 
 const lightParticles =
-  document.getElementById("lightParticles");
+    document.getElementById(
+        "lightParticles"
+    );
 
-let opened = false;
+
+const snow =
+    document.getElementById(
+        "snow"
+    );
 
 
-/* =========================
-   ذرات انفجار نور
-========================= */
+let opened=false;
 
-for(let i=0;i<22;i++){
 
-  const p =
-    document.createElement("span");
 
-  p.className =
-    "light-particle";
+/* ======================================================
+   INTRO LIGHT PARTICLES
+====================================================== */
 
-  const angle =
-    Math.random()*Math.PI*2;
+for(
+    let i=0;
+    i<26;
+    i++
+){
 
-  const distance =
-    70 + Math.random()*180;
+    const particle =
+        document.createElement(
+            "span"
+        );
 
-  p.style.setProperty(
-    "--x",
-    Math.cos(angle)*distance + "px"
-  );
 
-  p.style.setProperty(
-    "--y",
-    Math.sin(angle)*distance + "px"
-  );
+    particle.className =
+        "light-particle";
 
-  p.style.animationDelay =
-    (Math.random()*.25) + "s";
 
-  p.style.width =
-    (2+Math.random()*4)+"px";
+    const angle =
+        Math.random()
+        *
+        Math.PI
+        *
+        2;
 
-  p.style.height =
-    p.style.width;
 
-  lightParticles.appendChild(p);
+    const distance =
+        80
+        +
+        Math.random()
+        *
+        190;
+
+
+    particle.style.setProperty(
+        "--x",
+        Math.cos(angle)
+        *
+        distance
+        +
+        "px"
+    );
+
+
+    particle.style.setProperty(
+        "--y",
+        Math.sin(angle)
+        *
+        distance
+        +
+        "px"
+    );
+
+
+    particle.style.animationDelay =
+        (
+            Math.random()
+            *
+            .25
+        )
+        +
+        "s";
+
+
+    const size =
+        2
+        +
+        Math.random()
+        *
+        3;
+
+
+    particle.style.width =
+        size+"px";
+
+
+    particle.style.height =
+        size+"px";
+
+
+    lightParticles.appendChild(
+        particle
+    );
+
 }
 
 
-/* =========================
-   موسیقی
-========================= */
+
+/* ======================================================
+   CINEMATIC SNOW
+====================================================== */
+
+for(
+    let i=0;
+    i<58;
+    i++
+){
+
+    const flake =
+        document.createElement(
+            "span"
+        );
+
+
+    flake.className =
+        "snowflake";
+
+
+    flake.style.left =
+        Math.random()*100
+        +
+        "%";
+
+
+    const size =
+        1.5
+        +
+        Math.random()
+        *
+        3.5;
+
+
+    flake.style.width =
+        size+"px";
+
+
+    flake.style.height =
+        size+"px";
+
+
+    flake.style.setProperty(
+        "--drift",
+        (
+            -80
+            +
+            Math.random()
+            *
+            160
+        )
+        +
+        "px"
+    );
+
+
+    flake.style.animationDuration =
+        (
+            5
+            +
+            Math.random()
+            *
+            8
+        )
+        +
+        "s";
+
+
+    flake.style.animationDelay =
+        (
+            -Math.random()
+            *
+            12
+        )
+        +
+        "s";
+
+
+    flake.style.opacity =
+        .25
+        +
+        Math.random()
+        *
+        .6;
+
+
+    snow.appendChild(
+        flake
+    );
+
+}
+
+
+
+/* ======================================================
+   MUSIC
+====================================================== */
 
 function playMusic(){
 
-  audio.volume=.55;
+    audio.volume=.55;
 
-  audio.play()
-    .then(()=>{
-      musicBtn.classList.add("playing");
-    })
-    .catch(()=>{});
+
+    audio
+        .play()
+        .then(()=>{
+
+            musicBtn
+                .classList
+                .add(
+                    "playing"
+                );
+
+        })
+        .catch(()=>{});
 
 }
 
 
-/* =========================
-   باز کردن پاکت
-========================= */
+
+/* ======================================================
+   OPEN ENVELOPE
+====================================================== */
 
 function openEnvelope(){
 
-  if(opened)return;
-
-  opened=true;
-
-  /*
-    شروع نور
-  */
-
-  screen.classList.add("opening");
+    if(opened)
+        return;
 
 
-  /*
-    بعد از بیرون آمدن نامه
-    نامه بزرگ می‌شود
-  */
-
-  setTimeout(()=>{
-
-    screen.classList.add("final");
-
-  },1700);
+    opened=true;
 
 
-  /*
-    نمایش صفحه اصلی
-  */
+    /*
+       نور از محل مهر
+    */
 
-  setTimeout(()=>{
-
-    main.classList.add("visible");
-
-  },2300);
-
-
-  /*
-    وقتی صفحه اصلی تقریباً وارد شد،
-    اجازه موسیقی ظاهر شود
-  */
-
-  setTimeout(()=>{
-
-    musicPermission.classList.add("show");
-
-  },3000);
+    screen
+        .classList
+        .add(
+            "opening"
+        );
 
 
-  /*
-    پاکت کاملاً از روی صفحه کنار می‌رود
-  */
+    /*
+       حدود یک ثانیه بعد،
+       عکس اصلی وارد می‌شود
+    */
 
-  setTimeout(()=>{
+    setTimeout(()=>{
 
-    screen.style.opacity="0";
+        main
+            .classList
+            .add(
+                "visible"
+            );
 
-    screen.style.visibility="hidden";
+    },1150);
 
-    screen.style.pointerEvents="none";
 
-  },3900);
+    /*
+       پاکت محو می‌شود
+    */
+
+    setTimeout(()=>{
+
+        screen.style.opacity="0";
+
+        screen.style.visibility=
+            "hidden";
+
+        screen.style.pointerEvents=
+            "none";
+
+    },1900);
+
+
+    /*
+       بعد از ورود کامل،
+       اجازه موسیقی
+    */
+
+    setTimeout(()=>{
+
+        musicPermission
+            .classList
+            .add(
+                "show"
+            );
+
+    },2200);
 
 }
 
 
-/* =========================
-   لمس پاکت
-========================= */
+
+/* ======================================================
+   TOUCH ENVELOPE
+====================================================== */
 
 screen.addEventListener(
-  "click",
-  openEnvelope
+    "click",
+    openEnvelope
 );
 
 
-/* =========================
-   اجازه موسیقی
-========================= */
+
+/* ======================================================
+   MUSIC YES
+====================================================== */
 
 musicYes.addEventListener(
-  "click",
-  ()=>{
-
-    playMusic();
-
-    musicPermission.classList.remove("show");
-
-  }
-);
-
-musicNo.addEventListener(
-  "click",
-  ()=>{
-
-    musicPermission.classList.remove("show");
-
-  }
-);
-
-
-/* =========================
-   دکمه موسیقی
-========================= */
-
-musicBtn.addEventListener(
-  "click",
-  e=>{
-
-    e.stopPropagation();
-
-    if(audio.paused){
-
-      playMusic();
-
-    }else{
-
-      audio.pause();
-
-      musicBtn.classList.remove("playing");
-
-    }
-
-  }
-);
-
-
-/* =========================
-   منو
-========================= */
-
-document
-  .getElementById("menuBtn")
-  .addEventListener(
     "click",
     ()=>{
 
-      document
-        .querySelector(".venue")
-        .scrollIntoView({
-          behavior:"smooth"
-        });
+        playMusic();
+
+        musicPermission
+            .classList
+            .remove(
+                "show"
+            );
 
     }
-  );
+);
+
+
+
+/* ======================================================
+   MUSIC NO
+====================================================== */
+
+musicNo.addEventListener(
+    "click",
+    ()=>{
+
+        musicPermission
+            .classList
+            .remove(
+                "show"
+            );
+
+    }
+);
+
+
+
+/* ======================================================
+   MUSIC BUTTON
+====================================================== */
+
+musicBtn.addEventListener(
+    "click",
+    e=>{
+
+        e.stopPropagation();
+
+
+        if(audio.paused){
+
+            playMusic();
+
+        }else{
+
+            audio.pause();
+
+            musicBtn
+                .classList
+                .remove(
+                    "playing"
+                );
+
+        }
+
+    }
+);
+
+
+
+/* ======================================================
+   MENU
+====================================================== */
+
+document
+    .getElementById(
+        "menuBtn"
+    )
+    .addEventListener(
+        "click",
+        ()=>{
+
+            document
+                .querySelector(
+                    ".venue"
+                )
+                .scrollIntoView({
+                    behavior:
+                        "smooth"
+                });
+
+        }
+    );
+
 
 </script>
 
