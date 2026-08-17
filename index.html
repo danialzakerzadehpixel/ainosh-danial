@@ -10,570 +10,811 @@
 @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Vazirmatn:wght@300;400;500&family=Cormorant+Garamond:wght@400;500;600&display=swap');
 
 :root{
- --cream:#f2e6cf;
- --gold:#c6a56d;
- --gold2:#e1c895;
+  --cream:#f2e6cf;
+  --gold:#c6a56d;
+  --gold2:#e1c895;
 }
 
 *{box-sizing:border-box}
 
 html,body{
- margin:0;
- padding:0;
- background:#050505;
- color:var(--cream);
- font-family:Vazirmatn,sans-serif;
+  margin:0;
+  padding:0;
+  background:#050505;
+  color:var(--cream);
+  font-family:Vazirmatn,sans-serif;
 }
 
 body{
- min-height:100vh;
- overflow-x:hidden;
+  min-height:100vh;
+  overflow-x:hidden;
 }
 
 .app{
- min-height:100vh;
- background:#050505;
- position:relative;
+  min-height:100vh;
+  background:#050505;
+  position:relative;
 }
 
 .noise{
- position:fixed;
- inset:0;
- pointer-events:none;
- z-index:100;
- opacity:.055;
- background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:100;
+  opacity:.055;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
 }
 
-/* =========================
-   پاکت
-========================= */
+
+/* =================================================
+   صفحه ورود — پاکت
+================================================= */
 
 .envelope-screen{
- position:fixed;
- inset:0;
- z-index:50;
- background:url("splash.webp.png") center/cover no-repeat;
- cursor:pointer;
- transition:
-   opacity 1.3s cubic-bezier(.2,.8,.2,1),
-   transform 1.3s cubic-bezier(.2,.8,.2,1),
-   filter 1.3s ease;
+  position:fixed;
+  inset:0;
+  z-index:50;
+
+  background:url("splash.webp.png") center/cover no-repeat;
+
+  cursor:pointer;
+
+  transition:
+    opacity 1.3s cubic-bezier(.2,.8,.2,1),
+    transform 1.3s cubic-bezier(.2,.8,.2,1),
+    filter 1.3s ease;
 }
 
 .envelope-screen.hidden{
- opacity:0;
- transform:scale(1.06);
- filter:brightness(2);
- pointer-events:none;
+  opacity:0;
+  transform:scale(1.06);
+  filter:brightness(2);
+  pointer-events:none;
 }
 
 .envelope-screen::after{
- content:"";
- position:absolute;
- inset:-20%;
- background:
- radial-gradient(
-   circle at center,
-   rgba(255,235,190,.9) 0%,
-   rgba(255,220,160,.35) 18%,
-   rgba(255,220,160,0) 55%
- );
- opacity:0;
- transform:scale(.4);
- transition:
-   opacity .9s ease,
-   transform 1.2s cubic-bezier(.2,.8,.2,1);
- pointer-events:none;
+  content:"";
+  position:absolute;
+  inset:-20%;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255,235,190,.95) 0%,
+      rgba(255,220,160,.4) 18%,
+      rgba(255,220,160,0) 55%
+    );
+
+  opacity:0;
+  transform:scale(.4);
+
+  transition:
+    opacity .9s ease,
+    transform 1.2s cubic-bezier(.2,.8,.2,1);
+
+  pointer-events:none;
 }
 
 .envelope-screen.opening::after{
- opacity:1;
- transform:scale(1.5);
+  opacity:1;
+  transform:scale(1.5);
 }
 
-/* =========================
-   صفحه اصلی
-========================= */
+
+/* =================================================
+   سایت اصلی
+================================================= */
 
 .main{
- opacity:0;
- transform:scale(1.025);
- pointer-events:none;
- transition:
-   opacity 1.5s ease,
-   transform 1.7s cubic-bezier(.2,.8,.2,1);
+  opacity:0;
+  transform:scale(1.025);
+  pointer-events:none;
+
+  transition:
+    opacity 1.5s ease,
+    transform 1.7s cubic-bezier(.2,.8,.2,1);
 }
 
 .main.visible{
- opacity:1;
- transform:none;
- pointer-events:auto;
+  opacity:1;
+  transform:none;
+  pointer-events:auto;
 }
 
-/* =========================
-   HERO
-========================= */
+
+/* =================================================
+   عکس اصلی
+================================================= */
 
 .hero{
- min-height:100svh;
- position:relative;
- display:flex;
- align-items:flex-end;
- justify-content:center;
- overflow:hidden;
- padding:
-   30px 20px
-   max(45px,env(safe-area-inset-bottom));
+  min-height:100svh;
+
+  position:relative;
+
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+
+  overflow:hidden;
+
+  padding:
+    30px 20px
+    max(45px,env(safe-area-inset-bottom));
 }
 
 .hero::before{
- content:"";
- position:absolute;
- inset:0;
+  content:"";
+  position:absolute;
+  inset:0;
 
- background:
- linear-gradient(
-   to bottom,
-   rgba(0,0,0,.08) 0%,
-   rgba(0,0,0,.12) 35%,
-   rgba(0,0,0,.78) 82%,
-   #050505 100%
- ),
- url("couple.jpeg") center 28% / cover no-repeat;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,.08) 0%,
+      rgba(0,0,0,.12) 35%,
+      rgba(0,0,0,.78) 82%,
+      #050505 100%
+    ),
+    url("couple.jpeg") center 28% / cover no-repeat;
 
- transform:scale(1.04);
- animation:heroZoom 14s ease-out forwards;
+  transform:scale(1.04);
+
+  animation:
+    heroZoom 14s ease-out forwards;
 }
 
 @keyframes heroZoom{
- from{transform:scale(1.08)}
- to{transform:scale(1.02)}
+  from{
+    transform:scale(1.08);
+  }
+
+  to{
+    transform:scale(1.02);
+  }
 }
 
 .hero::after{
- content:"";
- position:absolute;
- inset:0;
- background:
- radial-gradient(
-   circle at 50% 42%,
-   transparent 0%,
-   rgba(0,0,0,.08) 35%,
-   rgba(0,0,0,.72) 100%
- );
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      transparent 0%,
+      rgba(0,0,0,.08) 35%,
+      rgba(0,0,0,.72) 100%
+    );
 }
 
+
+/* =================================================
+   دکمه‌های بالا
+================================================= */
+
 .topbar{
- position:absolute;
- top:20px;
- left:20px;
- right:20px;
- z-index:5;
- display:flex;
- justify-content:space-between;
- direction:ltr;
+  position:absolute;
+
+  top:20px;
+  left:20px;
+  right:20px;
+
+  z-index:5;
+
+  display:flex;
+  justify-content:space-between;
+
+  direction:ltr;
 }
 
 .icon{
- width:44px;
- height:44px;
- border-radius:50%;
- border:1px solid rgba(201,168,108,.5);
- background:rgba(5,4,3,.38);
- color:#e5cf9f;
- display:grid;
- place-items:center;
- backdrop-filter:blur(10px);
- font-size:19px;
- cursor:pointer;
- transition:transform .3s ease;
+  width:44px;
+  height:44px;
+
+  border-radius:50%;
+
+  border:1px solid rgba(201,168,108,.5);
+
+  background:rgba(5,4,3,.38);
+
+  color:#e5cf9f;
+
+  display:grid;
+  place-items:center;
+
+  backdrop-filter:blur(10px);
+
+  font-size:19px;
+
+  cursor:pointer;
+
+  transition:transform .3s ease;
 }
 
 .icon:active{
- transform:scale(.9);
+  transform:scale(.9);
 }
 
+
+/* =================================================
+   متن صفحه اصلی
+================================================= */
+
 .hero-content{
- width:min(760px,100%);
- position:relative;
- z-index:4;
- text-align:center;
- padding-bottom:30px;
- animation:
-   heroText 1.8s .4s both cubic-bezier(.2,.8,.2,1);
+  width:min(760px,100%);
+
+  position:relative;
+  z-index:4;
+
+  text-align:center;
+
+  padding-bottom:30px;
+
+  animation:
+    heroText 1.8s .4s both cubic-bezier(.2,.8,.2,1);
 }
 
 @keyframes heroText{
- from{
-   opacity:0;
-   transform:translateY(35px);
- }
- to{
-   opacity:1;
-   transform:none;
- }
+
+  from{
+    opacity:0;
+    transform:translateY(35px);
+  }
+
+  to{
+    opacity:1;
+    transform:none;
+  }
+
 }
 
 .kicker{
- font-family:"Cormorant Garamond",serif;
- font-size:18px;
- letter-spacing:5px;
- color:#dbc494;
- margin-bottom:10px;
+  font-family:"Cormorant Garamond",serif;
+
+  font-size:18px;
+
+  letter-spacing:5px;
+
+  color:#dbc494;
+
+  margin-bottom:10px;
 }
 
 .names{
- font-family:Amiri,serif;
- font-size:clamp(50px,14vw,94px);
- line-height:1.05;
- margin:8px 0 12px;
- color:#f4e7cc;
- text-shadow:0 4px 35px rgba(0,0,0,.8);
+  font-family:Amiri,serif;
+
+  font-size:clamp(50px,14vw,94px);
+
+  line-height:1.05;
+
+  margin:8px 0 12px;
+
+  color:#f4e7cc;
+
+  text-shadow:
+    0 4px 35px rgba(0,0,0,.8);
 }
 
 .orn{
- color:var(--gold2);
- font-size:25px;
- margin:5px 0 10px;
+  color:var(--gold2);
+
+  font-size:25px;
+
+  margin:5px 0 10px;
 }
 
 .date{
- font-family:Amiri,serif;
- font-size:25px;
- color:#ead8b5;
+  font-family:Amiri,serif;
+
+  font-size:25px;
+
+  color:#ead8b5;
 }
 
 .sub{
- margin-top:6px;
- font-size:13px;
- color:#cbb99a;
+  margin-top:6px;
+
+  font-size:13px;
+
+  color:#cbb99a;
 }
 
-/* =========================
+
+/* =================================================
    برف / ذرات نور
-========================= */
+================================================= */
 
 .snow{
- position:fixed;
- inset:0;
- z-index:6;
- pointer-events:none;
- overflow:hidden;
+  position:fixed;
+
+  inset:0;
+
+  z-index:6;
+
+  pointer-events:none;
+
+  overflow:hidden;
 }
 
 .snow span{
- position:absolute;
- width:3px;
- height:3px;
- border-radius:50%;
- background:#fff8df;
- box-shadow:
-   0 0 5px #fff,
-   0 0 12px rgba(255,220,150,.8);
- opacity:.65;
- animation:snowfall linear infinite;
+  position:absolute;
+
+  width:3px;
+  height:3px;
+
+  border-radius:50%;
+
+  background:#fff8df;
+
+  box-shadow:
+    0 0 5px #fff,
+    0 0 12px rgba(255,220,150,.8);
+
+  opacity:.65;
+
+  animation:
+    snowfall linear infinite;
 }
 
 @keyframes snowfall{
- 0%{
-   transform:translate3d(0,-10vh,0) scale(.6);
-   opacity:0;
- }
- 15%{opacity:.65}
- 80%{opacity:.45}
- 100%{
-   transform:translate3d(60px,110vh,0) scale(1);
-   opacity:0;
- }
+
+  0%{
+    transform:
+      translate3d(0,-10vh,0)
+      scale(.6);
+
+    opacity:0;
+  }
+
+  15%{
+    opacity:.65;
+  }
+
+  80%{
+    opacity:.45;
+  }
+
+  100%{
+    transform:
+      translate3d(60px,110vh,0)
+      scale(1);
+
+    opacity:0;
+  }
+
 }
 
-/* =========================
-   کارت
-========================= */
+
+/* =================================================
+   بخش اطلاعات
+================================================= */
 
 .card{
- max-width:800px;
- margin:auto;
- padding:75px 20px 90px;
- background:linear-gradient(to bottom,#050505,#0a0806);
- text-align:center;
+  max-width:800px;
+
+  margin:auto;
+
+  padding:
+    75px 20px
+    90px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #050505,
+      #0a0806
+    );
+
+  text-align:center;
 }
 
 .section-title{
- font-family:Amiri,serif;
- font-size:28px;
- color:#dfc79a;
- margin:0 0 22px;
+  font-family:Amiri,serif;
+
+  font-size:28px;
+
+  color:#dfc79a;
+
+  margin:0 0 22px;
 }
 
+
+/* =================================================
+   شمارش معکوس
+================================================= */
+
 .countdown{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:8px;
- direction:ltr;
+  display:grid;
+
+  grid-template-columns:repeat(4,1fr);
+
+  gap:8px;
+
+  direction:ltr;
 }
 
 .unit{
- border:1px solid rgba(185,154,103,.35);
- padding:14px 4px;
- background:rgba(20,15,10,.7);
- border-radius:5px;
- backdrop-filter:blur(5px);
+  border:
+    1px solid rgba(185,154,103,.35);
+
+  padding:14px 4px;
+
+  background:rgba(20,15,10,.7);
+
+  border-radius:5px;
+
+  backdrop-filter:blur(5px);
 }
 
 .num{
- font-family:"Cormorant Garamond",serif;
- font-size:34px;
- color:#ead7b3;
+  font-family:"Cormorant Garamond",serif;
+
+  font-size:34px;
+
+  color:#ead7b3;
 }
 
 .label{
- font-size:9px;
- color:#9d8c72;
- letter-spacing:1px;
+  font-size:9px;
+
+  color:#9d8c72;
+
+  letter-spacing:1px;
 }
 
-/* =========================
+
+/* =================================================
    گالری
-========================= */
+================================================= */
 
 .gallery{
- background:#050505;
- padding-bottom:80px;
+  background:#050505;
+
+  padding-bottom:20px;
 }
 
 .photo{
- position:relative;
- width:100%;
- overflow:hidden;
- background:#080706;
+  position:relative;
+
+  width:100%;
+
+  overflow:hidden;
+
+  background:#080706;
 }
 
 .photo img{
- width:100%;
- display:block;
- object-fit:cover;
- transform:scale(1.015);
- transition:
-   transform 1.8s cubic-bezier(.2,.8,.2,1);
+  width:100%;
+
+  display:block;
+
+  object-fit:cover;
+
+  transform:scale(1.015);
+
+  transition:
+    transform 1.8s cubic-bezier(.2,.8,.2,1);
 }
 
 .photo:hover img{
- transform:scale(1.04);
+  transform:scale(1.04);
 }
 
 .photo-overlay{
- position:absolute;
- inset:0;
- background:
- linear-gradient(
-   to bottom,
-   transparent 50%,
-   rgba(0,0,0,.72) 100%
- );
+  position:absolute;
+
+  inset:0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 50%,
+      rgba(0,0,0,.72) 100%
+    );
 }
 
 .photo-caption{
- position:absolute;
- bottom:25px;
- right:22px;
- left:22px;
- z-index:2;
- text-align:center;
- font-family:Amiri,serif;
- color:#ead9b8;
- font-size:22px;
- text-shadow:0 2px 12px #000;
+  position:absolute;
+
+  bottom:25px;
+
+  right:22px;
+  left:22px;
+
+  z-index:2;
+
+  text-align:center;
+
+  font-family:Amiri,serif;
+
+  color:#ead9b8;
+
+  font-size:22px;
+
+  text-shadow:
+    0 2px 12px #000;
 }
+
+
+/* =================================================
+   عکس تالار
+================================================= */
 
 .photo.hall img{
- height:92svh;
- object-fit:cover;
+  height:92svh;
+
+  object-fit:cover;
 }
+
+
+/* =================================================
+   عکس کلوزآپ
+================================================= */
 
 .photo.closeup img{
- height:78svh;
- object-fit:cover;
+  height:78svh;
+
+  object-fit:cover;
 }
 
-/* =========================
+
+/* =================================================
    لوکیشن
-========================= */
+================================================= */
 
 .venue{
- margin-top:70px;
+  margin-top:70px;
 }
 
 .venue-name{
- font-family:Amiri,serif;
- font-size:30px;
- color:#e7d2ab;
+  font-family:Amiri,serif;
+
+  font-size:30px;
+
+  color:#e7d2ab;
 }
 
 .venue-en{
- font-family:"Cormorant Garamond",serif;
- font-size:18px;
- color:#a99576;
- margin-top:2px;
+  font-family:"Cormorant Garamond",serif;
+
+  font-size:18px;
+
+  color:#a99576;
+
+  margin-top:2px;
 }
 
 .map-buttons{
- display:flex;
- flex-wrap:wrap;
- gap:10px;
- justify-content:center;
- margin-top:20px;
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:10px;
+
+  justify-content:center;
+
+  margin-top:20px;
 }
 
 .map-btn{
- color:#e4d0ab;
- border:1px solid rgba(185,154,103,.45);
- padding:12px 18px;
- border-radius:999px;
- text-decoration:none;
- font-size:12px;
- background:#100d0a;
- transition:.3s;
+  color:#e4d0ab;
+
+  border:
+    1px solid rgba(185,154,103,.45);
+
+  padding:12px 18px;
+
+  border-radius:999px;
+
+  text-decoration:none;
+
+  font-size:12px;
+
+  background:#100d0a;
+
+  transition:.3s;
 }
 
 .map-btn:hover{
- background:#1b150f;
- border-color:#d2b478;
- transform:translateY(-2px);
+  background:#1b150f;
+
+  border-color:#d2b478;
+
+  transform:translateY(-2px);
 }
 
 .footer{
- padding-top:60px;
- color:#776b59;
- font-size:11px;
+  padding-top:60px;
+
+  color:#776b59;
+
+  font-size:11px;
 }
 
-/* =========================
-   موسیقی
-========================= */
+
+/* =================================================
+   پنجره موسیقی
+================================================= */
 
 .music-modal{
- position:fixed;
- inset:0;
- z-index:80;
- display:flex;
- align-items:center;
- justify-content:center;
- background:rgba(0,0,0,.72);
- backdrop-filter:blur(10px);
- opacity:0;
- pointer-events:none;
- transition:opacity .6s ease;
+  position:fixed;
+
+  inset:0;
+
+  z-index:80;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:rgba(0,0,0,.72);
+
+  backdrop-filter:blur(10px);
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:opacity .6s ease;
 }
 
 .music-modal.show{
- opacity:1;
- pointer-events:auto;
+  opacity:1;
+
+  pointer-events:auto;
 }
 
 .music-box{
- width:min(88%,360px);
- padding:38px 25px;
- text-align:center;
- background:linear-gradient(145deg,#211910,#0d0a07);
- border:1px solid rgba(205,170,105,.5);
- box-shadow:0 25px 80px rgba(0,0,0,.8);
- border-radius:8px;
- transform:translateY(20px) scale(.96);
- transition:
-   transform .7s cubic-bezier(.2,.8,.2,1);
+  width:min(88%,360px);
+
+  padding:38px 25px;
+
+  text-align:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #211910,
+      #0d0a07
+    );
+
+  border:
+    1px solid rgba(205,170,105,.5);
+
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.8);
+
+  border-radius:8px;
+
+  transform:
+    translateY(20px)
+    scale(.96);
+
+  transition:
+    transform .7s cubic-bezier(.2,.8,.2,1);
 }
 
 .music-modal.show .music-box{
- transform:none;
+  transform:none;
 }
 
 .music-title{
- font-family:Amiri,serif;
- font-size:27px;
- color:#ead7b3;
- margin-bottom:8px;
+  font-family:Amiri,serif;
+
+  font-size:27px;
+
+  color:#ead7b3;
+
+  margin-bottom:8px;
 }
 
 .music-text{
- font-size:12px;
- color:#a9987d;
- margin-bottom:25px;
+  font-size:12px;
+
+  color:#a9987d;
+
+  margin-bottom:25px;
 }
 
 .music-buttons{
- display:flex;
- gap:10px;
- justify-content:center;
+  display:flex;
+
+  gap:10px;
+
+  justify-content:center;
 }
 
 .music-choice{
- flex:1;
- padding:12px;
- border-radius:999px;
- border:1px solid rgba(195,161,103,.45);
- background:#120e0a;
- color:#e3ceb0;
- font-family:Vazirmatn;
- cursor:pointer;
+  flex:1;
+
+  padding:12px;
+
+  border-radius:999px;
+
+  border:
+    1px solid rgba(195,161,103,.45);
+
+  background:#120e0a;
+
+  color:#e3ceb0;
+
+  font-family:Vazirmatn;
+
+  cursor:pointer;
 }
 
 .music-choice.primary{
- background:#8b6332;
- color:#fff6e5;
+  background:#8b6332;
+
+  color:#fff6e5;
 }
 
 .music-note.playing{
- animation:spin 3s linear infinite;
+  animation:
+    spin 3s linear infinite;
 }
 
 @keyframes spin{
- to{transform:rotate(360deg)}
+  to{
+    transform:rotate(360deg);
+  }
 }
+
+
+/* =================================================
+   دسکتاپ
+================================================= */
 
 @media(min-width:700px){
 
- .hero{
-   min-height:900px;
- }
+  .hero{
+    min-height:900px;
+  }
 
- .hero::before{
-   background-position:center 27%;
- }
+  .hero::before{
+    background-position:center 27%;
+  }
 
- .card{
-   padding-left:30px;
-   padding-right:30px;
- }
+  .card{
+    padding-left:30px;
+    padding-right:30px;
+  }
 
- .photo.hall img{
-   height:900px;
- }
+  .photo.hall img{
+    height:900px;
+  }
 
- .photo.closeup img{
-   height:750px;
- }
+  .photo.closeup img{
+    height:750px;
+  }
 
 }
 
+
+/* =================================================
+   موبایل کوچک
+================================================= */
+
 @media(max-width:380px){
 
- .countdown{
-   gap:4px;
- }
+  .countdown{
+    gap:4px;
+  }
 
- .num{
-   font-size:28px;
- }
+  .num{
+    font-size:28px;
+  }
 
- .unit{
-   padding:11px 2px;
- }
+  .unit{
+    padding:11px 2px;
+  }
 
 }
 </style>
 </head>
+
 
 <body>
 
@@ -581,440 +822,605 @@ body{
 
 <div class="noise"></div>
 
-<!-- پاکت -->
+
+<!-- ===============================================
+     صفحه پاکت
+================================================ -->
+
 <section
- class="envelope-screen"
- id="envelopeScreen">
+  class="envelope-screen"
+  id="envelopeScreen">
 </section>
 
-<!-- ذرات نور -->
-<div class="snow" id="snow"></div>
 
-<!-- سایت اصلی -->
-<main class="main" id="main">
+<!-- ===============================================
+     برف
+================================================ -->
+
+<div
+  class="snow"
+  id="snow">
+</div>
+
+
+<!-- ===============================================
+     سایت اصلی
+================================================ -->
+
+<main
+  class="main"
+  id="main">
+
+
+<!-- ===============================================
+     عکس اصلی
+================================================ -->
 
 <section class="hero">
 
- <div class="topbar">
+  <div class="topbar">
 
-   <button
-     class="icon music-note"
-     id="musicBtn"
-     aria-label="موسیقی">
-     ♫
-   </button>
+    <button
+      class="icon music-note"
+      id="musicBtn"
+      aria-label="موسیقی">
+      ♫
+    </button>
 
-   <button
-     class="icon"
-     id="menuBtn"
-     aria-label="اطلاعات">
-     ☰
-   </button>
+    <button
+      class="icon"
+      id="menuBtn"
+      aria-label="اطلاعات">
+      ☰
+    </button>
 
- </div>
+  </div>
 
- <div class="hero-content">
 
-   <div class="kicker">
-     THE BEGINNING OF FOREVER
-   </div>
+  <div class="hero-content">
 
-   <div class="names">
-     آینوش &amp; دانیال
-   </div>
+    <div class="kicker">
+      THE BEGINNING OF FOREVER
+    </div>
 
-   <div class="orn">
-     ⌁ ❦ ⌁
-   </div>
+    <div class="names">
+      آینوش &amp; دانیال
+    </div>
 
-   <div class="date">
-     ۱۰ مهر ۱۴۰۵
-   </div>
+    <div class="orn">
+      ⌁ ❦ ⌁
+    </div>
 
-   <div class="sub">
-     ساعت ۱۹:۰۰
-   </div>
+    <div class="date">
+      ۱۰ مهر ۱۴۰۵
+    </div>
 
- </div>
+    <div class="sub">
+      ساعت ۱۹:۰۰
+    </div>
+
+  </div>
 
 </section>
 
+
+<!-- ===============================================
+     بخش اصلی
+================================================ -->
+
 <section class="card">
 
- <h2 class="section-title">
-   تا آغاز یک خاطره‌ی ماندگار
- </h2>
 
- <div class="countdown">
+  <h2 class="section-title">
+    تا آغاز یک خاطره‌ی ماندگار
+  </h2>
 
-   <div class="unit">
-     <div class="num" id="days">--</div>
-     <div class="label">DAYS</div>
-   </div>
 
-   <div class="unit">
-     <div class="num" id="hours">--</div>
-     <div class="label">HOURS</div>
-   </div>
+  <!-- شمارش معکوس -->
 
-   <div class="unit">
-     <div class="num" id="minutes">--</div>
-     <div class="label">MINUTES</div>
-   </div>
+  <div class="countdown">
 
-   <div class="unit">
-     <div class="num" id="seconds">--</div>
-     <div class="label">SECONDS</div>
-   </div>
+    <div class="unit">
 
- </div>
+      <div
+        class="num"
+        id="days">
+        --
+      </div>
 
- <!-- گالری -->
+      <div class="label">
+        DAYS
+      </div>
 
- <div class="gallery">
+    </div>
 
-   <div class="photo hall">
 
-     <img
-       src="hall.png"
-       alt="آینوش و دانیال">
+    <div class="unit">
 
-     <div class="photo-overlay"></div>
+      <div
+        class="num"
+        id="hours">
+        --
+      </div>
 
-     <div class="photo-caption">
-       جایی میان نور و عشق
-     </div>
+      <div class="label">
+        HOURS
+      </div>
 
-   </div>
+    </div>
 
-   <div class="photo closeup">
 
-     <img
-       src="closeup.png"
-       alt="آینوش و دانیال">
+    <div class="unit">
 
-     <div class="photo-overlay"></div>
+      <div
+        class="num"
+        id="minutes">
+        --
+      </div>
 
-     <div class="photo-caption">
-       و این آغازِ قصه‌ی ماست...
-     </div>
+      <div class="label">
+        MINUTES
+      </div>
 
-   </div>
+    </div>
 
- </div>
 
- <!-- لوکیشن -->
+    <div class="unit">
 
- <div class="venue">
+      <div
+        class="num"
+        id="seconds">
+        --
+      </div>
 
-   <div class="section-title">
-     مراسم ما
-   </div>
+      <div class="label">
+        SECONDS
+      </div>
 
-   <div class="venue-name">
-     تالار فرش قرمز
-   </div>
+    </div>
 
-   <div class="venue-en">
-     Red Carpet
-   </div>
+  </div>
 
-   <div class="map-buttons">
 
-     <a
-       class="map-btn"
-       href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x3fbc4b61e82d70f9:0x4f22546a30003f?entry=s&sa=X&ved=2ahUKEwj6mLyvuqOWAxVyTqQEHTYfBlYQ4kB6BAgVEAA&hl=fa"
-       target="_blank"
-       rel="noopener">
-       Google Maps
-     </a>
+  <!-- =============================================
+       گالری
+  ============================================== -->
 
-     <a
-       class="map-btn"
-       href="https://www.waze.com/ul?q=%D8%AA%D8%A7%D9%84%D8%A7%D8%B1%20%D9%81%D8%B1%D8%B4%20%D9%82%D8%B1%D9%85%D8%B2"
-       target="_blank"
-       rel="noopener">
-       Waze
-     </a>
+  <div class="gallery">
 
-     <a
-       class="map-btn"
-       href="https://maps.apple.com/?q=%D8%AA%D8%A7%D9%84%D8%A7%D8%B1%20%D9%81%D8%B1%D8%B4%20%D9%82%D8%B1%D9%85%D8%B2"
-       target="_blank"
-       rel="noopener">
-       Apple Maps
-     </a>
 
-   </div>
+    <!-- عکس تالار -->
 
- </div>
+    <div class="photo hall">
 
- <div class="footer">
-   آینوش و دانیال • ۱۴۰۵
- </div>
+      <img
+        src="hall.PNG"
+        alt="آینوش و دانیال">
+
+      <div class="photo-overlay"></div>
+
+      <div class="photo-caption">
+        جایی میان نور و عشق
+      </div>
+
+    </div>
+
+
+    <!-- عکس کلوزآپ -->
+
+    <div class="photo closeup">
+
+      <img
+        src="closeup.PNG"
+        alt="آینوش و دانیال">
+
+      <div class="photo-overlay"></div>
+
+      <div class="photo-caption">
+        و این آغازِ قصه‌ی ماست...
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =============================================
+       لوکیشن
+  ============================================== -->
+
+  <div class="venue">
+
+    <div class="section-title">
+      مراسم ما
+    </div>
+
+    <div class="venue-name">
+      تالار فرش قرمز
+    </div>
+
+    <div class="venue-en">
+      Red Carpet
+    </div>
+
+
+    <div class="map-buttons">
+
+      <a
+        class="map-btn"
+        href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x3fbc4b61e82d70f9:0x4f22546a30003f?entry=s&sa=X&ved=2ahUKEwj6mLyvuqOWAxVyTqQEHTYfBlYQ4kB6BAgVEAA&hl=fa"
+        target="_blank"
+        rel="noopener">
+        Google Maps
+      </a>
+
+
+      <a
+        class="map-btn"
+        href="https://www.waze.com/ul?q=%D8%AA%D8%A7%D9%84%D8%A7%D8%B1%20%D9%81%D8%B1%D8%B4%20%D9%82%D8%B1%D9%85%D8%B2"
+        target="_blank"
+        rel="noopener">
+        Waze
+      </a>
+
+
+      <a
+        class="map-btn"
+        href="https://maps.apple.com/?q=%D8%AA%D8%A7%D9%84%D8%A7%D8%B1%20%D9%81%D8%B1%D8%B4%20%D9%82%D8%B1%D9%85%D8%B2"
+        target="_blank"
+        rel="noopener">
+        Apple Maps
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+    آینوش و دانیال • ۱۴۰۵
+  </div>
 
 </section>
 
 </main>
 
-<!-- موسیقی -->
+
+<!-- ===============================================
+     آهنگ
+================================================ -->
 
 <audio
- id="audio"
- src="wedding-song.mp3"
- preload="auto"
- loop>
+  id="audio"
+  src="wedding-song.mp3"
+  preload="auto"
+  loop>
 </audio>
 
-<!-- پنجره اجازه موسیقی -->
+
+<!-- ===============================================
+     اجازه پخش موسیقی
+================================================ -->
 
 <div
- class="music-modal"
- id="musicModal">
+  class="music-modal"
+  id="musicModal">
 
- <div class="music-box">
+  <div class="music-box">
 
-   <div class="music-title">
-     موسیقی این قصه را بشنویم؟
-   </div>
+    <div class="music-title">
+      موسیقی این قصه را بشنویم؟
+    </div>
 
-   <div class="music-text">
-     برای این لحظه، یک موسیقی برای شما آماده کرده‌ایم.
-   </div>
+    <div class="music-text">
+      برای این لحظه، یک موسیقی برای شما آماده کرده‌ایم.
+    </div>
 
-   <div class="music-buttons">
 
-     <button
-       class="music-choice primary"
-       id="musicYes">
-       بله، پخش کن ♫
-     </button>
+    <div class="music-buttons">
 
-     <button
-       class="music-choice"
-       id="musicNo">
-       فعلاً نه
-     </button>
+      <button
+        class="music-choice primary"
+        id="musicYes">
+        بله، پخش کن ♫
+      </button>
 
-   </div>
+      <button
+        class="music-choice"
+        id="musicNo">
+        فعلاً نه
+      </button>
 
- </div>
+    </div>
+
+  </div>
 
 </div>
 
+
 <script>
 
-/* =========================
-   COUNTDOWN
-========================= */
+/* ===============================================
+   شمارش معکوس
+================================================ */
 
 const target =
- new Date("2026-10-02T19:00:00+03:30").getTime();
+  new Date("2026-10-02T19:00:00+03:30").getTime();
+
 
 function pad(n){
- return String(n).padStart(2,"0");
+  return String(n).padStart(2,"0");
 }
+
 
 function tick(){
 
- let d=Math.max(0,target-Date.now());
+  let d =
+    Math.max(0,target-Date.now());
 
- const days=Math.floor(d/86400000);
 
- d%=86400000;
+  const days =
+    Math.floor(d/86400000);
 
- const hours=Math.floor(d/3600000);
+  d %= 86400000;
 
- d%=3600000;
 
- const minutes=Math.floor(d/60000);
+  const hours =
+    Math.floor(d/3600000);
 
- d%=60000;
+  d %= 3600000;
 
- const seconds=Math.floor(d/1000);
 
- document.getElementById("days").textContent=days;
- document.getElementById("hours").textContent=pad(hours);
- document.getElementById("minutes").textContent=pad(minutes);
- document.getElementById("seconds").textContent=pad(seconds);
+  const minutes =
+    Math.floor(d/60000);
+
+  d %= 60000;
+
+
+  const seconds =
+    Math.floor(d/1000);
+
+
+  document.getElementById("days")
+    .textContent=days;
+
+
+  document.getElementById("hours")
+    .textContent=pad(hours);
+
+
+  document.getElementById("minutes")
+    .textContent=pad(minutes);
+
+
+  document.getElementById("seconds")
+    .textContent=pad(seconds);
+
 }
 
+
 tick();
+
 setInterval(tick,1000);
 
 
-/* =========================
-   ELEMENTS
-========================= */
+/* ===============================================
+   عناصر
+================================================ */
 
 const screen =
- document.getElementById("envelopeScreen");
+  document.getElementById("envelopeScreen");
 
 const main =
- document.getElementById("main");
+  document.getElementById("main");
 
 const audio =
- document.getElementById("audio");
+  document.getElementById("audio");
 
 const musicBtn =
- document.getElementById("musicBtn");
+  document.getElementById("musicBtn");
 
 const musicModal =
- document.getElementById("musicModal");
+  document.getElementById("musicModal");
+
 
 let opened=false;
 
 
-/* =========================
-   OPEN ENVELOPE
-========================= */
+/* ===============================================
+   باز شدن پاکت
+================================================ */
 
 function openInvite(){
 
- if(opened) return;
+  if(opened) return;
 
- opened=true;
+  opened=true;
 
- screen.classList.add("opening");
 
- setTimeout(()=>{
+  /* نور سینمایی */
 
-   screen.classList.add("hidden");
+  screen.classList.add("opening");
 
-   main.classList.add("visible");
 
-   createSnow();
+  /*
+    کمی مکث برای حس سینمایی
+  */
 
-   setTimeout(()=>{
+  setTimeout(()=>{
 
-     musicModal.classList.add("show");
+    screen.classList.add("hidden");
 
-   },900);
+    main.classList.add("visible");
 
- },550);
+    createSnow();
+
+
+    /*
+      بعد از ورود به عکس اصلی
+      اجازه موسیقی
+    */
+
+    setTimeout(()=>{
+
+      musicModal.classList.add("show");
+
+    },900);
+
+  },550);
+
 }
 
+
 screen.addEventListener(
- "click",
- openInvite
+  "click",
+  openInvite
 );
 
 
-/* =========================
-   MUSIC
-========================= */
+/* ===============================================
+   پخش موسیقی
+================================================ */
 
 function startMusic(){
 
- audio.volume=.55;
+  audio.volume=.55;
 
- audio.play()
- .then(()=>{
 
-   musicBtn.classList.add("playing");
+  audio.play()
+    .then(()=>{
 
- })
- .catch(()=>{});
+      musicBtn.classList.add("playing");
 
- musicModal.classList.remove("show");
+    })
+    .catch(()=>{});
+
+
+  musicModal.classList.remove("show");
+
 }
 
-document
- .getElementById("musicYes")
- .addEventListener(
-   "click",
-   startMusic
- );
 
 document
- .getElementById("musicNo")
- .addEventListener(
-   "click",
-   ()=>{
+  .getElementById("musicYes")
+  .addEventListener(
+    "click",
+    startMusic
+  );
 
-     musicModal.classList.remove("show");
 
-   }
- );
+document
+  .getElementById("musicNo")
+  .addEventListener(
+    "click",
+    ()=>{
 
+      musicModal.classList.remove("show");
+
+    }
+  );
+
+
+/* دکمه موسیقی بالای صفحه */
 
 musicBtn.addEventListener(
- "click",
- e=>{
+  "click",
+  e=>{
 
-   e.stopPropagation();
-
-   if(audio.paused){
-
-     audio.play()
-     .then(()=>{
-
-       musicBtn.classList.add("playing");
-
-     });
-
-   }else{
-
-     audio.pause();
-
-     musicBtn.classList.remove("playing");
-
-   }
-
- });
+    e.stopPropagation();
 
 
-/* =========================
-   MENU
-========================= */
+    if(audio.paused){
+
+      audio.play()
+        .then(()=>{
+
+          musicBtn.classList.add("playing");
+
+        });
+
+    }
+
+    else{
+
+      audio.pause();
+
+      musicBtn.classList.remove("playing");
+
+    }
+
+  }
+);
+
+
+/* ===============================================
+   منو → لوکیشن
+================================================ */
 
 document
- .getElementById("menuBtn")
- .addEventListener(
-   "click",
-   ()=>{
+  .getElementById("menuBtn")
+  .addEventListener(
+    "click",
+    ()=>{
 
-     document
-       .querySelector(".venue")
-       .scrollIntoView({
-         behavior:"smooth"
-       });
+      document
+        .querySelector(".venue")
+        .scrollIntoView({
+          behavior:"smooth"
+        });
 
-   }
- );
+    }
+  );
 
 
-/* =========================
-   SNOW / LIGHT PARTICLES
-========================= */
+/* ===============================================
+   ایجاد برف / ذرات براق
+================================================ */
 
 function createSnow(){
 
- const container =
-   document.getElementById("snow");
+  const container =
+    document.getElementById("snow");
 
- for(let i=0;i<34;i++){
 
-   const s =
-     document.createElement("span");
+  /*
+    تعداد کم برای ظاهر لوکس
+  */
 
-   s.style.left =
-     Math.random()*100+"%";
+  for(let i=0;i<34;i++){
 
-   s.style.animationDuration =
-     (7+Math.random()*9)+"s";
+    const s =
+      document.createElement("span");
 
-   s.style.animationDelay =
-     (-Math.random()*15)+"s";
 
-   const size =
-     1.5+Math.random()*3;
+    s.style.left =
+      Math.random()*100+"%";
 
-   s.style.width=size+"px";
-   s.style.height=size+"px";
 
-   container.appendChild(s);
- }
+    s.style.animationDuration =
+      (7+Math.random()*9)+"s";
+
+
+    s.style.animationDelay =
+      (-Math.random()*15)+"s";
+
+
+    const size =
+      1.5+Math.random()*3;
+
+
+    s.style.width =
+      size+"px";
+
+
+    s.style.height =
+      size+"px";
+
+
+    container.appendChild(s);
+
+  }
+
 }
 
 </script>
