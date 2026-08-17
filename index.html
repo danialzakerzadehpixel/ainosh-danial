@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#050505">
+<meta name="theme-color" content="#0b0908">
 
 <title>Ainoosh & Danial | Wedding Invitation</title>
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@1,600;1,700&family=Vazirmatn:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Vazirmatn:wght@300;400;500;600&family=Great+Vibes&display=swap');
 
 :root{
   --bg:#090807;
@@ -21,32 +21,25 @@
   box-sizing:border-box;
 }
 
-html,
-body{
+html,body{
   margin:0;
-  padding:0;
   background:#050505;
   color:var(--cream);
   font-family:Vazirmatn,sans-serif;
-  overflow-x:hidden;
 }
 
 body{
   min-height:100vh;
+  overflow-x:hidden;
 }
 
 .app{
   min-height:100vh;
   position:relative;
-
   background:
-    radial-gradient(
-      circle at 50% 20%,
-      #26201a 0,
-      #0a0908 38%,
-      #030303 100%
-    );
+    radial-gradient(circle at 50% 20%,#26201a 0,#0a0908 38%,#030303 100%);
 }
+
 
 /* =========================
    NOISE
@@ -55,15 +48,13 @@ body{
 .noise{
   position:fixed;
   inset:0;
-
   pointer-events:none;
-
-  opacity:.06;
-
+  opacity:.08;
   z-index:50;
 
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
 }
+
 
 /* =========================
    ENVELOPE
@@ -72,7 +63,6 @@ body{
 .envelope-screen{
   position:fixed;
   inset:0;
-
   z-index:40;
 
   background:url("splash.webp.png") center/cover no-repeat;
@@ -90,26 +80,22 @@ body{
   pointer-events:none;
 }
 
-/* نور شفاف و مناسب Android */
-
 .envelope-screen::after{
   content:"";
-
   position:absolute;
-  inset:-15%;
+  inset:-20%;
 
   background:
     radial-gradient(
       circle at 50% 55%,
-      rgba(255,245,220,.72) 0%,
-      rgba(255,235,195,.34) 10%,
-      rgba(255,225,175,.14) 25%,
-      rgba(255,220,170,0) 55%
+      rgba(255,220,150,.85) 0%,
+      rgba(255,205,120,.28) 12%,
+      rgba(255,190,100,.10) 28%,
+      transparent 55%
     );
 
   opacity:0;
-
-  transform:scale(.55);
+  transform:scale(.45);
 
   transition:
     opacity .9s ease,
@@ -120,8 +106,9 @@ body{
 
 .envelope-screen.opening::after{
   opacity:1;
-  transform:scale(2.1);
+  transform:scale(2.2);
 }
+
 
 /* =========================
    MUSIC
@@ -130,7 +117,6 @@ body{
 .music-permission{
   position:fixed;
   inset:0;
-
   z-index:60;
 
   display:flex;
@@ -140,9 +126,7 @@ body{
   padding:25px;
 
   background:rgba(0,0,0,.72);
-
   backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
 
   opacity:0;
   pointer-events:none;
@@ -157,7 +141,6 @@ body{
 
 .music-box{
   width:min(390px,100%);
-
   padding:38px 25px;
 
   text-align:center;
@@ -170,7 +153,6 @@ body{
     );
 
   border:1px solid rgba(199,168,109,.45);
-
   border-radius:18px;
 
   box-shadow:
@@ -206,17 +188,13 @@ body{
 
 .music-btn{
   border:1px solid rgba(199,168,109,.5);
-
   background:#17120e;
-
   color:#ead8b5;
 
   padding:11px 22px;
-
   border-radius:999px;
 
   font-family:Vazirmatn,sans-serif;
-
   cursor:pointer;
 }
 
@@ -225,13 +203,13 @@ body{
   color:#17110b;
 }
 
+
 /* =========================
    MAIN
 ========================= */
 
 .main{
   opacity:0;
-
   transform:translateY(25px);
 
   transition:
@@ -246,6 +224,7 @@ body{
   transform:none;
   pointer-events:auto;
 }
+
 
 /* =========================
    SNOW
@@ -381,24 +360,24 @@ body{
   }
 }
 
+
 /* =========================
-   HERO
+   HERO / COUPLE
 ========================= */
 
 .hero{
   min-height:100svh;
 
   display:flex;
-
   align-items:flex-end;
-
   justify-content:center;
 
   padding:28px 18px 55px;
 
   position:relative;
-
   overflow:hidden;
+
+  isolation:isolate;
 }
 
 .hero::before{
@@ -421,6 +400,8 @@ body{
   transform:scale(1.02);
 
   opacity:.9;
+
+  z-index:-2;
 }
 
 .hero::after{
@@ -436,11 +417,44 @@ body{
       rgba(0,0,0,.25) 55%,
       #000 100%
     );
+
+  z-index:-1;
 }
+
+
+/* =========================
+   NAMES
+========================= */
+
+.names{
+  font-family:'Great Vibes',cursive;
+
+  font-size:clamp(43px,10.5vw,72px);
+
+  font-weight:400;
+
+  line-height:1.1;
+
+  margin:10px 0 13px;
+
+  color:#f0dfc1;
+
+  direction:ltr;
+
+  letter-spacing:1px;
+
+  text-shadow:
+    0 4px 25px rgba(0,0,0,.95),
+    0 0 12px rgba(255,225,180,.12);
+}
+
+
+/* =========================
+   HERO TEXT
+========================= */
 
 .hero-content{
   position:relative;
-
   z-index:2;
 
   width:min(720px,100%);
@@ -450,7 +464,6 @@ body{
 
 .kicker{
   font-family:Amiri,serif;
-
   font-size:16px;
 
   color:#d2bd98;
@@ -458,107 +471,166 @@ body{
   letter-spacing:4px;
 }
 
-/* =========================
-   AINOOSH & DANIAL
-   Calligraphy style
-========================= */
-
-.names{
-  font-family:
-    "Cormorant Garamond",
-    "Times New Roman",
-    serif;
-
-  font-size:
-    clamp(34px,8.5vw,62px);
-
-  font-weight:700;
-
-  font-style:italic;
-
-  line-height:1;
-
-  direction:ltr;
-
-  margin:13px 0 17px;
-
-  color:#eadcc0;
-
-  letter-spacing:-1px;
-
-  text-shadow:
-    0 5px 30px rgba(0,0,0,.9);
+.orn{
+  color:#c1a06a;
+  font-size:24px;
 }
-
-/* =========================
-   DATE
-========================= */
 
 .date{
   font-family:Amiri,serif;
 
-  font-size:25px;
+  font-size:21px;
 
   font-weight:700;
 
   color:#eadcc0;
 }
 
-/* =========================
-   TIME
-========================= */
-
 .sub{
-  font-size:15px;
+  font-family:Amiri,serif;
+
+  font-size:16px;
 
   font-weight:700;
 
-  color:#c8b99d;
+  color:#d8c5a5;
 
-  margin-top:8px;
+  margin-top:5px;
 }
 
-.orn{
-  color:#c1a06a;
-  font-size:26px;
-}
 
 /* =========================
-   PHOTO STRIP
+   GALLERY
+   COUPLE → HALL → CLOSEUP
 ========================= */
 
-.photo-strip{
+.gallery{
+  padding:0;
+  margin:0;
+
+  background:#050505;
+}
+
+.gallery-item{
+  max-width:760px;
+
+  margin:0 auto;
+
+  padding:0;
+
   position:relative;
+
+  overflow:hidden;
+
+  border-radius:0;
+
+  line-height:0;
+
+  box-shadow:none;
+}
+
+.gallery-item img{
+  display:block;
+
+  width:100%;
+
+  height:auto;
 
   margin:0;
   padding:0;
 
-  background:#050505;
+  border:0;
+
+  vertical-align:top;
+
+  object-fit:cover;
 
   line-height:0;
 
-  font-size:0;
-
-  overflow:hidden;
+  transition:
+    opacity 1.8s ease,
+    filter 1.8s ease,
+    transform 1.8s ease;
 }
 
-/*
-  محو شدن نرم انتهای couple
-  به ابتدای hall
-*/
 
-.photo-strip::before{
+/* =========================
+   HALL → CLOSEUP FADE
+========================= */
+
+.gallery-item img{
+  animation-duration:10s;
+  animation-timing-function:ease-in-out;
+  animation-iteration-count:infinite;
+}
+
+.gallery-item.hall-item img{
+  animation-name:hallFade;
+}
+
+.gallery-item.closeup-item img{
+  animation-name:closeupFade;
+}
+
+
+/* Hall */
+
+@keyframes hallFade{
+
+  0%,22%{
+    opacity:1;
+    filter:brightness(.94) saturate(.85);
+  }
+
+  32%,62%{
+    opacity:.25;
+    filter:brightness(.82) saturate(.65);
+  }
+
+  72%,100%{
+    opacity:1;
+    filter:brightness(.94) saturate(.85);
+  }
+}
+
+
+/* Closeup */
+
+@keyframes closeupFade{
+
+  0%,22%{
+    opacity:.25;
+    filter:brightness(.82) saturate(.65);
+  }
+
+  32%,62%{
+    opacity:1;
+    filter:brightness(.94) saturate(.9);
+  }
+
+  72%,100%{
+    opacity:.25;
+    filter:brightness(.82) saturate(.65);
+  }
+}
+
+
+/* =========================
+   BLEND BETWEEN COUPLE & HALL
+========================= */
+
+.gallery::before{
   content:"";
 
-  position:absolute;
+  display:block;
 
-  top:0;
-  left:0;
-  right:0;
+  height:70px;
 
-  height:90px;
+  margin-bottom:-70px;
 
-  z-index:3;
+  position:relative;
+
+  z-index:2;
 
   pointer-events:none;
 
@@ -566,30 +638,12 @@ body{
     linear-gradient(
       to bottom,
       #050505 0%,
-      rgba(5,5,5,.82) 18%,
-      rgba(5,5,5,.42) 48%,
+      rgba(5,5,5,.82) 25%,
+      rgba(5,5,5,.45) 55%,
       rgba(5,5,5,0) 100%
     );
 }
 
-.gallery-photo{
-  display:block;
-
-  width:100%;
-  height:auto;
-
-  margin:0 !important;
-  padding:0 !important;
-
-  border:0;
-  border-radius:0;
-
-  vertical-align:top;
-}
-
-.photo-strip img + img{
-  margin-top:0 !important;
-}
 
 /* =========================
    CARD
@@ -659,6 +713,7 @@ body{
   margin-top:3px;
 }
 
+
 /* =========================
    VENUE
 ========================= */
@@ -725,6 +780,7 @@ body{
   font-size:11px;
 }
 
+
 /* =========================
    RESPONSIVE
 ========================= */
@@ -753,15 +809,15 @@ body{
   }
 
   .names{
-    font-size:clamp(31px,8.5vw,52px);
+    font-size:clamp(40px,11vw,64px);
   }
 
   .date{
-    font-size:24px;
+    font-size:20px;
   }
 
   .sub{
-    font-size:14px;
+    font-size:15px;
   }
 }
 
@@ -780,12 +836,13 @@ body{
   }
 
   .names{
-    font-size:30px;
+    font-size:40px;
   }
 }
 
 </style>
 </head>
+
 
 <body>
 
@@ -863,7 +920,7 @@ body{
 
 
 <!-- =========================
-     HERO
+     HERO / COUPLE
 ========================= -->
 
 <section class="hero">
@@ -887,7 +944,7 @@ body{
     </div>
 
     <div class="sub">
-      ساعت ۱۹:۰۰
+      ساعت ۱۸:۰۰
     </div>
 
   </div>
@@ -896,20 +953,35 @@ body{
 
 
 <!-- =========================
-     PHOTOS
+     GALLERY
 ========================= -->
 
-<section class="photo-strip">
+<section class="gallery">
 
-  <img
-    class="gallery-photo"
-    src="hall.jpg"
-    alt="Ainoosh and Danial">
 
-  <img
-    class="gallery-photo"
-    src="closeup.jpg"
-    alt="Ainoosh and Danial">
+  <!-- HALL -->
+
+  <div class="gallery-item hall-item">
+
+    <img
+      class="hall-photo"
+      src="hall.jpg"
+      alt="Ainoosh and Danial">
+
+  </div>
+
+
+  <!-- CLOSEUP -->
+
+  <div class="gallery-item closeup-item">
+
+    <img
+      class="closeup-photo"
+      src="closeup.jpg"
+      alt="Ainoosh and Danial">
+
+  </div>
+
 
 </section>
 
@@ -1022,7 +1094,7 @@ body{
 ========================= */
 
 const target =
-  new Date("2026-10-02T19:00:00+03:30").getTime();
+  new Date("2026-10-02T18:00:00+03:30").getTime();
 
 function pad(n){
   return String(n).padStart(2,"0");
@@ -1054,7 +1126,6 @@ function tick(){
   const seconds =
     Math.floor(d / 1000);
 
-
   document.getElementById("days").textContent =
     days;
 
@@ -1074,7 +1145,7 @@ setInterval(tick,1000);
 
 
 /* =========================
-   ENVELOPE OPEN
+   ENVELOPE
 ========================= */
 
 const screen =
@@ -1156,7 +1227,7 @@ musicNo.addEventListener("click",function(){
 
 
 /* =========================
-   SNOW
+   CINEMATIC SNOW
 ========================= */
 
 const snow =
@@ -1173,24 +1244,19 @@ for(let i=0;i<85;i++){
       ? "snowflake spark"
       : "snowflake";
 
-
   particle.style.left =
     Math.random()*100 + "%";
-
 
   particle.style.animationDuration =
     (7 + Math.random()*13) + "s";
 
-
   particle.style.animationDelay =
     (-Math.random()*18) + "s";
-
 
   particle.style.setProperty(
     "--drift",
     (-100 + Math.random()*200) + "px"
   );
-
 
   const size =
     .8 + Math.random()*2.2;
@@ -1200,7 +1266,6 @@ for(let i=0;i<85;i++){
 
   particle.style.height =
     size + "px";
-
 
   snow.appendChild(particle);
 }
@@ -1218,28 +1283,22 @@ for(let i=0;i<15;i++){
   light.className =
     "snowflake spark";
 
-
   light.style.left =
     Math.random()*100 + "%";
-
 
   light.style.top =
     Math.random()*100 + "%";
 
-
   light.style.animationDuration =
     (5 + Math.random()*8) + "s";
 
-
   light.style.animationDelay =
     (-Math.random()*8) + "s";
-
 
   light.style.setProperty(
     "--drift",
     (-60 + Math.random()*120) + "px"
   );
-
 
   snow.appendChild(light);
 }
