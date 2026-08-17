@@ -12,7 +12,6 @@
 
 :root{
   --bg:#090807;
-  --paper:#e8dcc3;
   --gold:#c7a86d;
   --cream:#f1e7d1;
 }
@@ -40,7 +39,10 @@ body{
     radial-gradient(circle at 50% 20%,#26201a 0,#0a0908 38%,#030303 100%);
 }
 
-/* نویز سینمایی */
+/* =========================
+   NOISE
+========================= */
+
 .noise{
   position:fixed;
   inset:0;
@@ -51,9 +53,9 @@ body{
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
 }
 
-/* =================================================
-   صفحه پاکت
-================================================= */
+/* =========================
+   ENVELOPE
+========================= */
 
 .envelope-screen{
   position:fixed;
@@ -76,6 +78,7 @@ body{
 }
 
 /* نور سینمایی */
+
 .envelope-screen::after{
   content:"";
   position:absolute;
@@ -84,14 +87,14 @@ body{
   background:
     radial-gradient(
       circle at 50% 55%,
-      rgba(255,220,150,.75) 0%,
-      rgba(255,205,120,.25) 12%,
-      rgba(255,190,100,.08) 25%,
-      transparent 50%
+      rgba(255,220,150,.85) 0%,
+      rgba(255,205,120,.28) 12%,
+      rgba(255,190,100,.10) 28%,
+      transparent 55%
     );
 
   opacity:0;
-  transform:scale(.5);
+  transform:scale(.45);
 
   transition:
     opacity .9s ease,
@@ -105,9 +108,9 @@ body{
   transform:scale(2.2);
 }
 
-/* =================================================
-   پنجره اجازه موسیقی
-================================================= */
+/* =========================
+   MUSIC PERMISSION
+========================= */
 
 .music-permission{
   position:fixed;
@@ -148,7 +151,6 @@ body{
     );
 
   border:1px solid rgba(199,168,109,.45);
-
   border-radius:18px;
 
   box-shadow:
@@ -199,9 +201,9 @@ body{
   color:#17110b;
 }
 
-/* =================================================
-   محتوای اصلی
-================================================= */
+/* =========================
+   MAIN
+========================= */
 
 .main{
   opacity:0;
@@ -220,9 +222,133 @@ body{
   pointer-events:auto;
 }
 
-/* =================================================
+/* =========================
+   CINEMATIC SNOW
+========================= */
+
+.snow{
+  position:fixed;
+  inset:0;
+
+  z-index:25;
+
+  pointer-events:none;
+
+  overflow:hidden;
+
+  opacity:0;
+
+  transition:opacity 2s ease;
+}
+
+.main.visible .snow{
+  opacity:1;
+}
+
+.snowflake{
+  position:absolute;
+
+  top:-25px;
+
+  width:3px;
+  height:3px;
+
+  border-radius:50%;
+
+  background:rgba(255,247,225,.92);
+
+  box-shadow:
+    0 0 5px rgba(255,240,205,.95),
+    0 0 12px rgba(255,220,160,.55),
+    0 0 20px rgba(255,220,160,.22);
+
+  animation:
+    snowFall linear infinite,
+    snowSway ease-in-out infinite alternate;
+}
+
+.snowflake::after{
+  content:"";
+
+  position:absolute;
+
+  width:1px;
+  height:1px;
+
+  left:1px;
+  top:1px;
+
+  border-radius:50%;
+
+  background:#fff;
+
+  box-shadow:
+    0 0 4px #fff,
+    0 0 9px rgba(255,220,160,.9);
+}
+
+@keyframes snowFall{
+
+  0%{
+    transform:
+      translate3d(0,-30px,0)
+      rotate(0deg);
+  }
+
+  100%{
+    transform:
+      translate3d(var(--drift),110vh,0)
+      rotate(360deg);
+  }
+}
+
+@keyframes snowSway{
+
+  0%{
+    margin-left:-15px;
+  }
+
+  100%{
+    margin-left:15px;
+  }
+}
+
+/* ذرات درخشان */
+
+.spark{
+  width:2px;
+  height:2px;
+
+  background:#fff;
+
+  box-shadow:
+    0 0 6px #fff,
+    0 0 14px rgba(255,220,160,.95),
+    0 0 25px rgba(255,220,160,.45);
+
+  animation:
+    snowFall linear infinite,
+    sparkle 2s ease-in-out infinite alternate;
+}
+
+@keyframes sparkle{
+
+  0%{
+    opacity:.15;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:.3;
+  }
+}
+
+/* =========================
    HERO
-================================================= */
+========================= */
 
 .hero{
   min-height:100svh;
@@ -286,7 +412,9 @@ body{
 .kicker{
   font-family:Amiri,serif;
   font-size:16px;
+
   color:#d2bd98;
+
   letter-spacing:4px;
 }
 
@@ -309,19 +437,23 @@ body{
 
 .date{
   font-family:Amiri,serif;
+
   font-size:23px;
+
   color:#eadcc0;
 }
 
 .sub{
   font-size:13px;
+
   color:#c8b99d;
+
   margin-top:8px;
 }
 
-/* =================================================
-   گالری
-================================================= */
+/* =========================
+   GALLERY
+========================= */
 
 .gallery{
   padding:70px 18px 30px;
@@ -377,20 +509,19 @@ body{
   transform:scale(1.025);
 }
 
-/* عکس سالن */
 .hall-photo{
   max-height:90svh;
+
   object-fit:cover !important;
 }
 
-/* عکس کلوزآپ */
 .closeup-photo{
   filter:grayscale(1);
 }
 
-/* =================================================
-   کارت اطلاعات
-================================================= */
+/* =========================
+   CARD
+========================= */
 
 .card{
   max-width:760px;
@@ -417,8 +548,6 @@ body{
 
   margin:0 0 22px;
 }
-
-/* شمارش معکوس */
 
 .countdown{
   display:grid;
@@ -458,7 +587,9 @@ body{
   margin-top:3px;
 }
 
-/* مکان */
+/* =========================
+   VENUE
+========================= */
 
 .venue{
   margin:60px 0 0;
@@ -510,10 +641,9 @@ body{
 
 .map-btn:hover{
   background:#b08d55;
+
   color:#17110b;
 }
-
-/* footer */
 
 .footer{
   padding-top:55px;
@@ -523,47 +653,9 @@ body{
   font-size:11px;
 }
 
-/* دکمه موسیقی */
-
-.music-note{
-  position:fixed;
-
-  bottom:20px;
-  left:20px;
-
-  z-index:30;
-}
-
-.icon{
-  width:42px;
-  height:42px;
-
-  border:1px solid #b99a6766;
-
-  border-radius:50%;
-
-  background:#09080799;
-
-  color:#d9c49e;
-
-  display:grid;
-
-  place-items:center;
-
-  backdrop-filter:blur(8px);
-
-  cursor:pointer;
-}
-
-.music-note.playing{
-  animation:spin 3s linear infinite;
-}
-
-@keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
-}
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(min-width:700px){
 
@@ -581,6 +673,14 @@ body{
   }
 }
 
+@media(max-width:600px){
+
+  .snowflake{
+    width:2px;
+    height:2px;
+  }
+}
+
 @media(max-width:380px){
 
   .countdown{
@@ -595,6 +695,7 @@ body{
     padding:10px 2px;
   }
 }
+
 </style>
 </head>
 
@@ -604,9 +705,10 @@ body{
 
 <div class="noise"></div>
 
-<!-- ============================================
-     صفحه پاکت
-============================================= -->
+
+<!-- =========================
+     پاکت ورود
+========================= -->
 
 <section
   class="envelope-screen"
@@ -614,9 +716,9 @@ body{
 </section>
 
 
-<!-- ============================================
+<!-- =========================
      اجازه موسیقی
-============================================= -->
+========================= -->
 
 <div
   class="music-permission"
@@ -655,13 +757,26 @@ body{
 </div>
 
 
-<!-- ============================================
-     محتوای اصلی
-============================================= -->
+<!-- =========================
+     MAIN
+========================= -->
 
 <main
   class="main"
   id="main">
+
+
+<!-- افکت برف و نور -->
+
+<div
+  class="snow"
+  id="snow">
+</div>
+
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
@@ -692,9 +807,9 @@ body{
 </section>
 
 
-<!-- ============================================
-     گالری عکس‌ها
-============================================= -->
+<!-- =========================
+     GALLERY
+========================= -->
 
 <section class="gallery">
 
@@ -703,7 +818,6 @@ body{
   </h2>
 
 
-  <!-- عکس سالن -->
   <div class="gallery-item">
 
     <img
@@ -714,7 +828,6 @@ body{
   </div>
 
 
-  <!-- عکس کلوزآپ -->
   <div class="gallery-item">
 
     <img
@@ -727,9 +840,9 @@ body{
 </section>
 
 
-<!-- ============================================
-     اطلاعات
-============================================= -->
+<!-- =========================
+     INFO
+========================= -->
 
 <section class="card">
 
@@ -830,9 +943,9 @@ body{
 
 <script>
 
-/* ============================================
-   شمارش معکوس
-============================================= */
+/* =========================
+   COUNTDOWN
+========================= */
 
 const target =
   new Date("2026-10-02T19:00:00+03:30").getTime();
@@ -886,9 +999,9 @@ tick();
 setInterval(tick,1000);
 
 
-/* ============================================
-   ورود از طریق پاکت
-============================================= */
+/* =========================
+   ENVELOPE OPEN
+========================= */
 
 const screen =
   document.getElementById("envelopeScreen");
@@ -911,25 +1024,19 @@ const musicNo =
 let opened = false;
 
 
-/* لمس پاکت */
-
 screen.addEventListener("click",function(){
 
   if(opened) return;
 
   opened = true;
 
-  /*
-    ابتدا نور سینمایی
-  */
+
+  /* نور طلایی */
 
   screen.classList.add("opening");
 
 
-  /*
-    بعد از نور، پاکت محو می‌شود
-    و صفحه اصلی ظاهر می‌شود
-  */
+  /* ورود به صفحه اصلی */
 
   setTimeout(function(){
 
@@ -940,9 +1047,7 @@ screen.addEventListener("click",function(){
   },900);
 
 
-  /*
-    اجازه موسیقی بعد از ورود
-  */
+  /* درخواست موسیقی */
 
   setTimeout(function(){
 
@@ -953,13 +1058,13 @@ screen.addEventListener("click",function(){
 });
 
 
-/* ============================================
-   موسیقی
-============================================= */
+/* =========================
+   MUSIC
+========================= */
 
 musicYes.addEventListener("click",function(){
 
-  audio.volume = .55;
+  audio.volume=.55;
 
   audio.play()
     .then(function(){
@@ -983,29 +1088,111 @@ musicNo.addEventListener("click",function(){
 });
 
 
-/* ============================================
-   دکمه موسیقی شناور
-============================================= */
+/* =========================
+   CINEMATIC SNOW
+========================= */
 
-document.addEventListener("click",function(e){
+const snow =
+  document.getElementById("snow");
 
-  if(
-    e.target.closest("#musicBtn")
-  ){
 
-    if(audio.paused){
+/*
+  60 ذره ایجاد می‌کنیم.
+  بیشترشان برف بسیار ریز هستند
+  و تعدادی ذرات نورانی‌اند.
+*/
 
-      audio.play();
+for(let i=0;i<60;i++){
 
-    }else{
+  const particle =
+    document.createElement("span");
 
-      audio.pause();
 
-    }
+  particle.className =
+    Math.random() > .78
+      ? "snowflake spark"
+      : "snowflake";
 
-  }
 
-});
+  /* محل شروع */
+
+  particle.style.left =
+    Math.random()*100 + "%";
+
+
+  /* سرعت */
+
+  particle.style.animationDuration =
+    (8 + Math.random()*12) + "s";
+
+
+  /* شروع تصادفی */
+
+  particle.style.animationDelay =
+    (-Math.random()*15) + "s";
+
+
+  /* حرکت جانبی */
+
+  particle.style.setProperty(
+    "--drift",
+    (-80 + Math.random()*160) + "px"
+  );
+
+
+  /* اندازه تصادفی */
+
+  const size =
+    .55 + Math.random()*1.5;
+
+  particle.style.width =
+    size + "px";
+
+  particle.style.height =
+    size + "px";
+
+
+  snow.appendChild(particle);
+}
+
+
+/* =========================
+   EXTRA GOLDEN LIGHT
+========================= */
+
+for(let i=0;i<12;i++){
+
+  const light =
+    document.createElement("span");
+
+  light.className =
+    "snowflake spark";
+
+
+  light.style.left =
+    Math.random()*100 + "%";
+
+
+  light.style.top =
+    Math.random()*100 + "%";
+
+
+  light.style.animationDuration =
+    (5 + Math.random()*8) + "s";
+
+
+  light.style.animationDelay =
+    (-Math.random()*8) + "s";
+
+
+  light.style.setProperty(
+    "--drift",
+    (-50 + Math.random()*100) + "px"
+  );
+
+
+  snow.appendChild(light);
+}
 
 </script>
 
