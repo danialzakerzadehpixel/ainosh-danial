@@ -5,124 +5,1402 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b0908">
 <title>آینوش و دانیال | دعوتنامه عروسی</title>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Vazirmatn:wght@300;400;500;600&display=swap');
-:root{--bg:#090807;--paper:#e8dcc3;--paper2:#cbb995;--ink:#201a14;--gold:#b99a67;--red:#741d18;--cream:#f1e7d1}
-*{box-sizing:border-box}html,body{margin:0;background:#050505;color:var(--cream);font-family:Vazirmatn,sans-serif}
-body{min-height:100vh;overflow-x:hidden}.app{min-height:100vh;position:relative;background:radial-gradient(circle at 50% 20%,#26201a 0,#0a0908 38%,#030303 100%)}
-.noise{position:fixed;inset:0;pointer-events:none;opacity:.09;z-index:20;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
 
-/* ========= طراحی صفحه اول (فقط عکس پاکت، بدون متن اضافی) ========= */
-.envelope-screen {
-    position: fixed; inset: 0; z-index: 30;
-    /* نام فایل دقیقاً مطابق ریپازیتوری شما */
-    background: url('splash.webp.png') center/cover no-repeat; 
-    cursor: pointer;
-    transition: opacity 1s cubic-bezier(.2,.8,.2,1), transform 1s cubic-bezier(.2,.8,.2,1);
-}
-.envelope-screen.hidden {
-    opacity: 0; transform: scale(0.95) rotate(-2deg); pointer-events: none;
+:root{
+  --bg:#090807;
+  --paper:#e8dcc3;
+  --paper2:#cbb995;
+  --ink:#201a14;
+  --gold:#b99a67;
+  --red:#741d18;
+  --cream:#f1e7d1;
 }
 
-/* ========= بخش‌های اصلی سایت (دست‌نخورده) ========= */
-.main{opacity:0;transform:translateY(25px);transition:opacity 1.2s .45s,transform 1.2s .45s;pointer-events:none}.main.visible{opacity:1;transform:none;pointer-events:auto}
-.hero{min-height:100svh;display:flex;align-items:flex-end;justify-content:center;padding:28px 18px 38px;position:relative;overflow:hidden}
-.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0000 35%,#050505 92%),url("couple.jpeg") center 20%/cover no-repeat;filter:grayscale(1);transform:scale(1.02);opacity:.86}.hero:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 38%,#0000 0,#0005 58%,#000 100%)}
-.topbar,.hero-content{position:relative;z-index:2}.topbar{position:absolute;top:18px;left:18px;right:18px;display:flex;justify-content:space-between;direction:ltr}.icon{width:42px;height:42px;border:1px solid #b99a6766;border-radius:50%;background:#09080799;color:#d9c49e;display:grid;place-items:center;backdrop-filter:blur(8px);cursor:pointer}.hero-content{width:min(720px,100%);text-align:center}.kicker{font-family:Amiri,serif;font-size:17px;color:#d2bd98;letter-spacing:3px}.names{font-family:Amiri,serif;font-size:clamp(48px,13vw,88px);line-height:1.05;margin:10px 0 15px;text-shadow:0 4px 25px #000}.orn{color:#c1a06a;font-size:25px;margin:3px}.date{font-family:Amiri,serif;font-size:22px;color:#eadcc0}.sub{font-size:13px;color:#c8b99d;margin-top:8px}
-.card{max-width:760px;margin:-1px auto 0;padding:42px 18px 80px;background:linear-gradient(#050505,#0b0907);text-align:center}.section-title{font-family:Amiri,serif;font-size:25px;color:#d9c49e;margin:0 0 20px}.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;direction:ltr}.unit{border:1px solid #b99a675c;padding:13px 4px;background:#0f0c09;border-radius:4px}.num{font-family:Amiri,serif;font-size:31px;color:#ead7b4}.label{font-size:10px;color:#a9997f;letter-spacing:1px;margin-top:3px}.venue{margin:55px 0 0}.venue-name{font-family:Amiri,serif;font-size:27px}.venue-en{font-size:13px;color:#a99576;margin-top:0}.map-buttons{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:18px}.map-btn{color:#dfceb0;border:1px solid #b99a675c;padding:11px 16px;border-radius:999px;text-decoration:none;font-size:12px;background:#100d0a}.footer{padding-top:55px;color:#776b59;font-size:11px}.music-note{position:fixed;bottom:20px;left:20px;z-index:10}.music-note.playing{animation:spin 3s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}@media(min-width:700px){.hero{min-height:900px}.hero:before{background-position:center 26%}.card{padding-left:30px;padding-right:30px}}
-@media(max-width:380px){.countdown{gap:4px}.num{font-size:26px}.unit{padding:10px 2px}}
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  background:#050505;
+  color:var(--cream);
+  font-family:Vazirmatn,sans-serif;
+}
+
+body{
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+.app{
+  min-height:100vh;
+  position:relative;
+  background:
+    radial-gradient(circle at 50% 20%,#26201a 0,#0a0908 38%,#030303 100%);
+}
+
+/* =========================
+   NOISE
+========================= */
+
+.noise{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.08;
+  z-index:50;
+
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+/* =========================
+   صفحه ورود / پاکت
+========================= */
+
+.envelope-screen{
+  position:fixed;
+  inset:0;
+  z-index:30;
+
+  background:url('splash.webp.png') center/cover no-repeat;
+
+  cursor:pointer;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  overflow:hidden;
+
+  transition:
+    opacity 1.1s cubic-bezier(.2,.8,.2,1),
+    visibility 1.1s,
+    background-position .8s ease;
+}
+
+/*
+  یک تیرگی بسیار ملایم روی عکس پاکت
+*/
+.envelope-screen::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      transparent 20%,
+      rgba(0,0,0,.12) 60%,
+      rgba(0,0,0,.45) 100%
+    );
+  pointer-events:none;
+}
+
+/* =========================
+   اجازه موسیقی
+========================= */
+
+.music-permission{
+  position:absolute;
+  z-index:8;
+
+  width:min(390px,88%);
+
+  padding:24px 22px 22px;
+
+  text-align:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(30,22,16,.94),
+      rgba(8,7,6,.96)
+    );
+
+  border:1px solid rgba(201,169,111,.55);
+
+  box-shadow:
+    0 20px 70px rgba(0,0,0,.65),
+    inset 0 0 30px rgba(185,154,103,.05);
+
+  border-radius:18px;
+
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+
+  transition:
+    opacity .7s ease,
+    transform .7s cubic-bezier(.2,.8,.2,1);
+}
+
+.music-permission.hidden{
+  opacity:0;
+  transform:translateY(-15px) scale(.96);
+  pointer-events:none;
+}
+
+.music-symbol{
+  font-family:Amiri,serif;
+  font-size:31px;
+  color:#d7bd91;
+  margin-bottom:5px;
+}
+
+.music-title{
+  font-family:Amiri,serif;
+  font-size:23px;
+  color:#ead9b9;
+  margin-bottom:6px;
+}
+
+.music-text{
+  font-size:12px;
+  line-height:2;
+  color:#bcae97;
+  margin-bottom:18px;
+}
+
+.music-actions{
+  display:flex;
+  gap:9px;
+  justify-content:center;
+}
+
+.music-action{
+  flex:1;
+
+  padding:11px 12px;
+
+  border-radius:999px;
+
+  font-family:Vazirmatn,sans-serif;
+  font-size:12px;
+
+  cursor:pointer;
+
+  transition:
+    transform .25s ease,
+    background .25s ease,
+    border-color .25s ease;
+}
+
+.music-action:active{
+  transform:scale(.96);
+}
+
+.music-yes{
+  border:1px solid #b99a67;
+  color:#f1dfbc;
+  background:linear-gradient(
+    135deg,
+    rgba(185,154,103,.28),
+    rgba(116,29,24,.32)
+  );
+}
+
+.music-no{
+  border:1px solid rgba(185,154,103,.35);
+  color:#bcae97;
+  background:rgba(255,255,255,.035);
+}
+
+/* =========================
+   لایه باز شدن نامه
+========================= */
+
+.letter{
+  position:absolute;
+
+  z-index:5;
+
+  width:min(68vw,430px);
+  aspect-ratio:1 / 1.12;
+
+  left:50%;
+  top:72%;
+
+  transform:
+    translate(-50%,0)
+    scale(.72);
+
+  opacity:0;
+
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f0e3c9 0%,
+      #d7c19a 48%,
+      #c5aa78 100%
+    );
+
+  border-radius:3px;
+
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.75),
+    inset 0 0 0 1px rgba(91,61,27,.28);
+
+  transition:
+    top 1.45s cubic-bezier(.18,.78,.18,1),
+    transform 1.45s cubic-bezier(.18,.78,.18,1),
+    opacity .5s ease;
+
+  overflow:hidden;
+}
+
+/*
+  بافت کاغذ
+*/
+.letter::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  opacity:.25;
+
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255,255,255,.8),
+      transparent 25%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 3px,
+      rgba(70,45,20,.035) 4px
+    );
+}
+
+/*
+  متن روی نامه
+*/
+.letter-content{
+  position:absolute;
+  inset:0;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  padding:30px;
+
+  color:#493b2a;
+
+  text-align:center;
+
+  opacity:0;
+  transform:translateY(20px);
+
+  transition:
+    opacity .7s .9s ease,
+    transform .9s .9s cubic-bezier(.2,.8,.2,1);
+}
+
+.letter-orn{
+  font-family:Amiri,serif;
+  font-size:23px;
+  color:#866a42;
+  margin-bottom:14px;
+}
+
+.letter-title{
+  font-family:Amiri,serif;
+  font-size:clamp(25px,7vw,40px);
+  line-height:1.25;
+}
+
+.letter-names{
+  font-family:Amiri,serif;
+  font-size:clamp(19px,5vw,27px);
+  margin-top:12px;
+}
+
+.letter-date{
+  font-family:Amiri,serif;
+  font-size:16px;
+  margin-top:9px;
+  color:#705b3b;
+}
+
+/* =========================
+   انیمیشن باز شدن
+========================= */
+
+.envelope-screen.opening .letter{
+  opacity:1;
+
+  top:38%;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.82);
+}
+
+.envelope-screen.opening .letter-content{
+  opacity:1;
+  transform:none;
+}
+
+/*
+  مرحله نهایی:
+  نامه کل صفحه را می‌گیرد
+*/
+.envelope-screen.opening.final .letter{
+  top:50%;
+
+  width:110vw;
+  height:110vh;
+  aspect-ratio:auto;
+
+  transform:
+    translate(-50%,-50%)
+    scale(1.02);
+
+  border-radius:0;
+
+  box-shadow:none;
+}
+
+.envelope-screen.opening.final{
+  background:#090807;
+}
+
+.envelope-screen.opening.final::before{
+  opacity:0;
+}
+
+/*
+  خروج کامل صفحه ورود
+*/
+.envelope-screen.hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+/* =========================
+   ذرات سینمایی
+========================= */
+
+.sparkles{
+  position:fixed;
+  inset:0;
+
+  z-index:8;
+
+  pointer-events:none;
+
+  overflow:hidden;
+
+  opacity:0;
+
+  transition:opacity 2s ease;
+}
+
+.sparkles.active{
+  opacity:1;
+}
+
+.spark{
+  position:absolute;
+
+  top:-30px;
+
+  font-family:serif;
+
+  color:#f4e6c8;
+
+  text-shadow:
+    0 0 5px rgba(255,235,190,.85),
+    0 0 14px rgba(255,210,130,.45);
+
+  animation:
+    snowfall linear infinite;
+
+  opacity:.7;
+}
+
+.spark.flower{
+  color:#e8d6b2;
+  text-shadow:
+    0 0 7px rgba(255,220,170,.6);
+}
+
+@keyframes snowfall{
+
+  0%{
+    transform:
+      translate3d(0,-30px,0)
+      rotate(0deg);
+  }
+
+  25%{
+    transform:
+      translate3d(15px,25vh,0)
+      rotate(90deg);
+  }
+
+  50%{
+    transform:
+      translate3d(-10px,50vh,0)
+      rotate(180deg);
+  }
+
+  75%{
+    transform:
+      translate3d(20px,75vh,0)
+      rotate(270deg);
+  }
+
+  100%{
+    transform:
+      translate3d(-5px,110vh,0)
+      rotate(360deg);
+  }
+
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+  opacity:0;
+  transform:translateY(25px);
+
+  transition:
+    opacity 1.2s .45s,
+    transform 1.2s .45s;
+
+  pointer-events:none;
+}
+
+.main.visible{
+  opacity:1;
+  transform:none;
+  pointer-events:auto;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  min-height:100svh;
+
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+
+  padding:28px 18px 38px;
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.hero:before{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      180deg,
+      #0000 35%,
+      #050505 92%
+    ),
+    url("couple.jpeg")
+    center 20%/cover no-repeat;
+
+  filter:grayscale(1);
+
+  transform:scale(1.02);
+
+  opacity:.86;
+}
+
+.hero:after{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at 50% 38%,
+      #0000 0,
+      #0005 58%,
+      #000 100%
+    );
+}
+
+.topbar,
+.hero-content{
+  position:relative;
+  z-index:2;
+}
+
+.topbar{
+  position:absolute;
+
+  top:18px;
+  left:18px;
+  right:18px;
+
+  display:flex;
+  justify-content:space-between;
+
+  direction:ltr;
+}
+
+.icon{
+  width:42px;
+  height:42px;
+
+  border:1px solid #b99a6766;
+  border-radius:50%;
+
+  background:#09080799;
+
+  color:#d9c49e;
+
+  display:grid;
+  place-items:center;
+
+  backdrop-filter:blur(8px);
+
+  cursor:pointer;
+}
+
+.hero-content{
+  width:min(720px,100%);
+
+  text-align:center;
+}
+
+.kicker{
+  font-family:Amiri,serif;
+
+  font-size:17px;
+
+  color:#d2bd98;
+
+  letter-spacing:3px;
+}
+
+.names{
+  font-family:Amiri,serif;
+
+  font-size:clamp(48px,13vw,88px);
+
+  line-height:1.05;
+
+  margin:10px 0 15px;
+
+  text-shadow:0 4px 25px #000;
+}
+
+.orn{
+  color:#c1a06a;
+
+  font-size:25px;
+
+  margin:3px;
+}
+
+.date{
+  font-family:Amiri,serif;
+
+  font-size:22px;
+
+  color:#eadcc0;
+}
+
+.sub{
+  font-size:13px;
+
+  color:#c8b99d;
+
+  margin-top:8px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+  max-width:760px;
+
+  margin:-1px auto 0;
+
+  padding:42px 18px 80px;
+
+  background:
+    linear-gradient(#050505,#0b0907);
+
+  text-align:center;
+}
+
+.section-title{
+  font-family:Amiri,serif;
+
+  font-size:25px;
+
+  color:#d9c49e;
+
+  margin:0 0 20px;
+}
+
+.countdown{
+  display:grid;
+
+  grid-template-columns:repeat(4,1fr);
+
+  gap:8px;
+
+  direction:ltr;
+}
+
+.unit{
+  border:1px solid #b99a675c;
+
+  padding:13px 4px;
+
+  background:#0f0c09;
+
+  border-radius:4px;
+}
+
+.num{
+  font-family:Amiri,serif;
+
+  font-size:31px;
+
+  color:#ead7b4;
+}
+
+.label{
+  font-size:10px;
+
+  color:#a9997f;
+
+  letter-spacing:1px;
+
+  margin-top:3px;
+}
+
+.venue{
+  margin:55px 0 0;
+}
+
+.venue-name{
+  font-family:Amiri,serif;
+
+  font-size:27px;
+}
+
+.venue-en{
+  font-size:13px;
+
+  color:#a99576;
+
+  margin-top:0;
+}
+
+.map-buttons{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:9px;
+
+  justify-content:center;
+
+  margin-top:18px;
+}
+
+.map-btn{
+  color:#dfceb0;
+
+  border:1px solid #b99a675c;
+
+  padding:11px 16px;
+
+  border-radius:999px;
+
+  text-decoration:none;
+
+  font-size:12px;
+
+  background:#100d0a;
+
+  transition:
+    background .25s ease,
+    border-color .25s ease,
+    transform .25s ease;
+}
+
+.map-btn:active{
+  transform:scale(.96);
+}
+
+.footer{
+  padding-top:55px;
+
+  color:#776b59;
+
+  font-size:11px;
+}
+
+/* =========================
+   MUSIC
+========================= */
+
+.music-note{
+  position:fixed;
+
+  bottom:20px;
+  left:20px;
+
+  z-index:10;
+}
+
+.music-note.playing{
+  animation:spin 3s linear infinite;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(min-width:700px){
+
+  .hero{
+    min-height:900px;
+  }
+
+  .hero:before{
+    background-position:center 26%;
+  }
+
+  .card{
+    padding-left:30px;
+    padding-right:30px;
+  }
+
+}
+
+@media(max-width:380px){
+
+  .countdown{
+    gap:4px;
+  }
+
+  .num{
+    font-size:26px;
+  }
+
+  .unit{
+    padding:10px 2px;
+  }
+
+  .music-permission{
+    padding:20px 17px;
+  }
+
+}
 </style>
 </head>
+
 <body>
+
 <div class="app">
+
 <div class="noise"></div>
 
-<!-- صفحه اول جدید: عکس پاکت وینتیج (بدون هیچ متن تکراری) -->
-<section class="envelope-screen" id="envelopeScreen"></section>
+<!-- =========================
+     صفحه ورود
+========================= -->
+
+<section class="envelope-screen" id="envelopeScreen">
+
+  <!-- اجازه موسیقی -->
+
+  <div class="music-permission" id="musicPermission">
+
+    <div class="music-symbol">♫</div>
+
+    <div class="music-title">
+      یک لحظه...
+    </div>
+
+    <div class="music-text">
+      برای تجربه کامل دعوتنامه،
+      موسیقی این شب را هم با ما بشنوید.
+    </div>
+
+    <div class="music-actions">
+
+      <button
+        class="music-action music-yes"
+        id="musicYes"
+        type="button">
+        ♪ پخش موسیقی
+      </button>
+
+      <button
+        class="music-action music-no"
+        id="musicNo"
+        type="button">
+        بدون موسیقی
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- نامه‌ای که از پاکت بیرون می‌آید -->
+
+  <div class="letter">
+
+    <div class="letter-content">
+
+      <div class="letter-orn">
+        ⌁ ❦ ⌁
+      </div>
+
+      <div class="letter-title">
+        دعوت به آغاز
+      </div>
+
+      <div class="letter-names">
+        آینوش &amp; دانیال
+      </div>
+
+      <div class="letter-date">
+        ۱۰ مهر ۱۴۰۵
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     ذرات نور سینمایی
+========================= -->
+
+<div
+  class="sparkles"
+  id="sparkles"
+  aria-hidden="true">
+</div>
+
+
+<!-- =========================
+     MAIN
+========================= -->
 
 <main class="main" id="main">
+
 <section class="hero">
+
   <div class="topbar">
-    <button class="icon music-note" id="musicBtn" aria-label="موسیقی">♫</button>
-    <button class="icon" id="menuBtn" aria-label="اطلاعات">☰</button>
+
+    <button
+      class="icon music-note"
+      id="musicBtn"
+      aria-label="موسیقی">
+      ♫
+    </button>
+
+    <button
+      class="icon"
+      id="menuBtn"
+      aria-label="اطلاعات">
+      ☰
+    </button>
+
   </div>
+
+
   <div class="hero-content">
-    <div class="kicker">THE BEGINNING OF FOREVER</div>
-    <div class="names">آینوش &amp; دانیال</div>
-    <div class="orn">⌁ ❦ ⌁</div>
-    <div class="date">۱۰ مهر ۱۴۰۵</div>
-    <div class="sub">ساعت ۱۹:۰۰</div>
+
+    <div class="kicker">
+      THE BEGINNING OF FOREVER
+    </div>
+
+    <div class="names">
+      آینوش &amp; دانیال
+    </div>
+
+    <div class="orn">
+      ⌁ ❦ ⌁
+    </div>
+
+    <div class="date">
+      ۱۰ مهر ۱۴۰۵
+    </div>
+
+    <div class="sub">
+      ساعت ۱۹:۰۰
+    </div>
+
   </div>
+
 </section>
+
 
 <section class="card">
-  <h2 class="section-title">تا آغاز یک خاطره‌ی ماندگار</h2>
-  <div class="countdown">
-    <div class="unit"><div class="num" id="days">--</div><div class="label">DAYS</div></div>
-    <div class="unit"><div class="num" id="hours">--</div><div class="label">HOURS</div></div>
-    <div class="unit"><div class="num" id="minutes">--</div><div class="label">MINUTES</div></div>
-    <div class="unit"><div class="num" id="seconds">--</div><div class="label">SECONDS</div></div>
-  </div>
-  <div class="venue">
-    <div class="section-title">مراسم ما</div>
-    <div class="venue-name">تالار فرش قرمز</div>
-    <div class="venue-en">Red Carpet</div>
-    <div class="map-buttons">
-      <a class="map-btn" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x3fbc4b61e82d70f9:0x4f22546a30003f?entry=s&sa=X&ved=2ahUKEwj6mLyvuqOWAxVyTqQEHTYfBlYQ4kB6BAgVEAA&hl=fa&g_ep=Eg1tbF9yMDI2MDgxMV8wIOC7DCoASAJQAg%3D%3D" target="_blank" rel="noopener">Google Maps</a>
-      <a class="map-btn" href="https://www.waze.com/ul?q=%D8%AA%D8%A7%D9%84%D8%A7%D8%B1%20%D9%81%D8%B1%D8%B4%20%D9%82%D8%B1%D9%85%D8%B2" target="_blank" rel="noopener">Waze</a>
-      <a class="map-btn" href="https://maps.apple.com/?q=%D8%AA%D8%A7%D9%84%D8%A7%D8%B1%20%D9%81%D8%B1%D8%B4%20%D9%82%D8%B1%D9%85%D8%B2" target="_blank" rel="noopener">Apple Maps</a>
-    </div>
-  </div>
-  <div class="footer">آینوش و دانیال • ۱۴۰۵</div>
-</section>
-</main>
-<audio id="audio" src="wedding-song.mp3" preload="auto" loop></audio>
-</div>
-<script>
-const target = new Date("2026-10-02T19:00:00+03:30").getTime();
-function pad(n){return String(n).padStart(2,"0")}
-function tick(){
-  let d=Math.max(0,target-Date.now());
-  const days=Math.floor(d/86400000); d%=86400000;
-  const hours=Math.floor(d/3600000); d%=3600000;
-  const minutes=Math.floor(d/60000); d%=60000;
-  const seconds=Math.floor(d/1000);
-  document.getElementById("days").textContent=days;
-  document.getElementById("hours").textContent=pad(hours);
-  document.getElementById("minutes").textContent=pad(minutes);
-  document.getElementById("seconds").textContent=pad(seconds);
-}
-tick(); setInterval(tick,1000);
 
-/* ========= منطق باز شدن پاکت ========= */
-const screen = document.getElementById("envelopeScreen");
-const main = document.getElementById("main");
-const audio = document.getElementById("audio");
-const musicBtn = document.getElementById("musicBtn");
+  <h2 class="section-title">
+    تا آغاز یک خاطره‌ی ماندگار
+  </h2>
+
+
+  <div class="countdown">
+
+    <div class="unit">
+      <div class="num" id="days">--</div>
+      <div class="label">DAYS</div>
+    </div>
+
+    <div class="unit">
+      <div class="num" id="hours">--</div>
+      <div class="label">HOURS</div>
+    </div>
+
+    <div class="unit">
+      <div class="num" id="minutes">--</div>
+      <div class="label">MINUTES</div>
+    </div>
+
+    <div class="unit">
+      <div class="num" id="seconds">--</div>
+      <div class="label">SECONDS</div>
+    </div>
+
+  </div>
+
+
+  <div class="venue">
+
+    <div class="section-title">
+      مراسم ما
+    </div>
+
+    <div class="venue-name">
+      تالار فرش قرمز
+    </div>
+
+    <div class="venue-en">
+      Red Carpet
+    </div>
+
+    <div class="map-buttons">
+
+      <a
+        class="map-btn"
+        href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x3fbc4b61e82d70f9:0x4f22546a30003f?entry=s&sa=X&ved=2ahUKEwj6mLyvuqOWAxVyTqQEHTYfBlYQ4kB6BAgVEAA&hl=fa&g_ep=Eg1tbF9yMDI2MDgxMV8wIOC7DCoASAJQAg%3D%3D"
+        target="_blank"
+        rel="noopener">
+        Google Maps
+      </a>
+
+      <a
+        class="map-btn"
+        href="https://www.waze.com/ul?q=%D8%AA%D8%A7%D9%84%D8%A7%D8%B1%20%D9%81%D8%B1%D8%B4%20%D9%82%D8%B1%D9%85%D8%B2"
+        target="_blank"
+        rel="noopener">
+        Waze
+      </a>
+
+      <a
+        class="map-btn"
+        href="https://maps.apple.com/?q=%D8%AA%D8%A7%D9%84%D8%A7%D8%B1%20%D9%81%D8%B1%D8%B4%20%D9%82%D8%B1%D9%85%D8%B2"
+        target="_blank"
+        rel="noopener">
+        Apple Maps
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+    آینوش و دانیال • ۱۴۰۵
+  </div>
+
+</section>
+
+</main>
+
+
+<audio
+  id="audio"
+  src="wedding-song.mp3"
+  preload="auto"
+  loop>
+</audio>
+
+</div>
+
+
+<script>
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+const target =
+  new Date("2026-10-02T19:00:00+03:30").getTime();
+
+function pad(n){
+  return String(n).padStart(2,"0");
+}
+
+function tick(){
+
+  let d =
+    Math.max(0,target-Date.now());
+
+  const days =
+    Math.floor(d/86400000);
+
+  d%=86400000;
+
+  const hours =
+    Math.floor(d/3600000);
+
+  d%=3600000;
+
+  const minutes =
+    Math.floor(d/60000);
+
+  d%=60000;
+
+  const seconds =
+    Math.floor(d/1000);
+
+  document.getElementById("days").textContent =
+    days;
+
+  document.getElementById("hours").textContent =
+    pad(hours);
+
+  document.getElementById("minutes").textContent =
+    pad(minutes);
+
+  document.getElementById("seconds").textContent =
+    pad(seconds);
+}
+
+tick();
+
+setInterval(tick,1000);
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const screen =
+  document.getElementById("envelopeScreen");
+
+const main =
+  document.getElementById("main");
+
+const audio =
+  document.getElementById("audio");
+
+const musicBtn =
+  document.getElementById("musicBtn");
+
+const permission =
+  document.getElementById("musicPermission");
+
+const musicYes =
+  document.getElementById("musicYes");
+
+const musicNo =
+  document.getElementById("musicNo");
+
+const sparkles =
+  document.getElementById("sparkles");
+
 let opened = false;
 
-function openInvite(){
- if(opened) return;
- opened = true;
- screen.classList.add("hidden");
- main.classList.add("visible");
- audio.volume = 0.55;
- audio.play().then(() => musicBtn.classList.add("playing")).catch(() => {});
+
+/* =========================
+   ساخت ذرات سینمایی
+========================= */
+
+function createSparkles(){
+
+  const symbols = [
+    "✦",
+    "✧",
+    "⋆",
+    "❋",
+    "✦",
+    "·"
+  ];
+
+  for(let i=0;i<24;i++){
+
+    const s =
+      document.createElement("span");
+
+    s.className =
+      "spark";
+
+    if(i % 6 === 0){
+      s.classList.add("flower");
+    }
+
+    s.textContent =
+      symbols[
+        Math.floor(
+          Math.random()*symbols.length
+        )
+      ];
+
+    s.style.left =
+      Math.random()*100 + "%";
+
+    s.style.fontSize =
+      (5 + Math.random()*8) + "px";
+
+    s.style.animationDuration =
+      (9 + Math.random()*10) + "s";
+
+    s.style.animationDelay =
+      (-Math.random()*15) + "s";
+
+    s.style.opacity =
+      (.25 + Math.random()*.55);
+
+    sparkles.appendChild(s);
+  }
 }
 
-// کلیک روی عکس صفحه اول، آن را باز می‌کند
-screen.addEventListener("click", openInvite);
+createSparkles();
 
-/* ========= تنظیمات موسیقی و منو ========= */
-musicBtn.addEventListener("click", e => {
- e.stopPropagation();
- if(audio.paused){ audio.play().then(() => musicBtn.classList.add("playing")) }
- else { audio.pause(); musicBtn.classList.remove("playing") }
+
+/* =========================
+   شروع موسیقی
+========================= */
+
+function startMusic(){
+
+  audio.volume = 0;
+
+  const playPromise =
+    audio.play();
+
+  if(playPromise !== undefined){
+
+    playPromise.then(() => {
+
+      musicBtn.classList.add("playing");
+
+      let volume = 0;
+
+      const fade =
+        setInterval(() => {
+
+          volume += .025;
+
+          audio.volume =
+            Math.min(.55,volume);
+
+          if(volume >= .55){
+            clearInterval(fade);
+          }
+
+        },80);
+
+    }).catch(() => {});
+
+  }
+}
+
+
+/* =========================
+   باز شدن سینمایی
+========================= */
+
+function openInvite(){
+
+  if(opened) return;
+
+  opened = true;
+
+  /*
+    ابتدا اجازه موسیقی محو می‌شود
+  */
+
+  permission.classList.add("hidden");
+
+  /*
+    کمی مکث تا بعد نامه شروع به بیرون آمدن کند
+  */
+
+  setTimeout(() => {
+
+    screen.classList.add("opening");
+
+  },350);
+
+
+  /*
+    نامه بعد از بیرون آمدن
+    تبدیل به صفحه اصلی می‌شود
+  */
+
+  setTimeout(() => {
+
+    screen.classList.add("final");
+
+  },1900);
+
+
+  /*
+    نمایش سایت اصلی
+  */
+
+  setTimeout(() => {
+
+    main.classList.add("visible");
+
+    sparkles.classList.add("active");
+
+  },2350);
+
+
+  /*
+    خروج کامل صفحه پاکت
+  */
+
+  setTimeout(() => {
+
+    screen.classList.add("hidden");
+
+  },3100);
+
+}
+
+
+/* =========================
+   انتخاب موسیقی
+========================= */
+
+musicYes.addEventListener("click",(e)=>{
+
+  e.stopPropagation();
+
+  startMusic();
+
+  openInvite();
+
 });
 
-document.getElementById("menuBtn").addEventListener("click", () => {
- document.querySelector(".venue").scrollIntoView({ behavior: "smooth" });
+
+musicNo.addEventListener("click",(e)=>{
+
+  e.stopPropagation();
+
+  openInvite();
+
 });
+
+
+/* =========================
+   اگر روی خود پاکت کلیک شد
+========================= */
+
+screen.addEventListener("click",(e)=>{
+
+  /*
+    اگر پنجره اجازه موسیقی هنوز باز است،
+    کلیک روی پس‌زمینه کاری نمی‌کند.
+  */
+
+  if(
+    !opened &&
+    !permission.classList.contains("hidden")
+  ){
+    return;
+  }
+
+  openInvite();
+
+});
+
+
+/* =========================
+   کنترل موسیقی بعد از ورود
+========================= */
+
+musicBtn.addEventListener("click",(e)=>{
+
+  e.stopPropagation();
+
+  if(audio.paused){
+
+    audio.play()
+      .then(() => {
+
+        musicBtn.classList.add("playing");
+
+      })
+      .catch(() => {});
+
+  }else{
+
+    audio.pause();
+
+    musicBtn.classList.remove("playing");
+
+  }
+
+});
+
+
+/* =========================
+   منوی فعلی
+========================= */
+
+document
+  .getElementById("menuBtn")
+  .addEventListener("click",()=>{
+
+    document
+      .querySelector(".venue")
+      .scrollIntoView({
+        behavior:"smooth"
+      });
+
+  });
+
 </script>
+
 </body>
 </html>
