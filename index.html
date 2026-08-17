@@ -9,7 +9,7 @@
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Vazirmatn:wght@300;400;500;600&family=Ballet:opsz@16..72&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Amiri:wght@400;700&family=Vazirmatn:wght@300;400;500;600&display=swap');
 
 :root{
   --bg:#090807;
@@ -439,7 +439,7 @@ body{
 ========================= */
 
 .names{
-  font-family:'Ballet',cursive;
+  font-family:'Allura',cursive;
 
   font-size:clamp(43px,10.5vw,72px);
 
@@ -509,10 +509,6 @@ body{
   margin-right:auto;
 }
 
-
-/* عکس اول و دوم کاملاً عادی،
-   بدون تاریک شدن */
-
 .gallery-item{
   position:relative;
 
@@ -525,9 +521,6 @@ body{
 
   border:0;
 }
-
-
-/* خود عکس‌ها هیچ انیمیشن و تاریک‌شدنی ندارند */
 
 .gallery-item img{
   display:block;
@@ -553,80 +546,51 @@ body{
 
 
 /* =========================
-   فقط اتصال HALL به CLOSEUP
+   ONLY FADE HALL → CLOSEUP
 ========================= */
 
 .hall-item{
-  margin-bottom:-42px;
-
+  position:relative;
   z-index:1;
+
+  margin:0;
+  padding:0;
 }
 
 .closeup-item{
+  position:relative;
   z-index:2;
 
-  position:relative;
+  margin-top:-42px;
+  padding:0;
 }
 
 
 /*
-  ماسک بسیار نرم فقط روی قسمت بالایی
-  عکس CLOSEUP.
-  هیچ فاصله‌ای ایجاد نمی‌شود.
+   فقط قسمت بالایی CLOSEUP
+   شفاف می‌شود تا عکس HALL
+   از زیر آن دیده شود.
+   بنابراین هیچ فضای خالی
+   و هیچ تاریک‌شدن مصنوعی نداریم.
 */
 
-.closeup-item::before{
-  content:"";
-
-  position:absolute;
-
-  left:0;
-  right:0;
-
-  top:0;
-
-  height:55px;
-
-  z-index:3;
-
-  pointer-events:none;
-
-  background:
+.closeup-item img{
+  -webkit-mask-image:
     linear-gradient(
       to bottom,
-      rgba(5,5,5,0),
-      rgba(5,5,5,0)
+      transparent 0px,
+      rgba(0,0,0,.15) 12px,
+      rgba(0,0,0,.55) 28px,
+      #000 60px
     );
-}
 
-
-/*
-  محو شدن لبه پایین HALL
-  به سمت عکس CLOSEUP
-*/
-
-.hall-item::after{
-  content:"";
-
-  position:absolute;
-
-  left:0;
-  right:0;
-
-  bottom:0;
-
-  height:70px;
-
-  z-index:3;
-
-  pointer-events:none;
-
-  background:
+  mask-image:
     linear-gradient(
       to bottom,
-      rgba(5,5,5,0),
-      rgba(5,5,5,.18),
-      rgba(5,5,5,0)
+      transparent 0px,
+      rgba(0,0,0,.15) 12px,
+      rgba(0,0,0,.55) 28px,
+      #000 60px
     );
 }
 
@@ -806,8 +770,8 @@ body{
     font-size:15px;
   }
 
-  .hall-item{
-    margin-bottom:-32px;
+  .closeup-item{
+    margin-top:-32px;
   }
 }
 
