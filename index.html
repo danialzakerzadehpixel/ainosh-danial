@@ -11,73 +11,58 @@
 
 :root{--bg:#090807;--gold:#c7a86d;--cream:#f1e7d1}
 *{box-sizing:border-box}
-html,body{margin:0;background:#050505;color:var(--cream);font-family:Vazirmatn,sans-serif}
-body{min-height:100vh;overflow-x:hidden}
-.app{min-height:100vh;position:relative;background:radial-gradient(circle at 50% 20%,#26201a 0,#0a0908 38%,#030303 100%)}
-.noise{position:fixed;inset:0;pointer-events:none;opacity:.08;z-index:50;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+html,body{margin:0;background:#050505;color:var(--cream);font-family:Vazirmatn,sans-serif;overflow-x:hidden}
 
 /* =========================================================
-   ENVELOPE — ORIGINAL SPLASH ARTWORK + ANIMATION ONLY
+   ENVELOPE — SPLASH SCREEN (CINEMATIC 3D)
 ========================================================= */
 .envelope-screen{
-  position:fixed;inset:0;z-index:40;
+  position:fixed; inset:0; z-index:50;
   background:#090807;
   cursor:pointer;
   overflow:hidden;
-  transition:opacity 1.05s cubic-bezier(.2,.8,.2,1),transform 1.05s cubic-bezier(.2,.8,.2,1);
 }
-.splash-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.envelope-stage{
-  position:absolute;
-  left:50%;
-  top:calc(50% + 31px);
-  width:min(73.5vw,753px);
-  height:calc(min(73.5vw,753px) * 1.065);
+
+.envelope-wrapper{
+  position:absolute; left:50%; top:50%;
+  width:min(70vw, 650px); aspect-ratio:1/1;
   transform:translate(-50%,-50%);
-  transform-style:preserve-3d;
-  perspective:1400px;
+  transition: all 1.4s cubic-bezier(.2,.8,.2,1);
+}
+
+/* ترفند: نیمه بالای عکس پاکت برای درب */
+.envelope-flap{
+  position:absolute; top:0; left:0; width:100%; height:50%;
+  background-image:url('splash-original.jpg');
+  background-size:100% 200%; background-position:center top;
+  background-repeat:no-repeat;
+  transform-origin:top center; transform:rotateX(0deg);
+  transition:transform 1.3s cubic-bezier(.2,.8,.2,1);
+  backface-visibility:hidden; z-index:4;
+}
+
+/* نیمه پایین عکس برای پایه پاکت */
+.envelope-base{
+  position:absolute; bottom:0; left:0; width:100%; height:50%;
+  background-image:url('splash-original.jpg');
+  background-size:100% 200%; background-position:center bottom;
+  background-repeat:no-repeat; z-index:3;
+}
+
+/* نور سینمایی درخشان وسط پاکت */
+.envelope-glow{
+  position:absolute; inset:-30%; z-index:2;
+  background:radial-gradient(circle, rgba(255,215,150,0.9) 0%, transparent 70%);
+  opacity:0; transform:scale(0.5);
+  transition:all 1s cubic-bezier(.2,.8,.2,1);
   pointer-events:none;
 }
-.envelope-base{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
-.flap{
-  position:absolute;
-  left:0;top:0;
-  width:100%;
-  height:43.5%;
-  transform-origin:50% 0;
-  transform:rotateX(0deg);
-  transform-style:preserve-3d;
-  transition:transform 1.35s cubic-bezier(.18,.82,.18,1);
-  z-index:6;
-}
-.flap img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block}
-.flap-front{backface-visibility:hidden}
-.flap-back{transform:rotateY(180deg);backface-visibility:hidden;opacity:.985}
-.wax{
-  position:absolute;
-  left:50%;top:55.4%;
-  width:27%;
-  aspect-ratio:1;
-  transform:translate(-50%,-50%);
-  z-index:8;
-  transition:transform .45s ease,opacity .35s ease;
-}
-.envelope-screen.opening .flap{transform:rotateX(-158deg)}
-.envelope-screen.opening .wax{transform:translate(-50%,-50%) scale(.82);opacity:.12}
-.envelope-screen.opening .envelope-stage{animation:stageLift 1.5s cubic-bezier(.2,.8,.2,1) forwards}
-@keyframes stageLift{
-  from{transform:translate(-50%,-50%) scale(1)}
-  to{transform:translate(-50%,-50%) scale(1.035)}
-}
-.envelope-screen::after{
-  content:"";position:absolute;inset:-20%;
-  background:radial-gradient(circle at 50% 55%,rgba(255,220,150,.72),rgba(255,205,120,.18) 18%,transparent 55%);
-  opacity:0;transform:scale(.45);
-  transition:opacity .9s ease,transform 1.3s cubic-bezier(.2,.8,.2,1);
-  pointer-events:none;
-}
-.envelope-screen.opening::after{opacity:1;transform:scale(2.2)}
-.envelope-screen.hidden{opacity:0;transform:scale(1.04);pointer-events:none}
+
+/* انیمیشن‌های هنگام باز شدن */
+.envelope-screen.opening .envelope-flap{ transform:rotateX(-160deg); }
+.envelope-screen.opening .envelope-glow{ opacity:1; transform:scale(2); }
+.envelope-screen.opening .envelope-wrapper{ transform:translate(-50%,-55%) scale(0.85); opacity:0; pointer-events:none; }
+
 
 /* =========================================================
    MUSIC
@@ -93,10 +78,19 @@ body{min-height:100vh;overflow-x:hidden}
 .music-btn.primary{background:#b08d55;color:#17110b}
 
 /* =========================================================
-   MAIN
+   MAIN (INVITATION)
 ========================================================= */
-.main{opacity:0;transform:translateY(25px);transition:opacity 1.4s .2s,transform 1.4s .2s;pointer-events:none}
-.main.visible{opacity:1;transform:none;pointer-events:auto}
+.main{
+  position:fixed; inset:0; z-index:40;
+  display:flex; flex-direction:column; align-items:center;
+  overflow-y:auto;
+  opacity:0; transform:scale(0.85) translateY(15px);
+  transition:opacity 1.4s cubic-bezier(.2,.8,.2,1), transform 1.4s cubic-bezier(.2,.8,.2,1);
+  pointer-events:none;
+}
+.main.visible{ opacity:1; transform:scale(1) translateY(0); pointer-events:auto; }
+.main.settled{ position:relative; inset:auto; min-height:100vh; width:100%; }
+
 
 /* =========================================================
    SNOW
@@ -112,10 +106,10 @@ body{min-height:100vh;overflow-x:hidden}
 /* =========================================================
    HERO
 ========================================================= */
-.hero{min-height:100svh;display:flex;align-items:flex-end;justify-content:center;padding:28px 18px 55px;position:relative;overflow:hidden}
+.hero{min-height:100vh;display:flex;align-items:flex-end;justify-content:center;padding:28px 18px 55px;position:relative;overflow:hidden;width:100%;max-width:760px;margin:0 auto}
 .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,rgba(0,0,0,.35) 55%,#050505 95%),url("couple.jpeg") center 20%/cover no-repeat;filter:grayscale(1);transform:scale(1.02);opacity:.9}
 .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 38%,transparent 0,rgba(0,0,0,.25) 55%,#000 100%)}
-.hero-content{position:relative;z-index:2;width:min(720px,100%);text-align:center}
+.hero-content{position:relative;z-index:2;width:100%;text-align:center}
 .kicker{font-family:Amiri,serif;font-size:16px;color:#d2bd98;letter-spacing:4px}
 .names{font-family:Allura,cursive;font-size:clamp(43px,10.5vw,72px);font-weight:400;line-height:1.1;margin:10px 0 13px;color:#f0dfc1;direction:ltr;letter-spacing:1px;text-shadow:0 4px 25px rgba(0,0,0,.95),0 0 12px rgba(255,225,180,.12)}
 .orn{color:#c1a06a;font-size:24px}
@@ -125,7 +119,7 @@ body{min-height:100vh;overflow-x:hidden}
 /* =========================================================
    GALLERY
 ========================================================= */
-.gallery{padding:0;margin:0;background:#050505;max-width:760px;margin-left:auto;margin-right:auto}
+.gallery{padding:0;margin:0;background:#050505;max-width:760px;width:100%;}
 .gallery-item{position:relative;margin:0;padding:0;line-height:0;overflow:visible;border:0}
 .gallery-item img{display:block;width:100%;height:auto;margin:0;padding:0;border:0;vertical-align:top;object-fit:cover;filter:none;opacity:1;transform:none}
 .hall-item{position:relative;z-index:1;margin:0;padding:0}
@@ -135,7 +129,7 @@ body{min-height:100vh;overflow-x:hidden}
 /* =========================================================
    CARD / VENUE
 ========================================================= */
-.card{max-width:760px;margin:0 auto;padding:50px 18px 80px;background:linear-gradient(#050505,#0b0907);text-align:center}
+.card{max-width:760px;width:100%;margin:0 auto;padding:50px 18px 80px;background:linear-gradient(#050505,#0b0907);text-align:center}
 .section-title{font-family:Amiri,serif;font-size:27px;color:#d9c49e;margin:0 0 22px}
 .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;direction:ltr}
 .unit{border:1px solid #b99a675c;padding:13px 4px;background:#0f0c09;border-radius:5px}
@@ -150,7 +144,7 @@ body{min-height:100vh;overflow-x:hidden}
 @media(min-width:700px){.hero{min-height:900px}.hero::before{background-position:center 26%}.card{padding-left:30px;padding-right:30px}}
 @media(max-width:600px){.snowflake{width:2px;height:2px}.names{font-size:clamp(40px,11vw,64px)}.date{font-size:20px}.sub{font-size:15px}}
 @media(max-width:380px){.countdown{gap:4px}.num{font-size:26px}.unit{padding:10px 2px}.names{font-size:40px}}
-@media(prefers-reduced-motion:reduce){.flap,.envelope-stage,.envelope-screen,.main{transition:none!important;animation:none!important}}
+@media(prefers-reduced-motion:reduce){.envelope-screen,.main{transition:none!important;animation:none!important}}
 </style>
 </head>
 
@@ -158,18 +152,12 @@ body{min-height:100vh;overflow-x:hidden}
 <div class="app">
 <div class="noise"></div>
 
+<!-- SPLASH SCREEN (CINEMATIC ENVELOPE) -->
 <section class="envelope-screen" id="envelopeScreen">
-  <!-- This is the original splash artwork, unchanged as the background. -->
-  <img class="splash-art" src="splash-original.jpg" alt="">
-
-  <!-- Only the envelope flap and wax seal are separated for animation. -->
-  <div class="envelope-stage">
-    <img class="envelope-base" src="splash-base.jpg" alt="">
-    <div class="flap">
-      <img class="flap-front" src="envelope-flap.png" alt="">
-      <img class="flap-back" src="envelope-inside.png" alt="">
-    </div>
-    <img class="wax" src="wax.png" alt="">
+  <div class="envelope-wrapper" id="envelopeWrapper">
+    <div class="envelope-glow"></div>
+    <div class="envelope-base"></div>
+    <div class="envelope-flap"></div>
   </div>
 </section>
 
@@ -185,6 +173,7 @@ body{min-height:100vh;overflow-x:hidden}
   </div>
 </div>
 
+<!-- MAIN INVITATION SCREEN -->
 <main class="main" id="main">
 <div class="snow" id="snow"></div>
 
@@ -261,9 +250,21 @@ let opened=false;
 screen.addEventListener("click",()=>{
   if(opened)return;
   opened=true;
+  
+  // 1. Start cinematic open of the envelope
   screen.classList.add("opening");
-  setTimeout(()=>{screen.classList.add("hidden");main.classList.add("visible")},1250);
-  setTimeout(()=>musicPermission.classList.add("show"),2050);
+  
+  // 2. After 0.6 seconds (while flap is opening), start bringing the invitation out
+  setTimeout(()=>{
+    main.classList.add("visible");
+    musicPermission.classList.add("show");
+  }, 900); 
+  
+  // 3. After 1.7 seconds (flap fully open & envelope fading), settle the main screen
+  setTimeout(()=>{
+    screen.classList.add("hidden");
+    main.classList.add("settled");
+  }, 1800);
 });
 
 musicYes.addEventListener("click",()=>{
