@@ -495,7 +495,8 @@ body{
 
 /* =====================================================
    GALLERY
-   COUPLE → HALL → CLOSEUP
+   فقط HALL و CLOSEUP
+   COUPLE در HERO است و اینجا تکرار نمی‌شود
 ===================================================== */
 
 .gallery{
@@ -544,56 +545,21 @@ body{
 
 
 /* =====================================================
-   PHOTO 1 — COUPLE
-   پایین عکس اول فید می‌شود
+   اتصال COUPLE → HALL
+   پایین HERO و بالای HALL
+   با فید سیاه کوچک و پیوسته
 ===================================================== */
 
-.couple-item{
-  position:relative;
+.hero{
+  margin-bottom:-55px;
   z-index:1;
 }
-
-.couple-item img{
-
-  -webkit-mask-image:
-    linear-gradient(
-      to bottom,
-      #000 0%,
-      #000 82%,
-      rgba(0,0,0,.96) 86%,
-      rgba(0,0,0,.82) 90%,
-      rgba(0,0,0,.58) 94%,
-      rgba(0,0,0,.30) 97%,
-      transparent 100%
-    );
-
-  mask-image:
-    linear-gradient(
-      to bottom,
-      #000 0%,
-      #000 82%,
-      rgba(0,0,0,.96) 86%,
-      rgba(0,0,0,.82) 90%,
-      rgba(0,0,0,.58) 94%,
-      rgba(0,0,0,.30) 97%,
-      transparent 100%
-    );
-
-  -webkit-mask-repeat:no-repeat;
-  mask-repeat:no-repeat;
-}
-
-
-/* =====================================================
-   PHOTO 2 — HALL
-   بالا فید + پایین فید
-===================================================== */
 
 .hall-item{
   position:relative;
   z-index:2;
 
-  margin-top:-55px;
+  margin-top:0;
 }
 
 .hall-item img{
@@ -650,8 +616,8 @@ body{
 
 
 /* =====================================================
-   PHOTO 3 — CLOSEUP
-   فقط بالای عکس فید می‌شود
+   HALL → CLOSEUP
+   پایین HALL و بالای CLOSEUP
 ===================================================== */
 
 .closeup-item{
@@ -830,8 +796,7 @@ body{
 
   background:#100d0a;
 
-  transition:
-    .3s;
+  transition:.3s;
 
   direction:ltr;
 }
@@ -909,36 +874,12 @@ body{
     font-size:15px;
   }
 
-  .hall-item,
-  .closeup-item{
-    margin-top:-38px;
+  .hero{
+    margin-bottom:-38px;
   }
 
-  .couple-item img{
-
-    -webkit-mask-image:
-      linear-gradient(
-        to bottom,
-        #000 0%,
-        #000 80%,
-        rgba(0,0,0,.95) 85%,
-        rgba(0,0,0,.80) 90%,
-        rgba(0,0,0,.50) 95%,
-        rgba(0,0,0,.18) 98%,
-        transparent 100%
-      );
-
-    mask-image:
-      linear-gradient(
-        to bottom,
-        #000 0%,
-        #000 80%,
-        rgba(0,0,0,.95) 85%,
-        rgba(0,0,0,.80) 90%,
-        rgba(0,0,0,.50) 95%,
-        rgba(0,0,0,.18) 98%,
-        transparent 100%
-      );
+  .closeup-item{
+    margin-top:-38px;
   }
 
   .hall-item img{
@@ -1130,6 +1071,7 @@ body{
 
 <!-- =========================
      HERO / COUPLE
+     عکس اول فقط همین‌جاست
 ========================= -->
 
 <section class="hero">
@@ -1163,22 +1105,10 @@ body{
 
 <!-- =========================
      GALLERY
-     COUPLE → HALL → CLOSEUP
+     فقط HALL و CLOSEUP
 ========================= -->
 
 <section class="gallery">
-
-
-  <!-- COUPLE -->
-
-  <div class="gallery-item couple-item">
-
-    <img
-      class="couple-photo"
-      src="couple.jpeg"
-      alt="Ainoosh and Danial">
-
-  </div>
 
 
   <!-- HALL -->
