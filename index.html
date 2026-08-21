@@ -70,76 +70,156 @@ body{
   cursor:pointer;
 
   transition:
-    opacity 1.35s cubic-bezier(.2,.8,.2,1),
+    opacity 1.15s cubic-bezier(.2,.8,.2,1),
     transform 1.35s cubic-bezier(.2,.8,.2,1),
-    filter 1.2s ease;
+    filter 1.15s ease;
 }
 
-.envelope-screen.hidden{
-  opacity:0;
-  transform:scale(1.045);
-  filter:brightness(1.18);
-  pointer-events:none;
-}
+
+/* تاریکی اولیه روی ورود */
 
 .envelope-screen::before{
   content:"";
 
   position:absolute;
-  inset:-15%;
+  inset:0;
 
   background:
     radial-gradient(
-      circle at 50% 55%,
-      rgba(255,225,165,.18) 0%,
-      rgba(255,210,135,.08) 22%,
-      transparent 52%
+      circle at 50% 52%,
+      rgba(255,225,160,0) 0%,
+      rgba(255,210,130,0) 20%,
+      rgba(0,0,0,.12) 55%,
+      rgba(0,0,0,.35) 100%
     );
 
-  opacity:0;
-
-  transform:scale(.55);
-
-  transition:
-    opacity 1s ease,
-    transform 1.45s cubic-bezier(.2,.8,.2,1);
+  opacity:.65;
 
   pointer-events:none;
+
+  transition:
+    opacity .8s ease;
 }
 
-.envelope-screen.opening::before{
-  opacity:1;
-  transform:scale(2);
-}
+
+/* نور اصلی سینمایی */
 
 .envelope-screen::after{
   content:"";
 
   position:absolute;
-  inset:-20%;
+
+  width:35vmax;
+  height:35vmax;
+
+  left:50%;
+  top:53%;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.05);
+
+  border-radius:50%;
 
   background:
     radial-gradient(
-      circle at 50% 55%,
-      rgba(255,220,150,.88) 0%,
-      rgba(255,205,120,.30) 11%,
-      rgba(255,190,100,.10) 28%,
-      transparent 55%
+      circle,
+      rgba(255,248,220,1) 0%,
+      rgba(255,226,165,.95) 7%,
+      rgba(255,205,125,.55) 20%,
+      rgba(255,185,90,.18) 42%,
+      rgba(255,170,70,0) 72%
     );
 
-  opacity:0;
-  transform:scale(.45);
+  filter:blur(2px);
 
-  transition:
-    opacity .9s ease,
-    transform 1.3s cubic-bezier(.2,.8,.2,1);
+  opacity:0;
 
   pointer-events:none;
+
+  mix-blend-mode:screen;
+
+  transition:none;
 }
 
+
+/* هنگام کلیک نور واقعاً منفجر می‌شود */
+
 .envelope-screen.opening::after{
-  opacity:1;
-  transform:scale(2.2);
+  animation:cinematicFlash 1.25s cubic-bezier(.2,.75,.2,1) forwards;
+}
+
+@keyframes cinematicFlash{
+
+  0%{
+    opacity:0;
+    transform:
+      translate(-50%,-50%)
+      scale(.05);
+  }
+
+  18%{
+    opacity:1;
+  }
+
+  48%{
+    opacity:.92;
+    transform:
+      translate(-50%,-50%)
+      scale(1.25);
+  }
+
+  72%{
+    opacity:.48;
+  }
+
+  100%{
+    opacity:0;
+    transform:
+      translate(-50%,-50%)
+      scale(4.8);
+  }
+}
+
+
+/* نور محیطی اضافه */
+
+.envelope-screen.opening::before{
+  animation:envelopeGlow 1.2s ease forwards;
+}
+
+@keyframes envelopeGlow{
+
+  0%{
+    opacity:.65;
+  }
+
+  35%{
+    opacity:.15;
+  }
+
+  58%{
+    opacity:.05;
+  }
+
+  100%{
+    opacity:0;
+  }
+}
+
+
+/* خروج خود پاکت */
+
+.envelope-screen.hidden{
+  opacity:0;
+
+  transform:scale(1.055);
+
+  filter:
+    brightness(1.18)
+    blur(1px);
+
+  pointer-events:none;
 }
 
 
@@ -243,18 +323,30 @@ body{
 
 .main{
   opacity:0;
-  transform:translateY(25px);
+
+  transform:
+    translateY(35px)
+    scale(.985);
+
+  filter:blur(7px);
 
   transition:
-    opacity 1.4s .2s,
-    transform 1.4s .2s;
+    opacity 1.45s .05s,
+    transform 1.45s .05s cubic-bezier(.2,.8,.2,1),
+    filter 1.35s .05s ease;
 
   pointer-events:none;
 }
 
 .main.visible{
   opacity:1;
-  transform:none;
+
+  transform:
+    translateY(0)
+    scale(1);
+
+  filter:blur(0);
+
   pointer-events:auto;
 }
 
@@ -432,7 +524,8 @@ body{
 
   opacity:.9;
 
-  animation:heroCinematicZoom 18s ease-in-out infinite alternate;
+  animation:
+    heroCinematicZoom 18s ease-in-out infinite alternate;
 }
 
 @keyframes heroCinematicZoom{
@@ -469,21 +562,18 @@ body{
 
   text-align:center;
 
-  animation:
-    heroContentReveal 1.8s .35s both cubic-bezier(.2,.8,.2,1);
+  opacity:0;
+
+  transform:translateY(24px);
+
+  transition:
+    opacity 1.3s .7s ease,
+    transform 1.3s .7s cubic-bezier(.2,.8,.2,1);
 }
 
-@keyframes heroContentReveal{
-
-  from{
-    opacity:0;
-    transform:translateY(22px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+.main.visible .hero-content{
+  opacity:1;
+  transform:translateY(0);
 }
 
 .kicker{
@@ -519,8 +609,8 @@ body{
 
   text-shadow:
     0 4px 25px rgba(0,0,0,.95),
-    0 0 12px rgba(255,225,180,.16),
-    0 0 32px rgba(199,168,109,.08);
+    0 0 12px rgba(255,225,180,.18),
+    0 0 30px rgba(199,168,109,.10);
 
   animation:
     namesGlow 4s ease-in-out infinite alternate;
@@ -531,15 +621,15 @@ body{
   from{
     text-shadow:
       0 4px 25px rgba(0,0,0,.95),
-      0 0 12px rgba(255,225,180,.12),
-      0 0 25px rgba(199,168,109,.05);
+      0 0 12px rgba(255,225,180,.13),
+      0 0 24px rgba(199,168,109,.05);
   }
 
   to{
     text-shadow:
       0 4px 25px rgba(0,0,0,.95),
-      0 0 15px rgba(255,225,180,.20),
-      0 0 34px rgba(199,168,109,.10);
+      0 0 16px rgba(255,225,180,.23),
+      0 0 36px rgba(199,168,109,.11);
   }
 }
 
@@ -578,7 +668,6 @@ body{
 
 /* =========================
    GALLERY
-   فقط فید بین HALL و CLOSEUP
 ========================= */
 
 .gallery{
@@ -627,11 +716,6 @@ body{
   transform:none;
 }
 
-
-/* =========================
-   ONLY FADE HALL → CLOSEUP
-========================= */
-
 .hall-item{
   position:relative;
   z-index:1;
@@ -647,13 +731,6 @@ body{
   margin-top:-42px;
   padding:0;
 }
-
-
-/*
-   فقط قسمت بالایی CLOSEUP
-   شفاف می‌شود تا عکس HALL
-   از زیر آن دیده شود.
-*/
 
 .closeup-item img{
   -webkit-mask-image:
@@ -706,11 +783,6 @@ body{
   margin:0 0 22px;
 }
 
-
-/* =========================
-   COUNTDOWN
-========================= */
-
 .countdown{
   display:grid;
 
@@ -737,8 +809,6 @@ body{
   font-size:34px;
 
   color:#ead7b4;
-
-  letter-spacing:.5px;
 }
 
 .label{
@@ -782,88 +852,54 @@ body{
 
 
 /* =========================
-   MAP BUTTONS
+   MINIMAL MAP BUTTONS
 ========================= */
 
 .map-buttons{
-  display:grid;
-
-  grid-template-columns:repeat(2,minmax(0,1fr));
-
-  gap:11px;
-
-  justify-content:center;
-
-  margin-top:22px;
-
-  max-width:520px;
-
-  margin-left:auto;
-  margin-right:auto;
-}
-
-.map-btn{
-  position:relative;
-
   display:flex;
 
   align-items:center;
   justify-content:center;
 
-  gap:10px;
+  gap:18px;
 
-  min-height:62px;
+  margin-top:22px;
+
+  flex-wrap:wrap;
+}
+
+.map-btn{
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:8px;
+
+  min-width:116px;
+  min-height:46px;
 
   color:#dfceb0;
 
-  border:1px solid #b99a675c;
+  border:1px solid rgba(185,154,103,.32);
 
-  padding:10px 12px;
+  padding:7px 13px;
 
-  border-radius:15px;
+  border-radius:999px;
 
   text-decoration:none;
 
   font-size:12px;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(25,20,15,.98),
-      rgba(12,10,8,.98)
-    );
+  background:rgba(16,13,10,.72);
 
   transition:
-    transform .3s ease,
-    background .3s ease,
-    border-color .3s ease,
-    box-shadow .3s ease;
+    transform .25s ease,
+    background .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
 
-  overflow:hidden;
-}
-
-.map-btn::after{
-  content:"";
-
-  position:absolute;
-
-  inset:0;
-
-  background:
-    linear-gradient(
-      120deg,
-      transparent 25%,
-      rgba(255,255,255,.045) 50%,
-      transparent 75%
-    );
-
-  transform:translateX(-120%);
-
-  transition:transform .7s ease;
-}
-
-.map-btn:hover::after{
-  transform:translateX(120%);
+  direction:ltr;
 }
 
 .map-btn:hover{
@@ -876,82 +912,27 @@ body{
   transform:translateY(-2px);
 
   box-shadow:
-    0 8px 25px rgba(0,0,0,.35);
+    0 7px 22px rgba(0,0,0,.32);
 }
 
 .map-icon{
-  width:31px;
-  height:31px;
-
-  flex:0 0 31px;
+  width:27px;
+  height:27px;
 
   object-fit:contain;
 
   display:block;
 
-  position:relative;
-  z-index:2;
-}
+  flex:0 0 27px;
 
-.map-info{
-  display:flex;
-
-  flex-direction:column;
-
-  align-items:flex-start;
-
-  justify-content:center;
-
-  gap:3px;
-
-  direction:ltr;
-
-  position:relative;
-  z-index:2;
+  filter:
+    drop-shadow(0 1px 5px rgba(255,255,255,.16));
 }
 
 .map-name{
-  font-size:13px;
+  line-height:1;
 
-  line-height:1.1;
-
-  color:inherit;
-
-  font-weight:500;
-}
-
-.app-badge{
-  display:inline-flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  padding:2px 7px;
-
-  border:1px solid rgba(199,168,109,.35);
-
-  border-radius:999px;
-
-  font-family:Vazirmatn,sans-serif;
-
-  font-size:8px;
-
-  line-height:1.3;
-
-  color:#aa987c;
-
-  background:rgba(199,168,109,.06);
-
-  letter-spacing:.2px;
-}
-
-.map-btn:hover .app-badge{
-  color:#4c3820;
-
-  border-color:rgba(60,40,15,.25);
-
-  background:rgba(255,255,255,.12);
+  white-space:nowrap;
 }
 
 
@@ -1012,34 +993,26 @@ body{
   }
 
   .map-buttons{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-
-    gap:9px;
+    gap:8px;
   }
 
   .map-btn{
-    min-height:60px;
+    min-width:105px;
 
-    padding:9px 7px;
+    min-height:43px;
+
+    padding:6px 10px;
 
     gap:7px;
-  }
 
-  .map-icon{
-    width:27px;
-    height:27px;
-
-    flex-basis:27px;
-  }
-
-  .map-name{
     font-size:11px;
   }
 
-  .app-badge{
-    font-size:7px;
+  .map-icon{
+    width:25px;
+    height:25px;
 
-    padding:2px 6px;
+    flex-basis:25px;
   }
 }
 
@@ -1062,27 +1035,24 @@ body{
   }
 
   .map-buttons{
-    gap:7px;
+    gap:6px;
   }
 
   .map-btn{
-    min-height:57px;
+    min-width:98px;
+
+    min-height:41px;
+
+    padding:5px 8px;
   }
 
   .map-icon{
-    width:24px;
-    height:24px;
+    width:23px;
+    height:23px;
 
-    flex-basis:24px;
+    flex-basis:23px;
   }
 
-  .map-name{
-    font-size:10px;
-  }
-
-  .app-badge{
-    font-size:6.5px;
-  }
 }
 
 </style>
@@ -1203,9 +1173,6 @@ body{
 
 <section class="gallery">
 
-
-  <!-- HALL -->
-
   <div class="gallery-item hall-item">
 
     <img
@@ -1216,8 +1183,6 @@ body{
   </div>
 
 
-  <!-- CLOSEUP -->
-
   <div class="gallery-item closeup-item">
 
     <img
@@ -1226,7 +1191,6 @@ body{
       alt="Ainoosh and Danial">
 
   </div>
-
 
 </section>
 
@@ -1284,6 +1248,7 @@ body{
 
     <div class="map-buttons">
 
+
       <!-- GOOGLE MAPS -->
 
       <a
@@ -1294,12 +1259,11 @@ body{
 
         <img
           class="map-icon"
-          src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/googlemaps.svg"
+          src="https://cdn.simpleicons.org/googlemaps"
           alt="Google Maps">
 
-        <span class="map-info">
-          <span class="map-name">Google Maps</span>
-          <span class="app-badge">اپلیکیشن</span>
+        <span class="map-name">
+          Google Maps
         </span>
 
       </a>
@@ -1315,18 +1279,17 @@ body{
 
         <img
           class="map-icon"
-          src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/waze.svg"
+          src="https://cdn.simpleicons.org/waze"
           alt="Waze">
 
-        <span class="map-info">
-          <span class="map-name">Waze</span>
-          <span class="app-badge">اپلیکیشن</span>
+        <span class="map-name">
+          Waze
         </span>
 
       </a>
 
 
-      <!-- APPLE MAPS -->
+      <!-- OTHER APPS -->
 
       <a
         class="map-btn"
@@ -1334,38 +1297,12 @@ body{
         target="_blank"
         rel="noopener">
 
-        <img
-          class="map-icon"
-          src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@develop/icons/applemaps.svg"
-          alt="Apple Maps">
-
-        <span class="map-info">
-          <span class="map-name">Apple Maps</span>
-          <span class="app-badge">اپلیکیشن</span>
+        <span class="map-name">
+          Other Apps
         </span>
 
       </a>
 
-
-      <!-- NESHAN -->
-
-      <a
-        class="map-btn"
-        href="https://neshan.org/"
-        target="_blank"
-        rel="noopener">
-
-        <img
-          class="map-icon"
-          src="https://brandlogos.sgp1.digitaloceanspaces.com/svg/arcticons/neshan.svg"
-          alt="Neshan">
-
-        <span class="map-info">
-          <span class="map-name">Neshan</span>
-          <span class="app-badge">اپلیکیشن</span>
-        </span>
-
-      </a>
 
     </div>
 
@@ -1482,20 +1419,40 @@ screen.addEventListener("click",function(){
   screen.classList.add("opening");
 
 
+  /*
+    مرحله ۱:
+    نور طلایی از مرکز پخش می‌شود
+  */
+
   setTimeout(function(){
 
     screen.classList.add("hidden");
 
+  },650);
+
+
+  /*
+    مرحله ۲:
+    صفحه اصلی از تاریکی و Blur بیرون می‌آید
+  */
+
+  setTimeout(function(){
+
     main.classList.add("visible");
 
-  },900);
+  },760);
 
+
+  /*
+    مرحله ۳:
+    اجازه موسیقی بعد از Transition
+  */
 
   setTimeout(function(){
 
     musicPermission.classList.add("show");
 
-  },1700);
+  },1850);
 
 });
 
